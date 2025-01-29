@@ -37,6 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::post('lecturers/{id}/restore', [\App\Http\Controllers\LecturersController::class, 'restore'])->name('lecturers.restore');
     Route::delete('lecturers/{id}/force-delete', [\App\Http\Controllers\LecturersController::class, 'forceDelete'])->name('lecturers.forceDelete');
     
+    Route::resource('general_information', \App\Http\Controllers\GeneralInformationController::class);
+    Route::get('general_information/trashed', [\App\Http\Controllers\GeneralInformationController::class, 'trashed'])->name('general_information.trashed');
+    Route::post('general_information/{id}/restore', [\App\Http\Controllers\GeneralInformationController::class, 'restore'])->name('general_information.restore');
+    Route::delete('general_information/{id}/force-delete', [\App\Http\Controllers\GeneralInformationController::class, 'forceDelete'])->name('general_information.forceDelete');
 });
 
 require __DIR__ . '/auth.php';

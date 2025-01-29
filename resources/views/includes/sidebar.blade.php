@@ -68,6 +68,21 @@
                     </li>
                 </ul>
             </li>
+            <li class="treeview {{ request()->is('general-information*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-info-circle"></i>
+                    <span class="menu-text">Informasi Umum</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('general_information*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request()->routeIs('general_information.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('general_information.index') }}">Daftar Informasi Umum</a>
+                    </li>
+                    <li class="{{ request()->routeIs('general-information.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('general_information.create') }}">Tambah Informasi Umum</a>
+                    </li>
+                </ul>
+            </li>
             {{-- End Admin dashboard --}}
         </ul>
 
