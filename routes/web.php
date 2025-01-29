@@ -12,7 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::delete('admin/profile', [\App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('profile/upload',  [\App\Http\Controllers\ProfileController::class, 'upload'])->name('profile.upload');
+    Route::post('profile/upload', [\App\Http\Controllers\ProfileController::class, 'upload'])->name('profile.upload');
     Route::delete('profile/delete-file', [\App\Http\Controllers\ProfileController::class, 'deleteFile'])->name('profile.deleteFile');
     Route::post('/temp/storage', [\App\Http\Controllers\StorageController::class, 'store'])->name('storage.store');
     Route::delete('/temp/storage', [\App\Http\Controllers\StorageController::class, 'destroy'])->name('storage.destroy');
@@ -26,6 +26,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('admin/role-permissions/user', \App\Http\Controllers\UserController::class);
     Route::post('admin/role-permissions/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
+
+    Route::resource('courses', \App\Http\Controllers\CourseController::class);
+
+    // Soft Deletes Routes (Trash Bin)
+    Route::get('courses/trashed', [\App\Http\Controllers\CourseController::class, 'trashed'])->name('courses.trashed');
+    Route::post('courses/{id}/restore', [\App\Http\Controllers\CourseController::class, 'restore'])->name('courses.restore');
+    Route::delete('courses/{id}/force-delete', [\App\Http\Controllers\CourseController::class, 'forceDelete'])->name('courses.forceDelete');
 });
 
 require __DIR__ . '/auth.php';

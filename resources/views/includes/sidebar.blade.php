@@ -34,7 +34,22 @@
                     </a>
                 </li>
             </li>
-
+            <li class="treeview {{ request()->is('courses*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-book"></i>
+                    <span class="menu-text">Manajemen Mata Kuliah</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('courses*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request()->routeIs('courses.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('courses.index') }}">Daftar Mata Kuliah</a>
+                    </li>
+                    <li class="{{ request()->routeIs('courses.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('courses.create') }}">Tambah Mata Kuliah</a>
+                    </li>
+                </ul>
+            </li>
+            
             {{-- End Admin dashboard --}}
         </ul>
     </div>

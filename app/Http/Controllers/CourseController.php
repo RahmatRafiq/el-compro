@@ -7,15 +7,25 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
-    {
+    public function index(Request $request)
+{
+    $filter = $request->query('filter', 'active'); // Default: tampilkan data aktif
+
+    if ($filter == 'trashed') {
+        $courses = Course::onlyTrashed()->get();
+    } elseif ($filter == 'all') {
+        $courses = Course::withTrashed()->get();
+    } else {
         $courses = Course::all();
-        return view('courses.index', compact('courses'));
     }
+
+    return view('menu.courses.index', compact('courses', 'filter'));
+}
+
 
     public function create()
     {
-        return view('courses.create');
+        return view('menu.courses.create');
     }
 
     public function store(Request $request)
@@ -33,7 +43,7 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        return view('courses.edit', compact('course'));
+        return view('menu.courses.edit', compact('course'));
     }
 
     public function update(Request $request, Course $course)
@@ -58,18 +68,19 @@ class CourseController extends Controller
     public function trashed()
     {
         $courses = Course::onlyTrashed()->get();
-        return view('courses.trashed', compact('courses'));
+        return view('menu.courses.trashed', compact('courses'));
     }
 
     public function restore($id)
     {
         Course::onlyTrashed()->where('id', $id)->restore();
-        return redirect()->route('courses.trashed')->with('success', 'Course restored successfully.');
+        return redirect()->route('courses.index')->with('success', 'Course restored successfully.');
     }
-
+    
     public function forceDelete($id)
     {
         Course::onlyTrashed()->where('id', $id)->forceDelete();
-        return redirect()->route('courses.trashed')->with('success', 'Course permanently deleted.');
+        return redirect()->route('courses.index')->with('success', 'Course permanently deleted.');
     }
+    
 }
