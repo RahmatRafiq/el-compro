@@ -26,47 +26,6 @@ class LecturersController extends Controller
         return view('menu.lecturers.index', compact('lecturers', 'filter'));
     }
 
-    // public function json(Request $request)
-    // {
-    //     $search = $request->search['value'];
-    //     $status = $request->status;  // Get the selected status filter
-    //     $query = Lecturers::with('courses');
-    
-    //     // Filter based on status
-    //     if ($status === 'active') {
-    //         $query->whereNull('deleted_at');  // Show only active lecturers
-    //     } elseif ($status === 'deleted') {
-    //         $query->onlyTrashed();  // Show only deleted lecturers
-    //     }
-    
-    //     $columns = [
-    //         'id',
-    //         'name',
-    //         'status',
-    //         'created_at',
-    //         'updated_at',
-    //     ];
-    
-    //     if ($request->filled('search')) {
-    //         $query->where('name', 'like', "%{$search}%")
-    //               ->orWhere('created_at', 'like', "%{$search}%")
-    //               ->orWhere('updated_at', 'like', "%{$search}%");
-    //     }
-    
-    //     if ($request->filled('order')) {
-    //         $query->orderBy($columns[$request->order[0]['column']], $request->order[0]['dir']);
-    //     }
-    
-    //     $data = DataTable::paginate($query, $request);
-    
-    //     $data['data'] = $data['data']->map(function ($lecturer) {
-    //         $lecturer->status = $lecturer->trashed() ? 'Deleted' : 'Active';
-    //         return $lecturer;
-    //     });
-    
-    //     return response()->json($data);
-    // }
-
     public function create()
     {
         $courses = Course::all();

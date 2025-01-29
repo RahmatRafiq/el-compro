@@ -13,9 +13,9 @@
         <div class="mb-3 mt-3 d-flex justify-content-end">
             <label for="filter" class="form-label me-2">Filter Courses</label>
             <select id="filter" class="form-select w-auto">
-            <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Courses</option>
-            <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Courses</option>
-            <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Courses</option>
+                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Courses</option>
+                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Courses</option>
+                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Courses</option>
             </select>
         </div>
 
@@ -71,22 +71,37 @@
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('assets/DataTables/datatables.min.css') }}">
+<link href="{{ asset('assets/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 @endpush
 
 @push('javascript')
 <script src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
-        $('#courses').DataTable();
+        // Initialize DataTable
+        $('#courses').DataTable({
+            "searching": true,  // Enable search feature
+            "paging": true,     // Enable pagination
+            "ordering": true,   // Enable sorting
+        });
 
+        // Initialize Select2 for the filter
+        $('#filter').select2({
+            placeholder: "Select Filter",
+            allowClear: true
+        });
+
+        // Change filter value and reload page
         $('#filter').change(function() {
             let filter = $(this).val();
             window.location.href = `{{ route('courses.index') }}?filter=${filter}`;
         });
     });
 
+    // Delete course function with confirmation
     function deleteCourse(id) {
         Swal.fire({
             title: 'Are you sure?',
