@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -12,71 +12,16 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            [
-                'name' => 'create user',
-                'guard_name' => 'web',
-                'route' => 'user.create'
-            ],
-            [
-                'name' => 'read user',
-                'guard_name' => 'web',
-                'route' => 'user.read'
-            ],
-            [
-                'name' => 'update user',
-                'guard_name' => 'web',
-                'route' => 'user.update'
-            ],
-            [
-                'name' => 'delete user',
-                'guard_name' => 'web',
-                'route' => 'user.delete'
-            ],
-            [
-                'name' => 'create role',
-                'guard_name' => 'web',
-                'route' => 'role.create'
-            ],
-            [
-                'name' => 'read role',
-                'guard_name' => 'web',
-                'route' => 'role.read'
-            ],
-            [
-                'name' => 'update role',
-                'guard_name' => 'web',
-                'route' => 'role.update'
-            ],
-            [
-                'name' => 'delete role',
-                'guard_name' => 'web',
-                'route' => 'role.delete'
-            ],
-            [
-                'name' => 'create permission',
-                'guard_name' => 'web',
-                'route' => 'permission.create'
-            ],
-            [
-                'name' => 'read permission',
-                'guard_name' => 'web',
-                'route' => 'permission.read'
-            ],
-            [
-                'name' => 'update permission',
-                'guard_name' => 'web',
-                'route' => 'permission.update'
-            ],
-            [
-                'name' => 'delete permission',
-                'guard_name' => 'web',
-                'route' => 'permission.delete'
-            ],
+        $permissions = [
+            'create_item',
+            'read_item',
+            'update_item',
+            'delete_item',
+            'manage_users',
         ];
 
-        foreach ($data as $permission) {
-            \App\Models\Permission::create($permission);
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
         }
     }
 }

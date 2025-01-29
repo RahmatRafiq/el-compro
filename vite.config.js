@@ -1,14 +1,30 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.tsx',
-            ssr: 'resources/js/ssr.tsx',
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/dropzoner.js'
+            ],
             refresh: true,
         }),
-        react(),
     ],
+    // no hashing output
+    build: {
+        // target esmodule
+        target: 'esnext',
+        rollupOptions: {
+            output: {
+                entryFileNames: 'js/[name].js',
+                chunkFileNames: 'js/[name].js',
+                assetFileNames: 'css/[name].css',
+            }
+        },
+    },
+    esbuild: {
+        drop: ['console', 'debugger']
+    }
 });

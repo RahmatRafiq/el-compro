@@ -2,31 +2,27 @@
 
 namespace App\Providers;
 
-use Filament\Support\Facades\FilamentAsset;
-use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Filament\Support\Assets\Css;
-
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+        // Ensure user and profile image are available in every view that needs them
+        View::composer('includes.topbar', function ($view) {
+            $user = Auth::user();
+            $profileImage = $user ? $user->getMedia('profile-images')->first() : null;
+            $view->with(['user' => $user, 'profileImage' => $profileImage]);
+        });
+    }
+
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        FilamentAsset::register([
-            Css::make('filament-custom', __DIR__ . '/../../resources/css/filament.css'),
-        ]);
-
-        Vite::prefetch(concurrency: 3);
+        // Register application services
     }
 }

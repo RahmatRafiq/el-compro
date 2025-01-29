@@ -1,63 +1,84 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Helpers\MediaLibrary;
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): Response
+    public function edit(Request $request): View
     {
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+        $user = Auth::user();
+        $profileImage = $user->getMedia('profile-images')->first();
+
+        return view('admin.profile.index', [
+            'user' => $user,
+            'profileImage' => $profileImage,
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function upload(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'current_password'],
+            'profile-images.*' => 'required|file|max:2048|mimes:jpeg,jpg,png',
+            'id' => 'required|integer',
         ]);
 
         $user = $request->user();
 
-        Auth::logout();
+        return response()->json(['message' => 'Profile picture uploaded'], 200);
+    }
 
-        $user->delete();
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        DB::beginTransaction();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        try {
+            $request->validate([
+                'profile-images' => 'array|max:3',
+            ]);
 
-        return Redirect::to('/');
+            $user = $request->user();
+            $user->fill($request->validated());
+
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
+
+            if ($request->has('profile-images')) {
+                MediaLibrary::put(
+                    $user,
+                    'profile-images',
+                    $request,
+                    'profile-images'
+                );
+            }
+
+            $user->save();
+            DB::commit();
+
+            return Redirect::route('profile.edit')->with('status', 'Profile updated successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return Redirect::route('profile.edit')->with('error', 'Failed to update profile.');
+        }
+    }
+
+    public function deleteFile(Request $request)
+    {
+        $request->validate(['filename' => 'required|string']);
+
+        Storage::disk('profile-images')->delete($request->filename);
+        \Spatie\MediaLibrary\MediaCollections\Models\Media::where('file_name', $request->filename)->first()->delete();
+
+        return response()->json(['message' => 'File berhasil dihapus'], 200);
     }
 }
