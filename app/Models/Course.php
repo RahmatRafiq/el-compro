@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +10,13 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'course_code',
-        'name',
-        'credits',
-    ];
+    protected $fillable = ['course_code', 'name', 'credits'];
+
+    public function lecturers()
+    {
+        return $this->belongsToMany(Lecturers::class, 'lecturer_course', 'course_id', 'lecturer_id')
+            ->withTimestamps()
+            ->withPivot('deleted_at')
+            ->withTrashed();
+    }
 }

@@ -28,11 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/role-permissions/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
 
     Route::resource('courses', \App\Http\Controllers\CourseController::class);
-
-    // Soft Deletes Routes (Trash Bin)
     Route::get('courses/trashed', [\App\Http\Controllers\CourseController::class, 'trashed'])->name('courses.trashed');
     Route::post('courses/{id}/restore', [\App\Http\Controllers\CourseController::class, 'restore'])->name('courses.restore');
     Route::delete('courses/{id}/force-delete', [\App\Http\Controllers\CourseController::class, 'forceDelete'])->name('courses.forceDelete');
+
+    Route::resource('lecturers', \App\Http\Controllers\LecturersController::class);
+    Route::get('lecturers/trashed', [\App\Http\Controllers\LecturersController::class, 'trashed'])->name('lecturers.trashed');
+    Route::post('lecturers/{id}/restore', [\App\Http\Controllers\LecturersController::class, 'restore'])->name('lecturers.restore');
+    Route::delete('lecturers/{id}/force-delete', [\App\Http\Controllers\LecturersController::class, 'forceDelete'])->name('lecturers.forceDelete');
+    
 });
 
 require __DIR__ . '/auth.php';

@@ -49,9 +49,28 @@
                     </li>
                 </ul>
             </li>
-            
+            <li class="treeview {{ request()->is('lecturers*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-person"></i>
+                    <span class="menu-text">Manajemen Dosen</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('lecturers*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request
+
+                        ()->routeIs('lecturers.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('lecturers.index') }}">Daftar Dosen</a>
+                    </li>
+                    <li class="{{ request
+                    
+                        ()->routeIs('lecturers.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('lecturers.create') }}">Tambah Dosen</a>
+                    </li>
+                </ul>
+            </li>
             {{-- End Admin dashboard --}}
         </ul>
+
     </div>
     <!-- Sidebar menu ends -->
 </nav>
