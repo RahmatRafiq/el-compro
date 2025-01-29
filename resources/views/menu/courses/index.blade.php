@@ -10,12 +10,12 @@
             </div>
         </div>
 
-        <div class="mb-3">
-            <label for="filter" class="form-label">Filter Courses</label>
-            <select id="filter" class="form-select">
-                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Courses</option>
-                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Courses</option>
-                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Courses</option>
+        <div class="mb-3 mt-3 d-flex justify-content-end">
+            <label for="filter" class="form-label me-2">Filter Courses</label>
+            <select id="filter" class="form-select w-auto">
+            <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Courses</option>
+            <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Courses</option>
+            <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Courses</option>
             </select>
         </div>
 
