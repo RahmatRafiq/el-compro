@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
+            CourseSeeder::class,
+            GeneralInformationSeeder::class,
+            LecturerCourseSeeder::class,
+            LecturerSeeder::class,
+            VirtualSeeder::class,
         ]);
     }
 }
