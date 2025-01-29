@@ -36,10 +36,11 @@
                             <td>{{ $info->type }}</td>
                             <td>{{ $info->name }}</td>
                             <td>
-                                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
-                                    {{ $info->description }}
+                                <div style="word-wrap: break-word; max-width: 200px;">
+                                    {{ Str::limit(strip_tags($info->description), 300) }}
                                 </div>
                             </td>
+                            
                             <td>
                                 @if ($info->deleted_at)
                                     <span class="badge bg-danger">Deleted</span>
