@@ -15,5 +15,11 @@ class LecturerCourseSeeder extends Seeder
             ['lecturer_id' => 3, 'course_id' => 3],
             ['lecturer_id' => 1, 'course_id' => 2], // Dr. John Doe juga mengajar Chemistry
         ]);
+        for ($i = 4; $i <= 200; $i++) {
+            DB::table('lecturer_course')->insert([
+            'lecturer_id' => rand(1, 10),
+            'course_id' => rand(1, 10),
+            ]);
+        }
     }
 }

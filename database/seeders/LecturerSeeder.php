@@ -14,5 +14,11 @@ class LecturerSeeder extends Seeder
             ['name' => 'Prof. Jane Smith', 'image' => 'jane_smith.jpg'],
             ['name' => 'Dr. Alan Turing', 'image' => 'alan_turing.jpg'],
         ]);
+        for ($i = 1; $i <= 200; $i++) {
+            DB::table('lecturers')->insert([
+                'name' => 'Lecturer ' . $i,
+                'image' => 'lecturer_' . $i . '.jpg',
+            ]);
+        }
     }
 }
