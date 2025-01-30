@@ -32,13 +32,15 @@ class GeneralInformationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type'        => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'name'        => 'nullable|string|max:255',
             'description' => 'required|string',
         ]);
 
+        $category = Category::findOrFail($request->category_id);
+
         GeneralInformation::create([
-            'type'        => $request->type,
+            'type'        => $category->name,
             'name'        => $request->name,
             'description' => $request->description,
         ]);
@@ -55,13 +57,15 @@ class GeneralInformationController extends Controller
     public function update(Request $request, GeneralInformation $generalInformation)
     {
         $request->validate([
-            'type'        => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'name'        => 'nullable|string|max:255',
             'description' => 'required|string',
         ]);
 
+        $category = Category::findOrFail($request->category_id);
+
         $generalInformation->update([
-            'type'        => $request->type,
+            'type'        => $category->name,
             'name'        => $request->name,
             'description' => $request->description,
         ]);

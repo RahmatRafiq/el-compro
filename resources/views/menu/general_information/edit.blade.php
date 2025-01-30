@@ -11,18 +11,16 @@
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
-                <select id="type" name="type" class="form-select" required>
+                <select id="type" name="category_id" class="form-select" required>
                     <option value="">-- Select Type --</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->type }}" 
-                            {{ $generalInformation->type == $category->type ? 'selected' : '' }}>
+                        <option value="{{ $category->id }}" 
+                            {{ $generalInformation->category_id == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
             </div>
-            
-            
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -31,7 +29,7 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" required>{{ old('description', $generalInformation->description) }}</textarea>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $generalInformation->description) }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
@@ -40,11 +38,9 @@
     </div>
 </div>
 
-<!-- CKEditor CDN -->
 <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 
 <script>
-    // Initialize CKEditor for description field
     ClassicEditor
         .create(document.querySelector('#description'))
         .catch(error => {

@@ -10,16 +10,20 @@
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
-                <select id="type" name="type" class="form-select" required>
+                <select id="type" name="category_id" class="form-select" required>
                     <option value="">-- Select Type --</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->type }}" 
-                            {{ $generalInformation->type == $category->type ? 'selected' : '' }}>
+                        <option value="{{ $category->id }}" 
+                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
+                @error('category_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
+            
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -27,7 +31,7 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" required></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
