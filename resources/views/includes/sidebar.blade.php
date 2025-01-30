@@ -93,10 +93,23 @@
                     <li class="{{ request()->routeIs('virtuals.index') ? 'active-sub' : '' }}">
                         <a href="{{ route('virtuals.index') }}">List Virtual Content</a>
                     </li>
-                    <li class="{{ request
-                    
-                        ()->routeIs('virtuals.create') ? 'active-sub' : '' }}">
+                    <li class="{{ request()->routeIs('virtuals.create') ? 'active-sub' : '' }}">
                         <a href="{{ route('virtuals.create') }}">Add Virtual Content</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview {{ request()->is('categories*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-list-check"></i>
+                    <span class="menu-text">Categories</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('categories*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request()->routeIs('categories.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('categories.index') }}">List Categories</a>
+                    </li>
+                    <li class="{{ request()->routeIs('categories.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('categories.create') }}">Add Category</a>
                     </li>
                 </ul>
             </li>
