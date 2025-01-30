@@ -17,12 +17,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-label">Lecturer Image</label>
-                        <input type="file" class="form-control" name="image" accept="image/*">
-                        <small class="text-muted">Leave blank if you don't want to change the image.</small>
-                        <div class="mt-2">
-                            <img src="{{ asset('storage/' . $lecturer->image) }}" width="100" class="rounded">
-                        </div>
+                        <label for="images" class="form-label">Lecturer Image</label>
+                        <div class="dropzone" id="myDropzone"></div>
                     </div>
 
                     <div class="mb-3">
@@ -50,6 +46,11 @@
 <link href="{{ asset('assets/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 @endpush
 
+@push('head')
+    @vite(['resources/js/dropzoner.js'])
+    <script src="{{ asset('assets/vendor/toastify/toastify.js') }}"></script>
+@endpush
+
 @push('javascript')
 <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
 <script>
@@ -59,5 +60,51 @@
             allowClear: true
         });
     });
+</script>
+
+<script type="module">
+    const element = '#myDropzone';
+    const key = 'lecturer-image';
+    const files = [];
+    const urlStore = "{!! route('storage.store') !!}";
+    const urlDestroy = "{!! route('lecturers.deleteFile') !!}";
+    const csrf = "{!! csrf_token() !!}";
+    const acceptedFiles = 'image/*';
+    const maxFiles = 3;
+
+    @if ($lecturerImage)
+        files.push({
+            id: '{{ $lecturerImage->id }}',
+            name: '{{ $lecturerImage->name }}',
+            file_name: '{{ $lecturerImage->file_name }}',
+            size: '{{ $lecturerImage->size }}',
+            type: '{{ $lecturerImage->mime_type }}',
+            url: '{{ $lecturerImage->getUrl() }}',
+            original_url: '{{ $lecturerImage->getFullUrl() }}',
+        });
+    @endif
+
+    const dz = Dropzoner(
+        element,
+        key,
+        {
+            urlStore,
+            urlDestroy,
+            acceptedFiles,
+            files,
+            maxFiles,
+            kind: 'image',
+            csrf,
+        }
+    );
+
+    dz.on("success", function(file, response) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'images[]';  
+    input.value = response.path;
+    document.querySelector('form').appendChild(input);
+});
+
 </script>
 @endpush

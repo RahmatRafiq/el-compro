@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Lecturer;
+use App\Helpers\MediaLibrary;
 use App\Models\Course;
 use App\Models\Lecturers;
 use Illuminate\Http\Request;
@@ -13,7 +12,7 @@ class LecturersController extends Controller
     public function index(Request $request)
     {
         $filter = $request->query('filter', 'active');
-        $query = Lecturers::with('courses');
+        $query  = Lecturers::with('courses');
 
         if ($filter == 'trashed') {
             $query->onlyTrashed();
@@ -26,52 +25,77 @@ class LecturersController extends Controller
         return view('menu.lecturers.index', compact('lecturers', 'filter'));
     }
 
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'lecturer-image.*' => 'required|file|max:2048|mimes:jpeg,jpg,png',
+            'id'               => 'required|integer',
+        ]);
+
+        $lecturer = Lecturers::find($request->id);
+
+        return response()->json(['message' => 'Profile picture uploaded'], 200);
+    }
+
     public function create()
     {
         $courses = Course::all();
-        return view('menu.lecturers.create', compact('courses'));
+        $lecturer = new Lecturers();
+        $lecturerImage = $lecturer->getMedia('lecturer-image')->first();
+        return view('menu.lecturers.create', compact('courses', 'lecturerImage'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'courses' => 'array'
+            'name'           => 'required|max:255',
+            'courses'        => 'array',
+            'lecturer-image' => 'array|max:3',
         ]);
 
-        $imagePath = $request->hasFile('image') ? $request->file('image')->store('lecturers', 'public') : null;
-
         $lecturer = Lecturers::create([
-            'name' => $request->name,
-            'image' => $imagePath
+            'name'  => $request->name,
         ]);
 
         if ($request->has('courses')) {
             $lecturer->courses()->sync($request->courses);
         }
 
+        if ($request->has('lecturer-image')) {
+            MediaLibrary::put(
+                $lecturer,
+                'lecturer-image',
+                $request,
+                'lecturer-image'
+            );
+        }
+
         return redirect()->route('lecturers.index')->with('success', 'Lecturer added successfully.');
     }
 
     public function edit(Lecturers $lecturer)
-    {
+    {       
+         $lecturerImage = $lecturer->getMedia('lecturer-image')->first();
+
         $courses = Course::all();
-        return view('menu.lecturers.edit', compact('lecturer', 'courses'));
+        return view('menu.lecturers.edit', compact('lecturer', 'courses', 'lecturerImage'));
     }
 
     public function update(Request $request, Lecturers $lecturer)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'courses' => 'array'
+            'name'    => 'required|max:255',
+            'courses' => 'array',
+            'lecturer-image' => 'array|max:3',
         ]);
 
-        if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($lecturer->image);
-            $imagePath = $request->file('image')->store('lecturers', 'public');
-            $lecturer->update(['image' => $imagePath]);
+        if ($request->has('lecturer-image')) {
+            MediaLibrary::put(
+                $lecturer,
+                'lecturer-image',
+                $request,
+                'lecturer-image'
+            );
         }
 
         $lecturer->update(['name' => $request->name]);
@@ -83,11 +107,20 @@ class LecturersController extends Controller
         return redirect()->route('lecturers.index')->with('success', 'Lecturer updated successfully.');
     }
 
+    public function deleteFile(Request $request)
+    {
+        $lecturer = Lecturers::find($request->id);
+        $lecturer->clearMediaCollection('lecturer-image');
+        return response()->json(['message' => 'File deleted'], 200);
+    }
+
     public function destroy(Lecturers $lecturer)
     {
         $lecturer->delete();
         return redirect()->route('lecturers.index')->with('success', 'Lecturer deleted successfully.');
     }
+
+
 
     public function trashed()
     {

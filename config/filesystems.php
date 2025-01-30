@@ -56,6 +56,12 @@ return [
             'url' => env('APP_URL') . '/storage/profile-images',
             'visibility' => 'public',
         ],
+        'lecturer-image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/lecturer-image'),
+            'url' => env('APP_URL') . '/storage/lecturer-image',
+            'visibility' => 'public',
+        ],
         // temp
         'temp' => [
             'driver' => 'local',
