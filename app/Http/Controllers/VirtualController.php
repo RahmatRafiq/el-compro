@@ -25,7 +25,7 @@ class VirtualController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('type', 'virtual_tours')->get();
         return view('menu.virtuals.create', compact('categories'));
     }
 
@@ -45,7 +45,7 @@ class VirtualController extends Controller
 
     public function edit(Virtual $virtual)
     {
-        $categories = Category::all();
+        $categories = Category::where('type', 'virtual_tours')->get();
         return view('menu.virtuals.edit', compact('virtual', 'categories'));
     }
 

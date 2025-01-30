@@ -11,15 +11,18 @@
 
             <div class="mb-3">
                 <label for="type" class="form-label">Type</label>
-                <select id="type" name="type" class="form-select">
-                    <option value="konsentrasi" {{ $generalInformation->type == 'konsentrasi' ? 'selected' : '' }}>Konsentrasi</option>
-                    <option value="prospek_karir" {{ $generalInformation->type == 'prospek_karir' ? 'selected' : '' }}>Prospek Karir</option>
-                    <option value="keunggulan" {{ $generalInformation->type == 'keunggulan' ? 'selected' : '' }}>Keunggulan</option>
-                    <option value="capaian_prestasi" {{ $generalInformation->type == 'capaian_prestasi' ? 'selected' : '' }}>Capaian Prestasi</option>
-                    <option value="sks_matakuliah" {{ $generalInformation->type == 'sks_matakuliah' ? 'selected' : '' }}>SKS Matakuliah</option>
-                    <!-- Add more types as needed -->
+                <select id="type" name="type" class="form-select" required>
+                    <option value="">-- Select Type --</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->type }}" 
+                            {{ $generalInformation->type == $category->type ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
+            
+            
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>

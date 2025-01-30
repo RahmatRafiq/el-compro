@@ -13,15 +13,17 @@
 
             <div class="mb-3">
                 <label for="category_id" class="form-label">Category</label>
-                <select class="form-select select2" id="category_id" name="category_id" required>
+                <select class="form-control select2" name="category_id" required>
                     <option value="">-- Select Category --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $virtual->category_id == $category->id ? 'selected' : '' }}>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            {{ old('category_id', $virtual->category_id ?? '') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
             </div>
+            
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -52,7 +54,9 @@
 @endpush
 
 @push('javascript')
+
 <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -61,6 +65,13 @@
             placeholder: "Select Category",
             allowClear: true
         });
+
+        // Initialize CKEditor for description
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
     });
 </script>
 @endpush

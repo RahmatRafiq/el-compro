@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\GeneralInformation;
 use Illuminate\Http\Request;
 
@@ -24,47 +25,49 @@ class GeneralInformationController extends Controller
 
     public function create()
     {
-        return view('menu.general_information.create');
+        $categories = Category::where('type', 'general_information')->get();
+        return view('menu.general_information.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|string',
-            'name' => 'nullable|string|max:255',
+            'type'        => 'required|string',
+            'name'        => 'nullable|string|max:255',
             'description' => 'required|string',
         ]);
-    
+
         GeneralInformation::create([
-            'type' => $request->type,
-            'name' => $request->name,
+            'type'        => $request->type,
+            'name'        => $request->name,
             'description' => $request->description,
         ]);
-    
+
         return redirect()->route('general_information.index')->with('success', 'General Information created successfully!');
     }
 
     public function edit(GeneralInformation $generalInformation)
     {
-        return view('menu.general_information.edit', compact('generalInformation'));
+        $categories = Category::where('type', 'general_information')->get();
+        return view('menu.general_information.edit', compact('generalInformation', 'categories'));
     }
 
     public function update(Request $request, GeneralInformation $generalInformation)
-{
-    $request->validate([
-        'type' => 'required|string',
-        'name' => 'nullable|string|max:255',
-        'description' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'type'        => 'required|string',
+            'name'        => 'nullable|string|max:255',
+            'description' => 'required|string',
+        ]);
 
-    $generalInformation->update([
-        'type' => $request->type,
-        'name' => $request->name,
-        'description' => $request->description,
-    ]);
+        $generalInformation->update([
+            'type'        => $request->type,
+            'name'        => $request->name,
+            'description' => $request->description,
+        ]);
 
-    return redirect()->route('general_information.index')->with('success', 'General Information updated successfully!');
-}
+        return redirect()->route('general_information.index')->with('success', 'General Information updated successfully!');
+    }
 
     public function destroy(GeneralInformation $generalInformation)
     {
