@@ -83,6 +83,23 @@
                     </li>
                 </ul>
             </li>
+            <li class="treeview {{ request()->is('virtuals*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-camera-video"></i>
+                    <span class="menu-text">Virtual Content</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('virtuals*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request()->routeIs('virtuals.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('virtuals.index') }}">List Virtual Content</a>
+                    </li>
+                    <li class="{{ request
+                    
+                        ()->routeIs('virtuals.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('virtuals.create') }}">Add Virtual Content</a>
+                    </li>
+                </ul>
+            </li>
             {{-- End Admin dashboard --}}
         </ul>
 
