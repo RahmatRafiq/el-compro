@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Vite;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
             $profileImage = $user ? $user->getMedia('profile-images')->first() : null;
             $view->with(['user' => $user, 'profileImage' => $profileImage]);
         });
+        Vite::prefetch(concurrency: 3);
+
     }
 
     /**
@@ -25,4 +28,5 @@ class AppServiceProvider extends ServiceProvider
     {
         // Register application services
     }
+
 }

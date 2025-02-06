@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             // 'auth.optional' => \App\Http\Middleware\AuthOptional::class,
             'inertia' => HandleInertiaRequests::class,
+
+        ]);
+        $middleware->append([
+            // \App\Http\Middleware\AuthOptional::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
