@@ -7,15 +7,20 @@ interface GeneralInformationSectionProps {
 
 const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ categories, data }) => {
   return (
-    <section className="w-full py-8">
+    <section className="rounded-lg w-full py-8 bg-neutral text-neutral-content">
       <h2 className="text-2xl font-bold text-center mb-6">General Information</h2>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="w-full ">
         {categories.map((category) => {
           const categoryData = data.find(item => item.name === category.name);
           return (
-            <div key={category.id} className="w-full p-6 border rounded-lg shadow-lg hover:shadow-xl transition">
-              <h3 className="text-xl font-semibold mb-4">{category.name}</h3>
-              <p className="text-sm text-gray-600">{categoryData ? categoryData.description : "No description available"}</p>
+            <div key={category.id} className="collapse collapse-arrow  w-full ">
+              <input type="radio" name="category-accordion" />
+              <div className="collapse-title text-xl font-medium">{category.name}</div>
+              <div className="collapse-content overflow-hidden max-h-20">
+                <p className="text-sm">
+                  {categoryData ? categoryData.description : "No description available"}
+                </p>
+              </div>
             </div>
           );
         })}
