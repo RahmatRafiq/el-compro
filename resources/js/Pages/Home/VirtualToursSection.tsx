@@ -1,4 +1,3 @@
-// VirtualToursSection.tsx
 import React from "react";
 
 interface VirtualTour {
@@ -21,7 +20,7 @@ const VirtualToursSection: React.FC<VirtualToursSectionProps> = ({ virtualTours 
     <section className="virtual-tours p-6 bg-neutral rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-primary">Virtual Tours</h2>
 
-      {/* DaisyUI Carousel */}
+      {/* DaisyUI Carousel Center */}
       <div className="carousel w-full overflow-hidden rounded-lg shadow-md">
         {virtualTours.map((tour, index) => (
           <div key={tour.id} id={`item${index + 1}`} className="carousel-item w-full">
