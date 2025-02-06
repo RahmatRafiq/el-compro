@@ -22,9 +22,11 @@
         "@inertiajs/react": "^2.0.3",
         "@vitejs/plugin-react": "^4.3.4",
         "chart.js": "^4.4.3",
+        "daisyui": "^4.12.23",
         "dropzone": "^6.0.0-beta.2",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "toastify-js": "^1.12.0"
+        "toastify-js": "^1.12.0",
+        "ziggy-js": "^2.5.1"
     }
 }
