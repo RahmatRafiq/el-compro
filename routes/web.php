@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(['inertia'])->group(function () {
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
@@ -48,7 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::get('virtuals/trashed', [\App\Http\Controllers\VirtualController::class, 'trashed'])->name('virtuals.trashed');
     Route::post('virtuals/{id}/restore', [\App\Http\Controllers\VirtualController::class, 'restore'])->name('virtuals.restore');
     Route::delete('virtuals/{id}/force-delete', [\App\Http\Controllers\VirtualController::class, 'forceDelete'])->name('virtuals.forceDelete');
-
 
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::get('categories/trashed', [\App\Http\Controllers\CategoryController::class, 'trashed'])->name('categories.trashed');
