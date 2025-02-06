@@ -7,7 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/dropzoner.js'
+                'resources/js/dropzoner.js',
+                'resources/js/react.tsx',
             ],
             refresh: true,
         }),
