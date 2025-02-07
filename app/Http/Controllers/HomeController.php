@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\AboutApp;
 use App\Models\Course;
 use App\Models\GeneralInformation;
 use App\Models\Lecturers;
@@ -10,7 +11,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $courses   = Course::latest()->take(5)->get();
+
+        $courses = Course::latest()->take(5)->get();
+
+        $aboutApp = AboutApp::first();
 
         $lecturers = Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
             return [
@@ -23,7 +27,7 @@ class HomeController extends Controller
                 ]),
             ];
         });
-        
+
         $virtualTours = Virtual::with('category')
             ->whereHas('category', function ($query) {
                 $query->where('type', 'virtual_tours');
@@ -44,6 +48,7 @@ class HomeController extends Controller
 
         return inertia('Home', [
             'courses'                => $courses,
+            'aboutApp'               => $aboutApp,
             'lecturers'              => $lecturers,
             'virtualTours'           => $virtualTours,
             'concentrationData'      => $concentrationData,

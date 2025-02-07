@@ -19,7 +19,13 @@ interface HomeProps {
   virtualTours: any[];
   lecturers: any[];
   concentrationData: any[];
-  courses: Course[]; // Tambahkan courses ke props
+  courses: Course[]; 
+  aboutApp: {
+    title: string;
+    contact_email: string;
+    contact_phone: string;
+    contact_address: string;
+  };
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -27,12 +33,12 @@ const Home: React.FC<HomeProps> = ({
   virtualTours,
   lecturers,
   concentrationData,
-  courses
+  courses,
+  aboutApp,
 }) => {
   const registrationFlowData = generalInformationData.find(item => item.name === "Informasi dan Alur Pendaftaran");
-
   return (
-    <Layout>
+    <Layout aboutApp={aboutApp}> 
       <div className="space-y-8 px-6">
         <VirtualToursSection virtualTours={virtualTours} />
         <GeneralInformationSection generalInformationData={generalInformationData} />

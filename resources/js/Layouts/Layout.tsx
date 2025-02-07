@@ -6,14 +6,19 @@ import ThemeController from './ThemeController';
 
 interface LayoutProps {
     children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+    aboutApp: {
+      title: string;
+      contact_email: string;
+      contact_phone: string;
+      contact_address: string;
+    };
+  }
+const Layout: React.FC<LayoutProps> = ({ children, aboutApp }) => {
     return (
         <div className="min-h-screen">
             <Header />
             <main className="px-4 py-6">{children}</main>
-            <Footer />
+            <Footer aboutApp={aboutApp} />
             <ThemeController />
         </div>
     );
