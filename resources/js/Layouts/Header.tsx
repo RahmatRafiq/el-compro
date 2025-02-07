@@ -5,7 +5,6 @@ const Header: React.FC = () => {
   return (
     <nav className="navbar bg-base-100 shadow-md">
       <div className="navbar-start">
-        {/* Dropdown Mobile */}
         <div className="dropdown">
           <button tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -49,13 +48,11 @@ const Header: React.FC = () => {
           </ul>
         </div>
 
-        {/* Logo / Home */}
         <Link href="/home" className="btn btn-ghost text-xl">
           Nama Universitas
         </Link>
       </div>
 
-      {/* Navbar Tengah (Desktop) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
@@ -65,24 +62,10 @@ const Header: React.FC = () => {
             <Link href="/home/lecturers">Dosen Kami</Link>
           </li>
           <li><Link href="/home/courses">Mata Kuliah</Link></li>
-          <li>
-            <details>
-              <summary>Menu</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
         </ul>
       </div>
 
-      {/* Navbar End (Login/Register) */}
-      <div className="navbar-end">
+        <div className="navbar-end">
         <Link href="/login" className="btn btn-primary">
           Masuk
         </Link>
