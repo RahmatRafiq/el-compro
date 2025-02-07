@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\GeneralInformation;
 use App\Models\Lecturers;
 use App\Models\Virtual;
@@ -9,21 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $generalInformationData = GeneralInformation::whereIn('name', [
-            'Keunggulan',
-            'Capaian Prestasi',
-            'Prospek Karier',
-            'Informasi dan Alur Pendaftaran',
-        ])->get();
-        $virtualTours = Virtual::with('category')
-            ->whereHas('category', function ($query) {
-                $query->where('type', 'virtual_tours');
-            })
-            ->get();
-
-        $concentrationData = GeneralInformation::where('type', 'Konsentrasi')
-            ->select('id', 'name', 'description')
-            ->get();
+        $courses   = Course::latest()->take(5)->get();
 
         $lecturers = Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
             return [
@@ -36,12 +23,31 @@ class HomeController extends Controller
                 ]),
             ];
         });
+        
+        $virtualTours = Virtual::with('category')
+            ->whereHas('category', function ($query) {
+                $query->where('type', 'virtual_tours');
+            })
+            ->get();
+
+        $concentrationData = GeneralInformation::where('type', 'Konsentrasi')
+            ->select('id', 'name', 'description')
+            ->get();
+
+        $generalInformationData = GeneralInformation::whereIn('name', [
+            'Keunggulan',
+            'Capaian Prestasi',
+            'Prospek Karier',
+            'Informasi dan Alur Pendaftaran',
+        ])
+            ->get();
 
         return inertia('Home', [
-            'generalInformationData' => $generalInformationData,
-            'virtualTours'           => $virtualTours,
+            'courses'                => $courses,
             'lecturers'              => $lecturers,
+            'virtualTours'           => $virtualTours,
             'concentrationData'      => $concentrationData,
+            'generalInformationData' => $generalInformationData,
         ]);
     }
 
@@ -62,4 +68,12 @@ class HomeController extends Controller
         ]);
     }
 
+    public function courses()
+    {
+        $courses = Course::with('lecturers')->get();
+
+        return inertia('Courses', [
+            'courses' => $courses,
+        ]);
+    }
 }

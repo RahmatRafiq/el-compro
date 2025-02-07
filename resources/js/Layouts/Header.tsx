@@ -64,6 +64,7 @@ const Header: React.FC = () => {
           <li>
             <Link href="/home/lecturers">Dosen Kami</Link>
           </li>
+          <li><Link href="/home/courses">Mata Kuliah</Link></li>
           <li>
             <details>
               <summary>Menu</summary>

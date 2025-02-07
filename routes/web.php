@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['inertia'])->group(function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home/lecturers', [\App\Http\Controllers\HomeController::class, 'lecturers'])->name('home.lecturers');
+    Route::get('/home/lecturers', [\App\Http\Controllers\HomeController::class, 'lecturers'])->name('home.lecturers');
+    Route::get('/home/courses', [\App\Http\Controllers\HomeController::class, 'courses'])->name('home.courses');
 });
 
 Route::middleware('auth')->group(function () {
