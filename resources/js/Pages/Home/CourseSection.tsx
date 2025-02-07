@@ -14,7 +14,7 @@ interface CoursesSectionProps {
 
 const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+    <div className="rounded-lg w-full py-8 shadow-xl">
       <h2 className="text-3xl font-bold text-center  mb-6">Mata Kuliah</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
