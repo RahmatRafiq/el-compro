@@ -1,9 +1,34 @@
 import { Link } from "@inertiajs/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Menangani scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="navbar bg-base-100 shadow-md">
+    <nav
+      className={`navbar text-neutral-content shadow-md fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "backdrop-blur-lg bg-opacity-70 bg-neutral" 
+          : "bg-neutral" 
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <button tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -61,14 +86,10 @@ const Header: React.FC = () => {
           <li>
             <Link href="/home/lecturers">Dosen Kami</Link>
           </li>
-          <li><Link href="/home/courses">Mata Kuliah</Link></li>
+          <li>
+            <Link href="/home/courses">Mata Kuliah</Link>
+          </li>
         </ul>
-      </div>
-
-        <div className="navbar-end">
-        <Link href="/login" className="btn btn-primary">
-          Masuk
-        </Link>
       </div>
     </nav>
   );
