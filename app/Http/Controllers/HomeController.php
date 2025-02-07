@@ -45,4 +45,21 @@ class HomeController extends Controller
         ]);
     }
 
+    public function lecturers()
+    {
+        $lecturers = Lecturers::with('courses')->get()->map(fn($lecturer) => [
+            'id'      => $lecturer->id,
+            'name'    => $lecturer->name,
+            'image'   => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
+            'courses' => $lecturer->courses->map(fn($course) => [
+                'id'   => $course->id,
+                'name' => $course->name,
+            ]),
+        ]);
+
+        return inertia('Lecturers', [
+            'lecturers' => $lecturers,
+        ]);
+    }
+
 }
