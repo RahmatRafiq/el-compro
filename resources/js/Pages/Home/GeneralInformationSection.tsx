@@ -11,16 +11,14 @@ interface GeneralInformationSectionProps {
 }
 
 const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ generalInformationData }) => {
-  // Pisahkan Informasi dan Alur Pendaftaran dari informasi lainnya
   const flowInfo = generalInformationData.find(item => item.name === "Informasi dan Alur Pendaftaran");
   const otherInfo = generalInformationData.filter(item => item.name !== "Informasi dan Alur Pendaftaran");
 
   return (
     <div className="w-full space-y-6">
-      {/* Section untuk Informasi dan Alur Pendaftaran */}
       {flowInfo && (
         <section className="rounded-lg w-full py-8 card bg-base-200 shadow-lg">
-          <h2 className="text-2xl font-bold text-center mb-6">{flowInfo.name}</h2>
+          <h2 className="text-3xl font-bold text-center  mb-6">{flowInfo.name}</h2>
           <div className="w-full px-6">
             <ul className="timeline timeline-vertical">
               {(() => {
@@ -54,9 +52,8 @@ const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ g
         </section>
       )}
 
-      {/* Section untuk informasi lainnya */}
       <section className="rounded-lg w-full py-8 card bg-base-200 shadow-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">Informasi Umum</h2>
+        <h2 className="text-3xl font-bold text-center  mb-6">Informasi Umum</h2>
         <div className="w-full">
           {otherInfo.map((item) => (
             <div key={item.id} className="collapse collapse-arrow w-full">

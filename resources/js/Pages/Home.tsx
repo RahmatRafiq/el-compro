@@ -22,8 +22,8 @@ interface HomeProps {
   courses: Course[]; // Tambahkan courses ke props
 }
 
-const Home: React.FC<HomeProps> = ({ 
-  generalInformationData, 
+const Home: React.FC<HomeProps> = ({
+  generalInformationData,
   virtualTours,
   lecturers,
   concentrationData,

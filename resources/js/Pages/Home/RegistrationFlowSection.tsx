@@ -15,7 +15,7 @@ const RegistrationFlowSection: React.FC<RegistrationFlowSectionProps> = ({ regis
 
   return (
     <section className="rounded-lg w-full py-8 bg-neutral text-neutral-content">
-      <h2 className="text-2xl font-bold text-center mb-6">Informasi dan Alur Pendaftaran</h2>
+      <h2 className="text-3xl font-bold text-center  mb-6">Informasi dan Alur Pendaftaran</h2>
       <ul className="steps steps-vertical">{listItems}</ul>
     </section>
   );
