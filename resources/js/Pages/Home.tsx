@@ -15,7 +15,6 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ 
-  generalInformationCategories, 
   generalInformationData, 
   virtualTours,
   lecturers,
@@ -27,8 +26,8 @@ const Home: React.FC<HomeProps> = ({
     <Layout>
       <div className="space-y-8 px-6">
         <VirtualToursSection virtualTours={virtualTours} />
-        {/* <GeneralInformationSection categories={generalInformationCategories} data={generalInformationData} /> */}
-        {registrationFlowData && <RegistrationFlowSection registrationFlowData={registrationFlowData} />}
+        <GeneralInformationSection generalInformationData={generalInformationData} />
+        {/* {registrationFlowData && <RegistrationFlowSection registrationFlowData={registrationFlowData} />} */}
         <LecturersSection lecturers={lecturers} />
         <ConcentrationTabs concentrationData={concentrationData} />
       </div>
