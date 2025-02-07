@@ -1,29 +1,26 @@
-// resources/js/Components/ThemeController.tsx
 import React, { useState, useEffect } from 'react';
 
 const ThemeController: React.FC = () => {
-  const [theme, setTheme] = useState<string>('light');
+  const [theme, setTheme] = useState<string>('aqua');
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'aqua' ? 'dark' : 'aqua';
     setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme); // Mengubah tema
+    document.documentElement.setAttribute('data-theme', newTheme);
   };
 
   useEffect(() => {
-    // Menyimpan tema yang dipilih di localStorage agar tetap konsisten
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'aqua';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   useEffect(() => {
-    // Menyimpan tema yang dipilih di localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   return (
-    <div className="fixed bottom-16 right-4 flex items-center gap-2 rounded-full py-2 px-6 shadow-lg hover:bg-light-accent transition z-50 hover:scale-105 transform">
+    <div className="fixed bottom-16 right-4 flex items-center gap-2 rounded-full py-2 px-6 shadow-lg hover:bg-aqua-accent transition z-50 hover:scale-105 transform">
       <label className="flex cursor-pointer gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
