@@ -32,9 +32,6 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
                   ? `Teaches: ${lecturer.courses.map(course => course.name).join(", ")}`
                   : "No courses assigned"}
               </p>
-              {/* <div className="card-actions justify-end">
-                <button className="btn btn-primary">View Profile</button>
-              </div> */}
             </div>
           </div>
         ))}
