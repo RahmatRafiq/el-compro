@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Header />
             <main className="px-4 py-6">{children}</main>
             <Footer />
-            <ThemeController />
+            {/* <ThemeController /> */}
         </div>
     );
 };
