@@ -8,15 +8,22 @@ interface Course {
     name: string;
     credits: number;
     lecturers: { id: number; name: string }[];
+
 }
 
 interface CoursesProps {
     courses: Course[];
+    aboutApp: {
+        title: string;
+        contact_email: string;
+        contact_phone: string;
+        contact_address: string;
+      };
 }
 
-const Courses: React.FC<CoursesProps> = ({ courses }) => {
+const Courses: React.FC<CoursesProps> = ({ courses, aboutApp }) => {
     return (
-        <Layout>
+        <Layout aboutApp={aboutApp}> 
             <div className="space-y-8 px-6">
                 <div className="container mx-auto p-6">
                     <h1 className="text-2xl font-bold mb-4">Daftar Mata Kuliah</h1>

@@ -11,17 +11,22 @@ interface Lecturer {
 }
 
 
-interface PageProps extends InertiaPageProps {
+interface LecturersProps extends InertiaPageProps {
     lecturers: Lecturer[];
+    aboutApp: {
+        title: string;
+        contact_email: string;
+        contact_phone: string;
+        contact_address: string;
+      };
 }
 
-const Lecturers: React.FC = () => {
-    const { lecturers } = usePage<PageProps>().props;
+const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {
 
     return (
         <>
-            <Layout>
-                <div className="space-y-8 px-6">
+        <Layout aboutApp={aboutApp}> 
+        <div className="space-y-8 px-6">
                     <Head title="Dosen Kami" />
                     <section className="rounded-lg w-full py-8 bg-base-100 shadow-xl">
                         <h2 className="text-2xl font-bold text-center mb-6">Dosen Kami</h2>

@@ -58,6 +58,9 @@ class HomeController extends Controller
 
     public function lecturers()
     {
+
+        $aboutApp = AboutApp::first();
+
         $lecturers = Lecturers::with('courses')->get()->map(fn($lecturer) => [
             'id'      => $lecturer->id,
             'name'    => $lecturer->name,
@@ -70,15 +73,20 @@ class HomeController extends Controller
 
         return inertia('Lecturers', [
             'lecturers' => $lecturers,
+            'aboutApp'  => $aboutApp,
         ]);
     }
 
     public function courses()
     {
+
+        $aboutApp = AboutApp::first();
+
         $courses = Course::with('lecturers')->get();
 
         return inertia('Courses', [
             'courses' => $courses,
+            'aboutApp' => $aboutApp,
         ]);
     }
 }
