@@ -1,34 +1,46 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\GeneralInformation;
+use App\Models\Lecturers;
 use App\Models\Virtual;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Mengambil kategori berdasarkan type
         $generalInformationCategories = Category::where('type', 'general_information')->get();
-        $virtualToursCategories = Category::where('type', 'virtual_tours')->get();
-
-        // Mengambil informasi umum
         $generalInformationData = GeneralInformation::whereIn('name', $generalInformationCategories->pluck('name'))->get();
-
-        // Mengambil data virtual tours yang memiliki kategori virtual_tours
         $virtualTours = Virtual::with('category')
             ->whereHas('category', function ($query) {
                 $query->where('type', 'virtual_tours');
             })
             ->get();
-
+        
+        $registrationFlowData = GeneralInformation::where('name', 'Informasi dan Alur Pendaftaran')->first();
+    
+        // Ambil data Lecturer beserta courses dan gambar dari media library
+        $lecturers = Lecturers::with('courses')->take(6)->get()->map(function ($lecturer) {
+            return [
+            'id' => $lecturer->id,
+            'name' => $lecturer->name,
+            'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'), // Jika tidak ada gambar, gunakan default
+            'courses' => $lecturer->courses->map(fn ($course) => [
+                'id' => $course->id,
+                'name' => $course->name,
+            ]),
+            ];
+        });
+    
         return inertia('Home', [
             'generalInformationCategories' => $generalInformationCategories,
             'generalInformationData' => $generalInformationData,
-            'virtualTours' => $virtualTours, // Kirim data virtual tours ke frontend
+            'virtualTours' => $virtualTours,
+            'registrationFlowData' => $registrationFlowData,
+            'lecturers' => $lecturers, // Kirim data lecturers ke frontend
         ]);
     }
+    
+
 }
