@@ -22,7 +22,7 @@ interface VirtualToursSectionProps {
 
 const VirtualToursSection: React.FC<VirtualToursSectionProps> = ({ virtualTours }) => {
   return (
-    <section className="p-8 bg-base-300 rounded-lg shadow-xl">
+    <section className="p-8 bg-base-300 text-white rounded-lg shadow-xl">
       <h2 className="text-3xl font-bold text-center  mb-6">Virtual Tours</h2>
 
       {/* Swiper Carousel */}

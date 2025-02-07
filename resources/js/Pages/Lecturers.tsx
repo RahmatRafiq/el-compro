@@ -29,7 +29,7 @@ const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {
         <div className="space-y-8 px-6">
                     <Head title="Dosen Kami" />
                     <section className="rounded-lg w-full py-8 bg-base-100 shadow-xl">
-                        <h2 className="text-2xl font-bold text-center mb-6">Dosen Kami</h2>
+                        <h2 className="text-3xl font-bold text-center mb-6">Dosen Kami</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {lecturers.map((lecturer) => (
                                 <div
