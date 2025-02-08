@@ -26,7 +26,7 @@
 
                     <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" name="content" rows="5" required></textarea>
+                        <textarea class="form-control" name="content" rows="5" id="content" required></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -44,45 +44,79 @@
 @endsection
 
 @push('css')
-<link href="{{ asset('assets/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 @endpush
 
 @push('head')
-@vite(['resources/js/dropzoner.js'])
-<script src="{{ asset('assets/vendor/toastify/toastify.js') }}"></script>
+    @vite(['resources/js/dropzoner.js'])
+    <script src="{{ asset('assets/vendor/toastify/toastify.js') }}"></script>
 @endpush
 
 @push('javascript')
-<script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('#category-select').select2({
-            placeholder: "Select Category",
-            allowClear: true
+    <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#category-select').select2({
+                placeholder: "Select Category",
+                allowClear: true
+            });
         });
-    });
-</script>
+    </script>
 
-<script type="module">
-    const element = '#myDropzone';
-    const key = 'article-image';
-    const urlStore = "{!! route('storage.store') !!}";
-    const csrf = "{!! csrf_token() !!}";
-    const acceptedFiles = 'image/*';
-    const maxFiles = 1;
+    <script type="module">
+        const element = '#myDropzone';
+        const key = 'article-image';
+        const files = [];
+        const urlStore = "{!! route('storage.store') !!}";
+        const urlDestroy = "{!! route('articles.deleteFile') !!}";
+        const csrf = "{!! csrf_token() !!}";
+        const acceptedFiles = 'image/*';
+        const maxFiles = 1;
 
-    const dz = Dropzoner(
-        element,
-        key,
-        { urlStore, acceptedFiles, maxFiles, csrf }
-    );
+        @if ($articleImage)
+            files.push({
+                id: '{{ $articleImage->id }}',
+                name: '{{ $articleImage->name }}',
+                file_name: '{{ $articleImage->file_name }}',
+                size: '{{ $articleImage->size }}',
+                type: '{{ $articleImage->type }}',
+                url: '{{ $articleImage->url }}',
+                original_url: '{{ $articleImage->original_url }}',
+            });
+        @endif
 
-    dz.on("success", function(file, response) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'images[]';  
-        input.value = response.path;
-        document.querySelector('form').appendChild(input);
-    });
-</script>
+        const dz = Dropzoner(
+            element,
+            key,
+            {
+                urlStore,
+                urlDestroy,
+                acceptedFiles,
+                files,
+                maxFiles,
+                kind: 'image',
+                csrf,
+            }
+        );
+
+        dz.on("success", function (file, response) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'images[]';
+            input.value = response.path;
+            document.querySelector('form').appendChild(input);
+        });
+
+
+    </script>
 @endpush
