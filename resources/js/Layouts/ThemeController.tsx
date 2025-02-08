@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 const ThemeController = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  // Mengambil tema yang disimpan di localStorage saat halaman dimuat
-  useEffect(() => {
+  useLayoutEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
       setIsDarkMode(true);
-      document.documentElement.classList.add("dark"); // Menambahkan kelas "dark" untuk mengaktifkan dark mode
+      document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
 
-    // Menangani tampilan tombol scroll ke atas saat halaman di-scroll
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowScrollButton(true);
@@ -32,25 +30,23 @@ const ThemeController = () => {
   const toggleTheme = () => {
     const newTheme = !isDarkMode ? "dark" : "light";
     setIsDarkMode(!isDarkMode);
-    localStorage.setItem("theme", newTheme); // Menyimpan preferensi tema ke localStorage
+    localStorage.setItem("theme", newTheme);
     if (newTheme === "dark") {
-      document.documentElement.classList.add("dark"); // Aktifkan dark mode
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark"); // Nonaktifkan dark mode
+      document.documentElement.classList.remove("dark");
     }
   };
 
-  // Fungsi untuk scroll ke atas saat tombol panah diklik
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Smooth scroll
+      behavior: 'smooth',
     });
   };
 
   return (
     <div>
-      {/* Theme Toggle */}
       <div className="fixed bottom-16 right-4 flex items-center gap-2 rounded-full py-2 px-6 shadow-lg hover:bg-light-accent transition z-50 hover:scale-105 transform">
         <label className="flex cursor-pointer gap-2">
           <svg
@@ -89,7 +85,6 @@ const ThemeController = () => {
         </label>
       </div>
 
-      {/* Scroll to Top Button */}
       {showScrollButton && (
        <div
        onClick={scrollToTop}
@@ -107,7 +102,6 @@ const ThemeController = () => {
          <path d="M12 19V6M5 12l7-7 7 7" />
        </svg>
      </div>
-     
       )}
     </div>
   );
