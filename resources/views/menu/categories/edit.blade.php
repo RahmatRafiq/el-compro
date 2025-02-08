@@ -13,6 +13,8 @@
                 <select name="type" class="form-control">
                     <option value="virtual_tours" {{ old('type', $category->type) == 'virtual_tours' ? 'selected' : '' }}>Virtual Tours</option>
                     <option value="general_information" {{ old('type', $category->type) == 'general_information' ? 'selected' : '' }}>General Information</option>
+                    <option value="article" {{ old('type') == 'article' ? 'selected' : '' }}>Article</option>
+
                 </select>
             </div>
 
