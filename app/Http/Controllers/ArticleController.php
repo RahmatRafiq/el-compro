@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Helpers\MediaLibrary;
@@ -14,7 +13,7 @@ class ArticleController extends Controller
     {
         $filter = $request->query('filter', 'active');
 
-        $query  = Article::with('category')->whereHas('category', function ($query) {
+        $query = Article::with('category')->whereHas('category', function ($query) {
             $query->where('type', 'article');
         });
         if ($request->has('name')) {
@@ -32,20 +31,34 @@ class ArticleController extends Controller
         return view('menu.articles.index', compact('articles', 'filter'));
     }
 
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'article-images.*' => 'required|file|max:2048|mimes:jpeg,jpg,png',
+            'id'               => 'required|integer',
+        ]);
+
+        $article = Article::find($request->id);
+
+        return response()->json(['message' => 'Article image uploaded'], 200);
+    }
+
     public function create()
     {
-        $categories = Category::where('type', 'article')->get();
-        return view('menu.articles.create', compact('categories'));
+        $article       = new Article();
+        $categories    = Category::where('type', 'article')->get();
+        $articleImage = $article->getMedia('article-image')->first();
+        return view('menu.articles.create', compact('categories', 'articleImage'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'title'       => 'required|max:255',
-            'content'     => 'required',
-            'tags'        => 'array',
-            'article-images' => 'array|max:5',
+            'category_id'   => 'required|exists:categories,id',
+            'title'         => 'required|max:255',
+            'content'       => 'required',
+            'tags'          => 'array',
+            'article-image' => 'array|max:5',
         ]);
 
         $article = Article::create([
@@ -57,12 +70,12 @@ class ArticleController extends Controller
 
         ]);
 
-        if ($request->has('article-images')) {
+        if ($request->has('article-image')) {
             MediaLibrary::put(
                 $article,
-                'article-images',
+                'article-image',
                 $request,
-                'article-images'
+                'article-image'
             );
         }
 
@@ -71,29 +84,27 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        $categories = Category::where('type', 'article')->get();
-        $articleImages = $article->getMedia('article-images');
-        return view('menu.articles.edit', compact('article', 'categories', 'articleImages'));
+        $categories   = Category::where('type', 'article')->get();
+        $articleImage = $article->getMedia('article-image')->first();
+        return view('menu.articles.edit', compact('article', 'categories', 'articleImage'));
     }
 
     public function update(Request $request, Article $article)
     {
         $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'title'       => 'required|max:255',
-            'content'     => 'required',
-            'tags'        => 'array',
+            'category_id'    => 'required|exists:categories,id',
+            'title'          => 'required|max:255',
+            'content'        => 'required',
+            'tags'           => 'array',
             'article-images' => 'array|max:5',
         ]);
 
-
-
-        if ($request->has('article-images')) {
+        if ($request->has('article-image')) {
             MediaLibrary::put(
                 $article,
-                'article-images',
+                'article-image',
                 $request,
-                'article-images'
+                'article-image'
             );
         }
 
@@ -104,8 +115,15 @@ class ArticleController extends Controller
             'slug'        => Str::slug($request->title),
             'tags'        => $request->tags,
         ]);
-        
+
         return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
+    }
+
+    public function deleteFile(Request $request)
+    {
+        $article = Article::find($request->id);
+        $article->clearMediaCollection('article-image');
+        return response()->json(['message' => 'Article image deleted'], 200);
     }
 
     public function destroy(Article $article)

@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('articles/trashed', [\App\Http\Controllers\ArticleController::class, 'trashed'])->name('articles.trashed');
     Route::post('articles/{id}/restore', [\App\Http\Controllers\ArticleController::class, 'restore'])->name('articles.restore');
     Route::delete('articles/{id}/force-delete', [\App\Http\Controllers\ArticleController::class, 'forceDelete'])->name('articles.forceDelete');
+    Route::delete('articles/delete-file', [\App\Http\Controllers\ArticleController::class, 'deleteFile'])->name('articles.deleteFile');
 
 });
 
