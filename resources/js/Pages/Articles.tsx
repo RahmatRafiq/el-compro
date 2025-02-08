@@ -26,7 +26,6 @@ interface ArticlesPageProps {
     };
 }
 
-
 const ArticlesPage: React.FC<ArticlesPageProps> = ({ categories, aboutApp }) => {
     return (
         <Layout aboutApp={aboutApp}>
@@ -65,6 +64,11 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ categories, aboutApp }) => 
                                         </div>
                                     </div>
                                 ))}
+                            </div>
+                            <div className="flex justify-center mt-8">
+                                <Link href={`/articles/category/${category.name}`} className="btn btn-secondary">
+                                    Lihat Berita {category.name} Lainnya
+                                </Link>
                             </div>
                         </div>
                     ))}
