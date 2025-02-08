@@ -40,7 +40,7 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
         {/* Card Placeholder untuk tombol lihat semua */}
         <div
           className="card card-side bg-base-100 shadow-xl flex bg-base-200 justify-center items-center cursor-pointer"
-          onClick={() => router.visit('/home/lecturers')}
+          onClick={() => router.visit('/lecturers')}
         >
           <figure className="w-40 h-40 flex-shrink-0 overflow-hidden rounded-lg bg-gray-300 animate-pulse flex items-center justify-center">
             <span className="text-gray-500 text-lg font-semibold">+</span>

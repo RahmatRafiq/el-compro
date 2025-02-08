@@ -47,7 +47,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
         </table>
       </div>
       <div className="mt-4 text-right">
-        <Link href="/home/courses" className="btn btn-primary">
+        <Link href="/courses" className="btn btn-primary">
           Lihat Semua
         </Link>
       </div>

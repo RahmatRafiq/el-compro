@@ -55,7 +55,7 @@ const Header: React.FC = () => {
               <Link href="/">Beranda</Link>
             </li>
             <li>
-              <Link href="/home/lecturers">Dosen Kami</Link>
+              <Link href="/lecturers">Dosen Kami</Link>
             </li>
             <li>
               <details>
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
           </ul>
         </div>
 
-        <Link href="/home" className="btn btn-ghost text-xl">
+        <Link href="/" className="btn btn-ghost text-xl">
           Nama Universitas
         </Link>
       </div>
@@ -81,13 +81,13 @@ const Header: React.FC = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href="/home">Beranda</Link>
+            <Link href="/">Beranda</Link>
           </li>
           <li>
-            <Link href="/home/lecturers">Dosen Kami</Link>
+            <Link href="/lecturers">Dosen Kami</Link>
           </li>
           <li>
-            <Link href="/home/courses">Mata Kuliah</Link>
+            <Link href="/courses">Mata Kuliah</Link>
           </li>
         </ul>
       </div>

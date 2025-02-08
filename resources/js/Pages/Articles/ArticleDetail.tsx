@@ -62,7 +62,7 @@ const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, aboutApp, popula
                         <article className="text-lg leading-relaxed">{parse(article.content)}</article>
 
                         <div className="mt-6">
-                            <Link href="/home/articles" className="btn btn-secondary">
+                            <Link href="/articles" className="btn btn-secondary">
                                 Kembali ke Artikel
                             </Link>
                         </div>
@@ -90,7 +90,7 @@ const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, aboutApp, popula
                                         </div>
 
                                         <div className="flex-1">
-                                            <Link href={`/home/articles/${item.slug}`} className="hover:underline text-blue-600">
+                                            <Link href={`/articles/${item.slug}`} className="hover:underline text-blue-600">
                                                 {item.title}
                                             </Link>
                                             <p className="text-gray-500 text-xs">{item.view_count}x dilihat</p>
@@ -121,7 +121,7 @@ const ArticleDetail: React.FC<ArticleDetailProps> = ({ article, aboutApp, popula
                                         </div>
 
                                         <div className="flex-1">
-                                            <Link href={`/home/articles/${item.slug}`} className="hover:underline text-blue-600">
+                                            <Link href={`/articles/${item.slug}`} className="hover:underline text-blue-600">
                                                 {item.title}
                                             </Link>
                                             <p className="text-gray-500 text-xs">{item.created_at}</p>

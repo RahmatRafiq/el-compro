@@ -58,7 +58,7 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ categories, aboutApp }) => 
                                             <h2 className="card-title">{article.title}</h2>
                                             <p>{article.view_count} kali dilihat</p>
                                             <div className="card-actions justify-end">
-                                                <Link href={`/home/articles/${article.slug}`} className="btn btn-primary">
+                                                <Link href={`/articles/${article.slug}`} className="btn btn-primary">
                                                     Baca Selengkapnya
                                                 </Link>
                                             </div>

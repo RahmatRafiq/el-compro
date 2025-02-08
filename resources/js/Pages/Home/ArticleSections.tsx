@@ -36,7 +36,7 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                             <h2 className="card-title">{article.title}</h2>
                             <p>{article.view_count} kali dilihat</p>
                             <div className="card-actions justify-end">
-                                <Link href={`/home/articles/${article.slug}`} className="btn btn-primary">
+                                <Link href={`/articles/${article.slug}`} className="btn btn-primary">
                                     Baca Selengkapnya
                                 </Link>
                             </div>
@@ -53,7 +53,7 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                     </figure>
                     <div className="card-body flex justify-center items-center">
                         <Link
-                            href="/home/articles"
+                            href="/articles"
                             className="btn btn-primary w-full"
                         >
                             Lihat Semua Artikel
