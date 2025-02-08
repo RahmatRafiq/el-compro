@@ -25,7 +25,6 @@ const VirtualToursSection: React.FC<VirtualToursSectionProps> = ({ virtualTours 
     <section className="p-8 bg-base-300 text-white rounded-lg shadow-xl">
       <h2 className="text-3xl font-bold text-center  mb-6">Virtual Tours</h2>
 
-      {/* Swiper Carousel */}
       <Swiper
         spaceBetween={20}
         centeredSlides={true}
@@ -45,14 +44,13 @@ const VirtualToursSection: React.FC<VirtualToursSectionProps> = ({ virtualTours 
                 allowFullScreen
               ></iframe>
 
-              {/* Overlay Blur Background */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-lg">
                 <div className="backdrop-blur-md bg-white/20 p-3 rounded-md shadow-lg">
                   <h3 className="text-lg font-semibold">{tour.name}</h3>
                   <div
                     className="text-sm opacity-90"
-                    dangerouslySetInnerHTML={{ __html: tour.description }}
-                  />
+                    dangerouslySetInnerHTML={{ __html: tour.description.slice(0, 100) + (tour.description.length > 100 ? '...' : '') }}
+                    />
                 </div>
               </div>
             </div>
