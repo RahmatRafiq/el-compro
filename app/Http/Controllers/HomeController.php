@@ -51,6 +51,29 @@ class HomeController extends Controller
         ]);
     }
 
+    public function articlesByCategory($name)
+    {
+        $category = Category::where('name', $name)->where('type', 'article')->firstOrFail();
+
+        $articles = Article::where('category_id', $category->id)
+            ->latest()
+            ->paginate(10)
+            ->through(fn($article) => [
+                'id'         => $article->id,
+                'title'      => $article->title,
+                'image'      => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                'view_count' => $article->view_count,
+                'slug'       => $article->slug,
+            ]);
+// dd($articles);
+        return inertia('Articles/CategoryArticles', [
+            'category' => [
+                'name' => $category->name,
+            ],
+            'articles' => $articles,
+        ]);
+    }
+
     public function index()
     {
 
