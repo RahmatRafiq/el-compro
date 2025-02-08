@@ -11,18 +11,41 @@ class ArticleController extends Controller
 {
     public function show($slug)
     {
-        $article = Article::where('slug', $slug)->firstOrFail();
+        $article = Article::with('media')->where('slug', $slug)->firstOrFail();
+
+        $article->increment('view_count');
+
+        $popularArticles = Article::with('media')
+            ->where('created_at', '>=', now()->subMonth())
+            ->orderByDesc('view_count')
+            ->take(5)
+            ->get(['id', 'slug', 'title', 'view_count', 'created_at'])
+            ->map(function ($article) {
+                $article->image = $article->getFirstMediaUrl('article-image') ?: null;
+                return $article;
+            });
+
+        $latestArticles = Article::with('media')
+            ->orderByDesc('created_at')
+            ->take(5)
+            ->get(['id', 'slug', 'title', 'created_at'])
+            ->map(function ($article) {
+                $article->image = $article->getFirstMediaUrl('article-image') ?: null;
+                return $article;
+            });
 
         return inertia('Articles/ArticleDetail', [
-            'article' => [
+            'article'         => [
                 'slug'       => $article->slug,
                 'id'         => $article->id,
                 'title'      => $article->title,
                 'content'    => $article->content,
                 'image'      => $article->getFirstMediaUrl('article-image') ?: null,
-                'view_count' => $article->view_count,
+                'view_count' => $article->view_count + 1,
                 'created_at' => $article->created_at->format('d M Y'),
             ],
+            'popularArticles' => $popularArticles,
+            'latestArticles'  => $latestArticles,
         ]);
     }
 
