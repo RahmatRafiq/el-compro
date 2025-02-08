@@ -7,7 +7,7 @@ Route::middleware(['inertia'])->group(function () {
     Route::get('/lecturers', [\App\Http\Controllers\HomeController::class, 'lecturers'])->name('home.lecturers');
     Route::get('/courses', [\App\Http\Controllers\HomeController::class, 'courses'])->name('home.courses');
     Route::get('/articles', [\App\Http\Controllers\HomeController::class, 'articles'])->name('home.articles');
-    Route::get('/articles/{slug}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
+    Route::get('/articles/{slug}', [\App\Http\Controllers\HomeController::class, 'show'])->name('articles.show');
 
 });
 
