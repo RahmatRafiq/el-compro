@@ -6,6 +6,9 @@ Route::middleware(['inertia'])->group(function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home/lecturers', [\App\Http\Controllers\HomeController::class, 'lecturers'])->name('home.lecturers');
     Route::get('/home/courses', [\App\Http\Controllers\HomeController::class, 'courses'])->name('home.courses');
+    Route::get('/home/articles', [\App\Http\Controllers\HomeController::class, 'articles'])->name('home.articles');
+    Route::get('/home/articles/{slug}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
+
 });
 
 Route::middleware('auth')->group(function () {

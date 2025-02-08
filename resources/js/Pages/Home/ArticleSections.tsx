@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 interface Article {
@@ -5,6 +6,7 @@ interface Article {
     title: string;
     image: string;
     view_count: number;
+    slug: string;
 }
 
 interface ArticlesSectionProps {
@@ -34,9 +36,9 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                             <h2 className="card-title">{article.title}</h2>
                             <p>{article.view_count} kali dilihat</p>
                             <div className="card-actions justify-end">
-                                <a href={`/articles/${article.id}`} className="btn btn-primary">
+                                <Link href={`/articles/${article.slug}`} className="btn btn-primary">
                                     Baca Selengkapnya
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -45,15 +47,17 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                 <div
                     className="card bg-base-100 image-full shadow-xl break-inside-avoid cursor-pointer"
                     style={{ gridRowEnd: `span 2` }}
-                    onClick={() => window.location.href = "/articles"}
                 >
                     <figure className="w-full h-full overflow-hidden rounded-lg bg-gray-300 animate-pulse flex items-center justify-center">
                         <span className="text-gray-500 text-lg font-semibold">+</span>
                     </figure>
                     <div className="card-body flex justify-center items-center">
-                        <a href="/articles" className="btn btn-primary">
+                        <Link
+                            href="/home/articles"
+                            className="btn btn-primary w-full"
+                        >
                             Lihat Semua Artikel
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

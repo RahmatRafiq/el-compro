@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutApp;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\GeneralInformation;
 use App\Models\Lecturers;
@@ -20,6 +21,7 @@ class HomeController extends Controller
                 'title'      => $article->title,
                 'image'      => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
                 'view_count' => $article->view_count,
+                'slug'       => $article->slug,
             ];
         });
 
@@ -101,4 +103,31 @@ class HomeController extends Controller
             'aboutApp' => $aboutApp,
         ]);
     }
+
+    public function articles()
+    {
+        $categories = Category::where('type', 'article')->get();
+
+        $categoriesWithArticles = $categories->map(function ($category) {
+            return [
+                'name'     => $category->name,
+                'articles' => Article::where('category_id', $category->id)
+                    ->latest()
+                    ->take(5)
+                    ->get()
+                    ->map(fn($article) => [
+                        'id'         => $article->id,
+                        'title'      => $article->title,
+                        'image'      => $article->hasMedia('article-image') ? $article->getFirstMediaUrl('article-image') : null,
+                        'view_count' => $article->view_count,
+                        'slug'       => $article->slug,
+                    ]),
+            ];
+        });
+
+        return inertia('Articles', [
+            'categories' => $categoriesWithArticles,
+        ]);
+    }
+
 }

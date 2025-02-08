@@ -9,6 +9,23 @@ use Str;
 
 class ArticleController extends Controller
 {
+    public function show($slug)
+    {
+        $article = Article::where('slug', $slug)->firstOrFail();
+
+        return inertia('Articles/ArticleDetail', [
+            'article' => [
+                'slug'       => $article->slug,
+                'id'         => $article->id,
+                'title'      => $article->title,
+                'content'    => $article->content,
+                'image'      => $article->getFirstMediaUrl('article-image') ?: null,
+                'view_count' => $article->view_count,
+                'created_at' => $article->created_at->format('d M Y'),
+            ],
+        ]);
+    }
+
     public function index(Request $request)
     {
         $filter = $request->query('filter', 'active');
@@ -45,8 +62,8 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $article       = new Article();
-        $categories    = Category::where('type', 'article')->get();
+        $article      = new Article();
+        $categories   = Category::where('type', 'article')->get();
         $articleImage = $article->getMedia('article-image')->first();
         return view('menu.articles.create', compact('categories', 'articleImage'));
     }
