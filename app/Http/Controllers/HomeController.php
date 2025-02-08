@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutApp;
+use App\Models\Article;
 use App\Models\Course;
 use App\Models\GeneralInformation;
 use App\Models\Lecturers;
@@ -11,6 +12,16 @@ class HomeController extends Controller
 {
     public function index()
     {
+
+        $articles = Article::latest()->take(5)->get();
+        $articles = $articles->map(function ($article) {
+            return [
+                'id'         => $article->id,
+                'title'      => $article->title,
+                'image'      => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                'view_count' => $article->view_count,
+            ];
+        });
 
         $courses = Course::latest()->take(5)->get();
 
@@ -48,6 +59,7 @@ class HomeController extends Controller
 
         return inertia('Home', [
             'courses'                => $courses,
+            'articles'               => $articles,
             'aboutApp'               => $aboutApp,
             'lecturers'              => $lecturers,
             'virtualTours'           => $virtualTours,
@@ -85,7 +97,7 @@ class HomeController extends Controller
         $courses = Course::with('lecturers')->get();
 
         return inertia('Courses', [
-            'courses' => $courses,
+            'courses'  => $courses,
             'aboutApp' => $aboutApp,
         ]);
     }
