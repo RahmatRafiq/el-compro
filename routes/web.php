@@ -59,6 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::get('categories/trashed', [\App\Http\Controllers\CategoryController::class, 'trashed'])->name('categories.trashed');
     Route::post('categories/{id}/restore', [\App\Http\Controllers\CategoryController::class, 'restore'])->name('categories.restore');
     Route::delete('categories/{id}/force-delete', [\App\Http\Controllers\CategoryController::class, 'forceDelete'])->name('categories.forceDelete');
+
+    Route::resource('articles', \App\Http\Controllers\ArticleController::class);
+    Route::get('articles/trashed', [\App\Http\Controllers\ArticleController::class, 'trashed'])->name('articles.trashed');
+    Route::post('articles/{id}/restore', [\App\Http\Controllers\ArticleController::class, 'restore'])->name('articles.restore');
+    Route::delete('articles/{id}/force-delete', [\App\Http\Controllers\ArticleController::class, 'forceDelete'])->name('articles.forceDelete');
+
 });
 
 require __DIR__ . '/auth.php';
