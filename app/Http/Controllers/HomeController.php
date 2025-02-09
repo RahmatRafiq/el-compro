@@ -53,7 +53,8 @@ class HomeController extends Controller
 
     public function articlesByCategory($name)
     {
-        $category = Category::where('name', $name)->where('type', 'article')->firstOrFail();
+        $category = Category::where('name', $name)->where('type', 'article')
+            ->firstOrFail();
 
         $articles = Article::where('category_id', $category->id)
             ->latest()
@@ -65,7 +66,7 @@ class HomeController extends Controller
                 'view_count' => $article->view_count,
                 'slug'       => $article->slug,
             ]);
-// dd($articles);
+
         return inertia('Articles/CategoryArticles', [
             'category' => [
                 'name' => $category->name,
@@ -176,7 +177,7 @@ class HomeController extends Controller
                 'name'     => $category->name,
                 'articles' => Article::where('category_id', $category->id)
                     ->latest()
-                    ->take(5)
+                    ->take(4)
                     ->get()
                     ->map(fn($article) => [
                         'id'         => $article->id,

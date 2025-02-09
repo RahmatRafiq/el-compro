@@ -44,11 +44,21 @@ const Home: React.FC<HomeProps> = ({
     <Layout aboutApp={aboutApp}> 
       <div className="space-y-8 px-6">
         <VirtualToursSection virtualTours={virtualTours} />
+        <div className="divider"></div>
+
         <GeneralInformationSection generalInformationData={generalInformationData} />
+        <div className="divider"></div>
+
         <ArticlesSection articles={articles} />
+        {/* <div className="divider"></div> */}
+
         <LecturersSection lecturers={lecturers} />
+        <div className="divider"></div>
+
         <ConcentrationTabs concentrationData={concentrationData} />
-        <CoursesSection courses={courses} /> {/* Tambahkan komponen CoursesSection */}
+        <div className="divider"></div>
+
+        <CoursesSection courses={courses} />
       </div>
     </Layout>
   );

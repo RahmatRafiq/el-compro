@@ -35,12 +35,10 @@ const CategoryArticlesPage: React.FC<CategoryArticlesPageProps> = ({ category, a
     return (
         <Layout aboutApp={aboutApp}>
             <div className="space-y-8 px-6">
-                {/* Heading */}
                 <h2 className="text-3xl font-bold text-center mb-6">
                     Daftar Semua Artikel Kategori {category.name}
                 </h2>
 
-                {/* Grid Artikel */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                     {articles.data.length > 0 ? (
                         articles.data.map((article) => (
@@ -75,28 +73,40 @@ const CategoryArticlesPage: React.FC<CategoryArticlesPageProps> = ({ category, a
                     )}
                 </div>
 
-                <div className="flex justify-center mt-8 space-x-4">
-                    {articles.current_page > 1 && (
-                        <Link
-                            href={`?page=${articles.current_page - 1}`}
-                            className="btn btn-secondary"
-                        >
-                            Sebelumnya
-                        </Link>
-                    )}
+                <div className="flex justify-center mt-8">
+                    <div className="join">
+                        {articles.current_page > 1 && (
+                            <Link
+                                href={`?page=${articles.current_page - 1}`}
+                                className="join-item btn btn-secondary"
+                            >
+                                «
+                            </Link>
+                        )}
 
-                    {articles.current_page < articles.last_page && (
-                        <Link
-                            href={`?page=${articles.current_page + 1}`}
-                            className="btn btn-secondary"
-                        >
-                            Selanjutnya
-                        </Link>
-                    )}
+                        {Array.from({ length: articles.last_page }, (_, i) => i + 1).map((page) => (
+                            <Link
+                                key={page}
+                                href={`?page=${page}`}
+                                className={`join-item btn ${articles.current_page === page ? "btn-primary" : "btn-secondary"}`}
+                            >
+                                {page}
+                            </Link>
+                        ))}
+
+                        {articles.current_page < articles.last_page && (
+                            <Link
+                                href={`?page=${articles.current_page + 1}`}
+                                className="join-item btn btn-secondary"
+                            >
+                                »
+                            </Link>
+                        )}
+                    </div>
                 </div>
 
                 <div className="flex justify-center mt-8">
-                    <Link href="/categories" className="btn btn-outline">
+                    <Link href="/articles" className="btn btn-outline">
                         Lihat Kategori Lainnya
                     </Link>
                 </div>

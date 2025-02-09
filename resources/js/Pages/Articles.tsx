@@ -8,7 +8,6 @@ interface Article {
     image: string | null;
     view_count: number;
     slug: string;
-
 }
 
 interface CategorySection {
@@ -32,8 +31,8 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ categories, aboutApp }) => 
             <div className="space-y-8 px-6">
                 <section className="w-full py-8">
                     <h2 className="text-3xl font-bold text-center mb-6">Semua Artikel</h2>
-                    {categories.map((category) => (
-                        <div key={category.name} className="mb-10 rounded-lg w-full py-8 bg-base-100 shadow-xl">
+                    {categories.filter(category => category.articles.length > 0).map((category) => (
+                        <div key={category.name} className="mb-10 rounded-lg w-full py-8 bg-base-100">
                             <h3 className="text-2xl font-bold text-center mb-4">{category.name}</h3>
                             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                                 {category.articles.map((article) => (
@@ -65,8 +64,8 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ categories, aboutApp }) => 
                                     </div>
                                 ))}
                             </div>
-                            <div className="flex justify-center mt-8">
-                                <Link href={`/articles/category/${category.name}`} className="btn btn-secondary">
+                            <div className="divider divider-vertical divider-end mt-8">
+                                <Link href={`/articles/category/${category.name}`} className="btn btn-ghost">
                                     Lihat Berita {category.name} Lainnya
                                 </Link>
                             </div>
