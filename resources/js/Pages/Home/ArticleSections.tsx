@@ -48,7 +48,7 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
             </div>
             <div className="divider divider-vertical divider-end mt-8">
                 <Link href="/articles" className="btn btn-secondary">
-                    Lihat Semua Artikel Lainnya
+                    Lihat Semua Artikel 
                 </Link>
             </div>
         </section>
