@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\GeneralInformation;
 use App\Models\Lecturers;
 use App\Models\Virtual;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -191,6 +192,44 @@ class HomeController extends Controller
 
         return inertia('Articles', [
             'categories' => $categoriesWithArticles,
+        ]);
+    }
+
+    public function virtualTours()
+    {
+        $virtualTours = Virtual::with('category')
+            ->whereHas('category', function ($query) {
+                $query->where('type', 'virtual_tours');
+            })
+            ->get()
+            ->map(fn($virtual) => [
+                'id'          => $virtual->id,
+                'name'        => $virtual->name,
+                'slug'        => Str::slug($virtual->name), 
+                'url_embed'   => $virtual->url_embed,
+                'description' => $virtual->description,
+                'category'    => $virtual->category ? $virtual->category->name : null,
+            ]);
+
+        return inertia('VirtualTours', [
+            'virtualTours' => $virtualTours,
+        ]);
+    }
+
+    public function virtualTourDetail($name)
+    {
+        $virtual = Virtual::with('category')
+            ->whereRaw("LOWER(REPLACE(name, ' ', '-')) = ?", [Str::slug($name)]) // Cari berdasarkan slug dari name
+            ->firstOrFail();
+
+        return inertia('VirtualTours/Detail', [
+            'virtualTour' => [
+                'id'          => $virtual->id,
+                'name'        => $virtual->name,
+                'url_embed'   => $virtual->url_embed,
+                'description' => $virtual->description,
+                'category'    => $virtual->category ? $virtual->category->name : null,
+            ],
         ]);
     }
 
