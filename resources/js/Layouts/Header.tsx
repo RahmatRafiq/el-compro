@@ -23,11 +23,10 @@ const Header: React.FC = () => {
 
   return (
     <nav
-      className={`navbar text-neutral-content shadow-md fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "backdrop-blur-lg bg-opacity-70 bg-neutral" 
-          : "bg-neutral" 
-      }`}
+      className={`navbar text-neutral-content shadow-md fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+          ? "backdrop-blur-lg bg-opacity-70 bg-neutral"
+          : "bg-neutral"
+        }`}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -52,23 +51,19 @@ const Header: React.FC = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link href="/">Beranda</Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
               <Link href="/lecturers">Dosen Kami</Link>
             </li>
             <li>
-              <details>
-                <summary>Menu</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
+              <Link href="/courses">Mata Kuliah</Link>
+            </li>
+            <li>
+              <Link href="/virtual-tours">Virtual Tours</Link>
+            </li>
+            <li>
+              <Link href="/articles">Artikel</Link>
             </li>
           </ul>
         </div>
@@ -81,13 +76,19 @@ const Header: React.FC = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href="/">Beranda</Link>
+            <Link href="/">Home</Link>
           </li>
           <li>
             <Link href="/lecturers">Dosen Kami</Link>
           </li>
           <li>
             <Link href="/courses">Mata Kuliah</Link>
+          </li>
+          <li>
+            <Link href="/virtual-tours">Virtual Tours</Link>
+          </li>
+          <li>
+            <Link href="/articles">Artikel</Link>
           </li>
         </ul>
       </div>
