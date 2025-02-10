@@ -1,4 +1,5 @@
 import React from "react";
+import { FaInfoCircle } from "react-icons/fa";
 
 interface GeneralInformation {
   id: number;
@@ -53,20 +54,33 @@ const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ g
       )}
 
       <section className="rounded-lg w-full py-8 card bg-base-200 shadow-lg">
-        <h2 className="text-3xl font-bold text-center  mb-6">Informasi Umum</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Informasi Umum</h2>
         <div className="w-full">
           {otherInfo.map((item) => (
             <div key={item.id} className="collapse collapse-arrow w-full">
               <input type="radio" name="general-information-accordion" />
-              <div className="collapse-title text-xl font-medium">{item.name}</div>
-              <div
-                className="collapse-content overflow-hidden text-sm"
-                dangerouslySetInnerHTML={{ __html: item.description }}
-              />
+              <div className="collapse-title text-xl font-medium flex items-center">
+                <FaInfoCircle className="text-blue-500 mr-2" />
+                {item.name}
+              </div>
+              <div className="collapse-content space-y-4 p-4 bg-secondary rounded-lg">
+                {(() => {
+                  const parser = new DOMParser();
+                  const parsedHtml = parser.parseFromString(item.description, "text/html");
+                  const paragraphs = Array.from(parsedHtml.querySelectorAll("p"));
+
+                  return paragraphs.map((p, index) => (
+                    <div key={index} className="card shadow-md p-4 rounded-lg">
+                      <p className="text-white">{p.textContent}</p>
+                    </div>
+                  ));
+                })()}
+              </div>
             </div>
           ))}
         </div>
       </section>
+
     </div>
   );
 };
