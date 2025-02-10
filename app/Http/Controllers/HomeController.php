@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
     public function show($slug)
     {
+        $aboutApp = AboutApp::first();
         $article = Article::with('media')->where('slug', $slug)->firstOrFail();
 
         $article->increment('view_count');
@@ -49,11 +50,13 @@ class HomeController extends Controller
             ],
             'popularArticles' => $popularArticles,
             'latestArticles'  => $latestArticles,
+            'aboutApp'        => $aboutApp,
         ]);
     }
 
     public function articlesByCategory($name)
     {
+        $aboutApp = AboutApp::first();
         $category = Category::where('name', $name)->where('type', 'article')
             ->firstOrFail();
 
@@ -73,12 +76,13 @@ class HomeController extends Controller
                 'name' => $category->name,
             ],
             'articles' => $articles,
+            'aboutApp' => $aboutApp,
         ]);
     }
 
     public function index()
     {
-
+        $aboutApp = AboutApp::first();
         $articles = Article::latest()->take(5)->get();
         $articles = $articles->map(function ($article) {
             return [
@@ -91,8 +95,6 @@ class HomeController extends Controller
         });
 
         $courses = Course::latest()->take(5)->get();
-
-        $aboutApp = AboutApp::first();
 
         $lecturers = Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
             return [
@@ -137,9 +139,7 @@ class HomeController extends Controller
 
     public function lecturers()
     {
-
         $aboutApp = AboutApp::first();
-
         $lecturers = Lecturers::with('courses')->get()->map(fn($lecturer) => [
             'id'      => $lecturer->id,
             'name'    => $lecturer->name,
@@ -158,9 +158,7 @@ class HomeController extends Controller
 
     public function courses()
     {
-
         $aboutApp = AboutApp::first();
-
         $courses = Course::with('lecturers')->get();
 
         return inertia('Courses', [
@@ -171,6 +169,7 @@ class HomeController extends Controller
 
     public function articles()
     {
+        $aboutApp = AboutApp::first();
         $categories = Category::where('type', 'article')->get();
 
         $categoriesWithArticles = $categories->map(function ($category) {
@@ -192,11 +191,13 @@ class HomeController extends Controller
 
         return inertia('Articles', [
             'categories' => $categoriesWithArticles,
+            'aboutApp'   => $aboutApp,
         ]);
     }
 
     public function virtualTours()
     {
+        $aboutApp = AboutApp::first();
         $virtualTours = Virtual::with('category')
             ->whereHas('category', function ($query) {
                 $query->where('type', 'virtual_tours');
@@ -213,11 +214,13 @@ class HomeController extends Controller
 
         return inertia('VirtualTours', [
             'virtualTours' => $virtualTours,
+            'aboutApp'     => $aboutApp,
         ]);
     }
 
     public function virtualTourDetail($name)
     {
+        $aboutApp = AboutApp::first();
         $virtual = Virtual::with('category')
             ->whereRaw("LOWER(REPLACE(name, ' ', '-')) = ?", [Str::slug($name)]) // Cari berdasarkan slug dari name
             ->firstOrFail();
@@ -230,7 +233,7 @@ class HomeController extends Controller
                 'description' => $virtual->description,
                 'category'    => $virtual->category ? $virtual->category->name : null,
             ],
+            'aboutApp' => $aboutApp,
         ]);
     }
-
 }
