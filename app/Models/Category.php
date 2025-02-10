@@ -14,4 +14,13 @@ class Category extends Model
         'name',
         'slug',
     ];
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'category_id');
+    }
+
+    public function virtuals()
+    {
+        return $this->hasMany(Virtual::class, 'category_id');
+    }
 }
