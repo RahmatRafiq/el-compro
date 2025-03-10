@@ -25,6 +25,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>About</th>
                         <th>Courses</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -35,6 +36,7 @@
                         <tr>
                             <td>{{ $lecturer->id }}</td>
                             <td>{{ $lecturer->name }}</td>
+                            <td>{{ $lecturer->about }}</td>
                             <td>{{ $lecturer->courses->pluck('name')->join(', ') }}</td>
                             <td>
                                 @if ($lecturer->deleted_at)
