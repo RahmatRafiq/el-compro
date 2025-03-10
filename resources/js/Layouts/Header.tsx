@@ -59,22 +59,22 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
           {isDropdownOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow "
             >
               <li>
-                <Link href="/" onClick={() => setIsDropdownOpen(false)}>Home</Link>
+                <Link href="/" onClick={() => setIsDropdownOpen(false)} className="mb-1 btn btn-ghost text-primary font-bold">Home</Link>
               </li>
               <li>
-                <Link href="/lecturers" onClick={() => setIsDropdownOpen(false)}>Dosen Kami</Link>
+                <Link href="/lecturers" onClick={() => setIsDropdownOpen(false)} className="mb-1 btn btn-active text-primary">Dosen Kami</Link>
               </li>
               <li>
-                <Link href="/courses" onClick={() => setIsDropdownOpen(false)}>Mata Kuliah</Link>
+                <Link href="/courses" onClick={() => setIsDropdownOpen(false)} className="mb-1 btn btn-active text-primary">Mata Kuliah</Link>
               </li>
               <li>
-                <Link href="/virtual-tours" onClick={() => setIsDropdownOpen(false)}>Virtual Tours</Link>
+                <Link href="/virtual-tours" onClick={() => setIsDropdownOpen(false)} className="mb-1 btn btn-active text-primary">Virtual Tours</Link>
               </li>
               <li>
-                <Link href="/articles" onClick={() => setIsDropdownOpen(false)}>Artikel</Link>
+                <Link href="/articles" onClick={() => setIsDropdownOpen(false)} className="mb-1 btn btn-active text-primary">Artikel</Link>
               </li>
             </ul>
           )}
