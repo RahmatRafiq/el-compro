@@ -5,6 +5,7 @@ interface Lecturer {
   id: number;
   name: string;
   image: string;
+  about: string;
   courses: { id: number; name: string }[];
 }
 
@@ -33,6 +34,7 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
                   ? `Teaches: ${lecturer.courses.map(course => course.name).join(", ")}`
                   : "No courses assigned"}
               </p>
+              <p className="text-sm text-gray-500">{lecturer.about}</p>
             </div>
           </div>
         ))}

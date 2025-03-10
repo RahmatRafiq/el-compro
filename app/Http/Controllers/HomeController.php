@@ -100,6 +100,7 @@ class HomeController extends Controller
             return [
                 'id'      => $lecturer->id,
                 'name'    => $lecturer->name,
+                'about'   => $lecturer->about,
                 'image'   => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
                 'courses' => $lecturer->courses->map(fn($course) => [
                     'id'   => $course->id,
@@ -143,6 +144,7 @@ class HomeController extends Controller
         $lecturers = Lecturers::with('courses')->get()->map(fn($lecturer) => [
             'id'      => $lecturer->id,
             'name'    => $lecturer->name,
+            'about'   => $lecturer->about,
             'image'   => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
             'courses' => $lecturer->courses->map(fn($course) => [
                 'id'   => $course->id,

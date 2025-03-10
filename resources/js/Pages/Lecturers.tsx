@@ -6,6 +6,7 @@ import Layout from "@/Layouts/Layout";
 interface Lecturer {
     id: number;
     name: string;
+    about: string;
     image: string;
     courses: { id: number; name: string }[];
 }
@@ -50,6 +51,7 @@ const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {
                                                 ? `Mengajar: ${lecturer.courses.map((course) => course.name).join(", ")}`
                                                 : "Belum ada mata kuliah"}
                                         </p>
+                                        <p className="text-sm text-gray-500">{lecturer.about}</p>
                                     </div>
                                 </div>
                             ))}
