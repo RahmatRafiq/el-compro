@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             LecturerCourseSeeder::class,
             LecturerSeeder::class,
             VirtualSeeder::class,
+            ArticleSeeder::class,
         ]);
     }
 }

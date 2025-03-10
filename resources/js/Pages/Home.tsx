@@ -6,6 +6,7 @@ import RegistrationFlowSection from './Home/RegistrationFlowSection';
 import LecturersSection from './Home/LecturersSection';
 import ConcentrationTabs from './Home/ConcentrationTabs';
 import CoursesSection from './Home/CourseSection';
+import ArticlesSection from './Home/ArticleSections';
 
 interface Course {
   id: number;
@@ -26,6 +27,7 @@ interface HomeProps {
     contact_phone: string;
     contact_address: string;
   };
+  articles: any[];
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -35,16 +37,26 @@ const Home: React.FC<HomeProps> = ({
   concentrationData,
   courses,
   aboutApp,
+  articles,
 }) => {
   const registrationFlowData = generalInformationData.find(item => item.name === "Informasi dan Alur Pendaftaran");
   return (
     <Layout aboutApp={aboutApp}> 
       <div className="space-y-8 px-6">
         <VirtualToursSection virtualTours={virtualTours} />
+
         <GeneralInformationSection generalInformationData={generalInformationData} />
+        <div className="divider"></div>
+
+        <ArticlesSection articles={articles} />
+
         <LecturersSection lecturers={lecturers} />
+        <div className="divider"></div>
+
         <ConcentrationTabs concentrationData={concentrationData} />
-        <CoursesSection courses={courses} /> {/* Tambahkan komponen CoursesSection */}
+        <div className="divider"></div>
+
+        <CoursesSection courses={courses} />
       </div>
     </Layout>
   );
