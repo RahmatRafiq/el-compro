@@ -17,7 +17,7 @@ export default defineConfig({
     ],
     // no hashing output
     build: {
-        // target esmodule
+        outDir: "dist",
         target: 'esnext',
         rollupOptions: {
             output: {
