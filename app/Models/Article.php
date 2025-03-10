@@ -21,8 +21,11 @@ class Article extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'tags' => 'array',
+        'tags'       => 'array',
+        'created_at' => 'datetime:d M Y H:i',
+        'updated_at' => 'datetime:d M Y H:i',
     ];
+
 
     public function category()
     {

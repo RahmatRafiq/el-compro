@@ -1,46 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row gx-3">
-    <div class="col-xxl-12">
-        <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Add Article</h5>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="title" required>
-                    </div>
+    <div class="row gx-3">
+        <div class="col-xxl-12">
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Add Article</h5>
+                </div>
+                <div class="card-body">
+                    <form id="article-form" action="{{ route('articles.store') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="category" class="form-label">Category</label>
-                        <select id="category-select" name="category_id" class="form-select">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category-select" name="category_id" class="form-select">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" name="content" rows="5" id="content" required></textarea>
-                    </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" name="content" rows="5" id="content"></textarea>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="images" class="form-label">Article Image</label>
-                        <div class="dropzone" id="myDropzone"></div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Article Image</label>
+                            <div class="dropzone" id="myDropzone"></div>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="{{ route('articles.index') }}" class="btn btn-secondary">Cancel</a>
-                </form>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{{ route('articles.index') }}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('css')
@@ -57,19 +58,30 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 
     <script>
+        let editorInstance;
+
         ClassicEditor
             .create(document.querySelector('#content'))
+            .then(editor => {
+                editorInstance = editor;
+            })
             .catch(error => {
                 console.error(error);
             });
-    </script>
-    
-    <script>
+
         $(document).ready(function () {
             $('#category-select').select2({
                 placeholder: "Select Category",
                 allowClear: true
             });
+        });
+
+        document.querySelector("#article-form").addEventListener("submit", function (e) {
+            const editorData = editorInstance.getData().trim();
+            if (!editorData) {
+                alert("Content is required!");
+                e.preventDefault();
+            }
         });
     </script>
 
@@ -114,9 +126,7 @@
             input.type = 'hidden';
             input.name = 'images[]';
             input.value = response.path;
-            document.querySelector('form').appendChild(input);
+            document.querySelector('#article-form').appendChild(input);
         });
-
-
     </script>
 @endpush
