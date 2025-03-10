@@ -14,9 +14,15 @@
                             <label for="name" class="form-label">Lecturer Name</label>
                             <input type="text" class="form-control" name="name" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="about" class="form-label">About</label>
                             <textarea class="form-control" name="about" id="about"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
                         </div>
 
                         <div class="mb-3">
