@@ -7,6 +7,7 @@ interface Lecturer {
     id: number;
     name: string;
     about: string;
+    email: string;
     image: string;
     courses: { id: number; name: string }[];
 }
@@ -51,7 +52,18 @@ const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {
                                                 ? `Mengajar: ${lecturer.courses.map((course) => course.name).join(", ")}`
                                                 : "Belum ada mata kuliah"}
                                         </p>
-                                        <p className="text-sm text-gray-500">{lecturer.about}</p>
+                                        {lecturer.about && (
+                                            <p className="text-sm text-gray-500">
+                                                Profil Singkat: {lecturer.about}
+                                            </p>
+                                        )}
+                                        {lecturer.email && (
+                                            <p className="text-base text-gray-700">
+                                                Email: <a href={`mailto:${lecturer.email}`} className="text-primary font-medium">
+                                                    {lecturer.email}
+                                                </a>
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             ))}

@@ -31,10 +31,14 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
               <h2 className="card-title">{lecturer.name}</h2>
               <p className="text-sm text-gray-500">
                 {lecturer.courses.length > 0
-                  ? `Teaches: ${lecturer.courses.map(course => course.name).join(", ")}`
+                  ? `Mengajar: ${lecturer.courses.map(course => course.name).join(", ")}`
                   : "No courses assigned"}
               </p>
-              <p className="text-sm text-gray-500">{lecturer.about}</p>
+              {lecturer.about && (
+                <p className="text-sm text-gray-500">
+                  Profil Singkat: {lecturer.about}
+                </p>
+              )}
             </div>
           </div>
         ))}
