@@ -51,12 +51,14 @@ class LecturersController extends Controller
             'name'           => 'required|max:255',
             'courses'        => 'array',
             'about'          => 'nullable|string',
+            'email'          => 'nullable|email',
             'lecturer-image' => 'array|max:3',
         ]);
 
         $lecturer = Lecturers::create([
             'name'  => $request->name,
             'about' => $request->about,
+            'email' => $request->email,
         ]);
 
         if ($request->has('courses')) {
@@ -89,6 +91,7 @@ class LecturersController extends Controller
             'name'    => 'required|max:255',
             'courses' => 'array',
             'about'   => 'nullable|string',
+            'email'   => 'nullable|email',
             'lecturer-image' => 'array|max:3',
         ]);
 
@@ -104,6 +107,7 @@ class LecturersController extends Controller
         $lecturer->update([
             'name'  => $request->name,
             'about' => $request->about,
+            'email' => $request->email,
         ]);
         
         if ($request->has('courses')) {
