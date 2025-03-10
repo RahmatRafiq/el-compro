@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +9,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Lecturers extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes , InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['name', 'image'];
+    protected $fillable = [
+        'name',
+        'about',
+        'image',
+    ];
 
     public function courses()
     {
