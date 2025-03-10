@@ -5,6 +5,7 @@ interface Lecturer {
   id: number;
   name: string;
   image: string;
+  about: string;
   courses: { id: number; name: string }[];
 }
 
@@ -30,9 +31,14 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
               <h2 className="card-title">{lecturer.name}</h2>
               <p className="text-sm text-gray-500">
                 {lecturer.courses.length > 0
-                  ? `Teaches: ${lecturer.courses.map(course => course.name).join(", ")}`
+                  ? `Mengajar: ${lecturer.courses.map(course => course.name).join(", ")}`
                   : "No courses assigned"}
               </p>
+              {lecturer.about && (
+                <p className="text-sm text-gray-500">
+                  Profil Singkat: {lecturer.about}
+                </p>
+              )}
             </div>
           </div>
         ))}
@@ -40,7 +46,7 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
         {/* Card Placeholder untuk tombol lihat semua */}
         <div
           className="card card-side bg-base-100 shadow-xl flex bg-base-200 justify-center items-center cursor-pointer"
-          onClick={() => router.visit('/home/lecturers')}
+          onClick={() => router.visit('/lecturers')}
         >
           <figure className="w-40 h-40 flex-shrink-0 overflow-hidden rounded-lg bg-gray-300 animate-pulse flex items-center justify-center">
             <span className="text-gray-500 text-lg font-semibold">+</span>

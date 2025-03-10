@@ -56,14 +56,10 @@
                 </a>
                 <ul class="treeview-menu"
                     style="{{ request()->is('lecturers*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request
-
-                        ()->routeIs('lecturers.index') ? 'active-sub' : '' }}">
+                    <li class="{{ request()->routeIs('lecturers.index') ? 'active-sub' : '' }}">
                         <a href="{{ route('lecturers.index') }}">Daftar Dosen</a>
                     </li>
-                    <li class="{{ request
-                    
-                        ()->routeIs('lecturers.create') ? 'active-sub' : '' }}">
+                    <li class="{{ request()->routeIs('lecturers.create') ? 'active-sub' : '' }}">
                         <a href="{{ route('lecturers.create') }}">Tambah Dosen</a>
                     </li>
                 </ul>
@@ -113,7 +109,21 @@
                     </li>
                 </ul>
             </li>
-            {{-- End Admin dashboard --}}
+            <li class="treeview {{ request()->is('articles*') ? 'active current-page open' : '' }}">
+                <a href="#" class="treeview-toggle">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span class="menu-text">Articles</span>
+                </a>
+                <ul class="treeview-menu"
+                    style="{{ request()->is('articles*') ? 'display: block;' : 'display: none;' }}">
+                    <li class="{{ request()->routeIs('articles.index') ? 'active-sub' : '' }}">
+                        <a href="{{ route('articles.index') }}">List Articles</a>
+                    </li>
+                    <li class="{{ request()->routeIs('articles.create') ? 'active-sub' : '' }}">
+                        <a href="{{ route('articles.create') }}">Add Articles</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

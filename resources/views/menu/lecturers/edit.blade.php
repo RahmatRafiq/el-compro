@@ -17,6 +17,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="about" class="form-label">About</label>
+                        <textarea class="form-control" name="about" id="about">{{ $lecturer->about }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" value="{{ $lecturer->email }}" required>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="images" class="form-label">Lecturer Image</label>
                         <div class="dropzone" id="myDropzone"></div>
                     </div>

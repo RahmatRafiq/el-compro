@@ -14,7 +14,7 @@ interface CoursesSectionProps {
 
 const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
   return (
-    <div className="rounded-lg w-full py-8 shadow-xl">
+    <div className="rounded-lg w-full py-8 ">
       <h2 className="text-3xl font-bold text-center  mb-6">Mata Kuliah</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
@@ -46,9 +46,9 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 text-right">
-        <Link href="/home/courses" className="btn btn-primary">
-          Lihat Semua
+      <div className="divider divider-vertical divider-end">
+        <Link href="/courses" className="btn btn-secondary">
+          Lihat Semua Mata Kuliah
         </Link>
       </div>
     </div>
