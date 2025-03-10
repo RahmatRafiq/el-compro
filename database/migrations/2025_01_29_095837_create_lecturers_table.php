@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('lecturers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('about');
+            $table->text('about')->nullable();
+            $table->string('email')->nullable();
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();

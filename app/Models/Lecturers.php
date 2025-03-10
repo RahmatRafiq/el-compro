@@ -15,6 +15,7 @@ class Lecturers extends Model implements HasMedia
         'name',
         'about',
         'image',
+        'email',
     ];
 
     public function courses()
