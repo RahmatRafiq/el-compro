@@ -16,17 +16,19 @@ const Footer: React.FC<FooterProps> = ({ aboutApp }) => {
   return (
     <footer className="footer bg-neutral text-neutral-content p-10">
       <aside>
-        <img
-          src="assets/images/logo-sm.png"
-          alt="Logo"
-          width="100"
-          height="100"
-        />
+        <a href="https://unifa.ac.id/" target="_blank" rel="noopener noreferrer">
+          <img
+        src="assets/images/logo-sm.png"
+        alt="Logo"
+        width="100"
+        height="100"
+          />
+        </a>
         {aboutApp?.title && (
           <p>
-            {aboutApp.title}
-            {aboutApp.description && <br />}
-            {aboutApp.description}
+        {aboutApp.title}
+        {aboutApp.description && <br />}
+        {aboutApp.description}
           </p>
         )}
       </aside>
