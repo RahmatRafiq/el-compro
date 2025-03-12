@@ -1,0 +1,244 @@
+{
+  "_Layout.js": {
+    "file": "js/Layout.js",
+    "name": "Layout",
+    "imports": [
+      "resources/js/react.tsx"
+    ]
+  },
+  "_index.js": {
+    "file": "js/index.js",
+    "name": "index"
+  },
+  "_index2.js": {
+    "file": "js/index2.js",
+    "name": "index",
+    "imports": [
+      "resources/js/react.tsx"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "css/app.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/Pages/Articles.tsx": {
+    "file": "js/Articles.js",
+    "name": "Articles",
+    "src": "resources/js/Pages/Articles.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Articles/ArticleDetail.tsx": {
+    "file": "js/ArticleDetail.js",
+    "name": "ArticleDetail",
+    "src": "resources/js/Pages/Articles/ArticleDetail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index2.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Articles/CategoryArticles.tsx": {
+    "file": "js/CategoryArticles.js",
+    "name": "CategoryArticles",
+    "src": "resources/js/Pages/Articles/CategoryArticles.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Courses.tsx": {
+    "file": "js/Courses.js",
+    "name": "Courses",
+    "src": "resources/js/Pages/Courses.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home.tsx": {
+    "file": "js/Home.js",
+    "name": "Home",
+    "src": "resources/js/Pages/Home.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "resources/js/Pages/Home/GeneralInformationSection.tsx",
+      "resources/js/Pages/Home/VirtualToursSection.tsx",
+      "resources/js/Pages/Home/LecturersSection.tsx",
+      "resources/js/Pages/Home/ConcentrationTabs.tsx",
+      "resources/js/Pages/Home/CourseSection.tsx",
+      "resources/js/Pages/Home/ArticleSections.tsx",
+      "_index.js",
+      "_index2.js"
+    ]
+  },
+  "resources/js/Pages/Home/ArticleSections.tsx": {
+    "file": "js/ArticleSections.js",
+    "name": "ArticleSections",
+    "src": "resources/js/Pages/Home/ArticleSections.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/ConcentrationTabs.tsx": {
+    "file": "js/ConcentrationTabs.js",
+    "name": "ConcentrationTabs",
+    "src": "resources/js/Pages/Home/ConcentrationTabs.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/CourseSection.tsx": {
+    "file": "js/CourseSection.js",
+    "name": "CourseSection",
+    "src": "resources/js/Pages/Home/CourseSection.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/GeneralInformationSection.tsx": {
+    "file": "js/GeneralInformationSection.js",
+    "name": "GeneralInformationSection",
+    "src": "resources/js/Pages/Home/GeneralInformationSection.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/LecturersSection.tsx": {
+    "file": "js/LecturersSection.js",
+    "name": "LecturersSection",
+    "src": "resources/js/Pages/Home/LecturersSection.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/RegistrationFlowSection.tsx": {
+    "file": "js/RegistrationFlowSection.js",
+    "name": "RegistrationFlowSection",
+    "src": "resources/js/Pages/Home/RegistrationFlowSection.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/Home/VirtualToursSection.tsx": {
+    "file": "js/VirtualToursSection.js",
+    "name": "VirtualToursSection",
+    "src": "resources/js/Pages/Home/VirtualToursSection.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_index2.js",
+      "_index.js"
+    ],
+    "css": [
+      "css/VirtualToursSection.css"
+    ]
+  },
+  "resources/js/Pages/Lecturers.tsx": {
+    "file": "js/Lecturers.js",
+    "name": "Lecturers",
+    "src": "resources/js/Pages/Lecturers.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/VirtualTours.tsx": {
+    "file": "js/VirtualTours.js",
+    "name": "VirtualTours",
+    "src": "resources/js/Pages/VirtualTours.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index2.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/Pages/VirtualTours/Detail.tsx": {
+    "file": "js/Detail.js",
+    "name": "Detail",
+    "src": "resources/js/Pages/VirtualTours/Detail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/react.tsx",
+      "_Layout.js",
+      "_index2.js",
+      "_index.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "js/app2.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "resources/js/dropzoner.js": {
+    "file": "js/dropzoner.js",
+    "name": "dropzoner",
+    "src": "resources/js/dropzoner.js",
+    "isEntry": true,
+    "css": [
+      "css/dropzoner.css"
+    ]
+  },
+  "resources/js/react.tsx": {
+    "file": "js/react.js",
+    "name": "react",
+    "src": "resources/js/react.tsx",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "dynamicImports": [
+      "resources/js/Pages/Articles.tsx",
+      "resources/js/Pages/Articles/ArticleDetail.tsx",
+      "resources/js/Pages/Articles/CategoryArticles.tsx",
+      "resources/js/Pages/Courses.tsx",
+      "resources/js/Pages/Home.tsx",
+      "resources/js/Pages/Home/ArticleSections.tsx",
+      "resources/js/Pages/Home/ConcentrationTabs.tsx",
+      "resources/js/Pages/Home/CourseSection.tsx",
+      "resources/js/Pages/Home/GeneralInformationSection.tsx",
+      "resources/js/Pages/Home/LecturersSection.tsx",
+      "resources/js/Pages/Home/RegistrationFlowSection.tsx",
+      "resources/js/Pages/Home/VirtualToursSection.tsx",
+      "resources/js/Pages/Lecturers.tsx",
+      "resources/js/Pages/VirtualTours.tsx",
+      "resources/js/Pages/VirtualTours/Detail.tsx"
+    ],
+    "css": [
+      "css/app.css"
+    ]
+  }
+}
