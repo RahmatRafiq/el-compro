@@ -80,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
           )}
         </div>
 
-        <Link href="/" className="btn btn-ghost text-xl flex items-center p-0">
+        <Link href="/" className="btn btn-ghost text-xl flex items-center p-0 bg-white">
           <img src="assets/images/logo.png" alt="Logo" className="h-full w-full object-contain" />
         </Link>
       </div>
