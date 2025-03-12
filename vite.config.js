@@ -15,9 +15,10 @@ export default defineConfig({
         }),
         react(),
     ],
+    
     // no hashing output
     build: {
-        outDir: "dist",
+        // outDir: "dist",
         target: 'esnext',
         rollupOptions: {
             output: {
