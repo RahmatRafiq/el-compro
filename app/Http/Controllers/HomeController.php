@@ -17,7 +17,6 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        // Cache AboutApp selama 60 menit karena jarang berubah
         $this->aboutApp = Cache::remember('aboutApp', now()->addMinutes(60), function () {
             return AboutApp::first();
         });
@@ -110,7 +109,7 @@ class HomeController extends Controller
         });
 
         $courses = Cache::remember("home_courses", now()->addMinutes(10), function () {
-            return Course::latest()->take(5)->get();
+            return Course::get();
         });
 
         $lecturers = Cache::remember("home_lecturers", now()->addMinutes(10), function () {
