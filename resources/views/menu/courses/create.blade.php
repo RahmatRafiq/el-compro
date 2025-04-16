@@ -32,6 +32,7 @@
                                 <option value="teknik_tenaga_listrik">TEKNIK TENAGA LISTRIK</option>
                                 <option value="teknik_telekomunikasi">TEKNIK TELEKOMUNIKASI</option>
                                 <option value="semua_konsentrasi">SEMUA KONSENTRASI</option>
+                                <option value="mata_kuliah_dasar">MATA KULIAH DASAR</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>

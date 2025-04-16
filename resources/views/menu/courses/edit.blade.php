@@ -26,7 +26,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="semester" class="form-label">Semester</label>
-                            <input type="number" class="form-control" name="semester" value="{{ $course->semester }}" min="1" max="8" required>
+                            <input type="number" class="form-control" name="semester" value="{{ $course->semester }}"
+                                min="1" max="8" required>
                         </div>
                         <div class="mb-3">
                             <label for="major_concentration" class="form-label">Major Concentration</label>
@@ -36,6 +37,7 @@
                                 <option value="teknik_telekomunikasi" {{ $course->major_concentration == 'teknik_telekomunikasi' ? 'selected' : '' }}>TEKNIK
                                     TELEKOMUNIKASI</option>
                                 <option value="semua_konsentrasi" {{ $course->major_concentration == 'semua_konsentrasi' ? 'selected' : '' }}>SEMUA KONSENTRASI</option>
+                                <option value="mata_kuliah_dasar" {{ $course->major_concentration == 'mata_kuliah_dasar' ? 'selected' : '' }}>MATA KULIAH DASAR</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-success">Update</button>
