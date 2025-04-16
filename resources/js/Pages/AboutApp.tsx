@@ -34,18 +34,22 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
         {/* Struktur Organisasi */}
         {aboutApp.image && (
           <div className="flex justify-center">
-            <div className="rounded-2xl shadow-lg overflow-hidden border border-base-300">
+            <figure className="rounded-2xl shadow-lg overflow-hidden border border-base-300 max-w-4xl">
               <img
                 src={aboutApp.image}
                 alt="Struktur Organisasi"
-                className="w-full max-w-4xl object-contain"
+                className="w-full object-contain"
               />
-            </div>
+              <figcaption className="bg-base-100 text-center text-sm text-gray-500 py-2">
+                Struktur Organisasi
+              </figcaption>
+            </figure>
           </div>
         )}
 
+
         {/* Konten Section */}
-        <div className="grid gap-8">
+        <div className="space-y-8">
           <CollapseCard title="Sambutan" content={aboutApp.greeting} />
           <CollapseCard title="Visi & Misi" content={aboutApp.vision_mission} />
           <CollapseCard title="Sejarah Singkat" content={aboutApp.history} />
