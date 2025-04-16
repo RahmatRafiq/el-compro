@@ -19,7 +19,8 @@ Route::middleware('auth')->group(function () {
         Route::get('', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/admin', [\App\Http\Controllers\DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
 
-        Route::resource('mbkm/about-app', \App\Http\Controllers\AboutAppController::class);
+        Route::resource('about-app', \App\Http\Controllers\AboutAppController::class);
+        Route::delete('about-app/delete-file',[\App\Http\Controllers\AboutAppController::class, 'deleteFile'])->name('aboutApp.deleteFile');
 
         Route::get('admin/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
