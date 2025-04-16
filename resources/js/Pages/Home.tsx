@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '../Layouts/Layout';
 import GeneralInformationSection from './Home/GeneralInformationSection';
 import VirtualToursSection from './Home/VirtualToursSection';
-import RegistrationFlowSection from './Home/RegistrationFlowSection';
 import LecturersSection from './Home/LecturersSection';
 import ConcentrationTabs from './Home/ConcentrationTabs';
 import CoursesSection from './Home/CourseSection';
@@ -13,6 +12,7 @@ interface Course {
   course_code: string;
   name: string;
   credits: number;
+  major_concentration: string;
 }
 
 interface HomeProps {
