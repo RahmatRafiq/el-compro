@@ -14,7 +14,6 @@ class Lecturers extends Model implements HasMedia
     protected $fillable = [
         'name',
         'about',
-        'image',
         'email',
     ];
 

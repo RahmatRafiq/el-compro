@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,13 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['course_code', 'name', 'credits'];
+    protected $fillable = [
+        'course_code',
+        'name',
+        'credits',
+        'semester',
+        'major_concentration',
+    ];
 
     public function lecturers()
     {
