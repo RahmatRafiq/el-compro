@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@inertiajs/react";
 
 interface AboutApp {
   title?: string;
@@ -18,36 +19,65 @@ const Footer: React.FC<FooterProps> = ({ aboutApp }) => {
       <aside>
         <a href="https://unifa.ac.id/" target="_blank" rel="noopener noreferrer">
           <img
-        src="assets/images/logo-sm.png"
-        alt="Logo"
-        width="100"
-        height="100"
+            src="assets/images/logo-sm.png"
+            alt="Logo"
+            width="100"
+            height="100"
           />
         </a>
+
         {aboutApp?.title && (
-          <p>
-        {aboutApp.title}
-        {aboutApp.description && <br />}
-        {aboutApp.description}
-          </p>
+          <div className="mt-4">
+            <p className="mb-2">
+              {aboutApp.title}
+              {aboutApp.description && <><br />{aboutApp.description}</>}
+            </p>
+
+            <Link
+              href="/about-us"
+              className="btn btn-sm btn-outline btn-accent mt-2"
+            >
+              Selengkapnya
+            </Link>
+          </div>
         )}
       </aside>
+
       <nav>
         <h6 className="footer-title">Contact</h6>
         <div className="grid grid-flow-row gap-2">
           {aboutApp?.contact_email && (
-            <p>Email: <a href={`mailto:${aboutApp.contact_email}`}>{aboutApp.contact_email}</a></p>
-          )}
-          {aboutApp?.contact_phone && (
-            <p>Phone: <a href={`tel:${aboutApp.contact_phone}`}>{aboutApp.contact_phone}</a></p>
-          )}
-            {aboutApp?.contact_address && (
             <p>
-              Address: <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(aboutApp.contact_address)}`} target="_blank" rel="noopener noreferrer">
-              {aboutApp.contact_address}
+              Email:{" "}
+              <a href={`mailto:${aboutApp.contact_email}`}>
+                {aboutApp.contact_email}
               </a>
             </p>
-            )}
+          )}
+          {aboutApp?.contact_phone && (
+            <p>
+              Phone:{" "}
+              <a href={`tel:${aboutApp.contact_phone}`}>
+                {aboutApp.contact_phone}
+              </a>
+            </p>
+          )}
+          {aboutApp?.contact_address && (
+            <div className="mt-4">
+              <iframe
+                title="Lokasi"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(aboutApp.contact_address)}&output=embed`}
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-lg shadow-md"
+              ></iframe>
+            </div>
+          )}
+
         </div>
       </nav>
     </footer>
