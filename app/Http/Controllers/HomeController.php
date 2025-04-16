@@ -266,4 +266,22 @@ class HomeController extends Controller
             'aboutApp'    => $this->aboutApp,
         ]);
     }
+
+    public function aboutApp()
+    {
+        $aboutApp = Cache::remember('aboutApp', now()->addMinutes(10), function () {
+            return AboutApp::with('media')->first();
+        });
+
+        if ($aboutApp) {
+            $aboutApp->image = $aboutApp->hasMedia('struktur-organisasi')
+            ? $aboutApp->getFirstMediaUrl('struktur-organisasi')
+            : null;
+        }
+
+        return inertia('AboutApp', [
+            'aboutApp' => $aboutApp,
+        ]);
+    }
+
 }

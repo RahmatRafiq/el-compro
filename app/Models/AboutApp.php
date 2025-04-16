@@ -18,7 +18,6 @@ class AboutApp extends Model implements HasMedia
         'greeting',
         'vision_mission',
         'history',
-        'vision',
         'contact_email',
         'contact_phone',
         'contact_address',
