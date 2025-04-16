@@ -50,7 +50,7 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
 
         {/* Konten Section */}
         <div className="space-y-8">
-          <CollapseCard title="Sambutan" content={aboutApp.greeting} />
+          <CollapseCard title="Sekapur Sirih" content={aboutApp.greeting} />
           <CollapseCard title="Visi & Misi" content={aboutApp.vision_mission} />
           <CollapseCard title="Sejarah Singkat" content={aboutApp.history} />
         </div>
