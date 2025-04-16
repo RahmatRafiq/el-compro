@@ -7,7 +7,7 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
-            <li class="treeview {{ request()->is('mbkm/admin/role-permissions*') ? 'active current-page open' : '' }}">
+            <li class="treeview {{ request()->is('admin/role-permissions*') ? 'active current-page open' : '' }}">
                 <a href="#" class="treeview-toggle">
                     <i class="bi bi-person-gear"></i>
                     <span class="menu-text">Manajemen Pengguna</span>
