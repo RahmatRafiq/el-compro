@@ -7,6 +7,8 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
+
+            <!-- Manajemen Pengguna dengan Treeview -->
             <li class="treeview {{ request()->is('admin/role-permissions*') ? 'active current-page open' : '' }}">
                 <a href="#" class="treeview-toggle">
                     <i class="bi bi-person-gear"></i>
@@ -27,105 +29,49 @@
                         <a href="{{ route('about-app.index') }}">Tentang Aplikasi</a>
                     </li>
                 </ul>
-                <li class="{{ request()->routeIs('profile.edit') ? 'active current-page' : '' }}">
-                    <a href="{{ route('profile.edit') }}">
-                        <i class="bi bi-person"></i>
-                        <span class="menu-text">Manajemen Profil</span>
-                    </a>
-                </li>
             </li>
-            <li class="treeview {{ request()->is('courses*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
-                    <i class="bi bi-book"></i>
-                    <span class="menu-text">Manajemen Mata Kuliah</span>
-                </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('courses*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('courses.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('courses.index') }}">Daftar Mata Kuliah</a>
-                    </li>
-                    <li class="{{ request()->routeIs('courses.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('courses.create') }}">Tambah Mata Kuliah</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="treeview {{ request()->is('lecturers*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
+            <li class="{{ request()->routeIs('profile.edit') ? 'active current-page' : '' }}">
+                <a href="{{ route('profile.edit') }}">
                     <i class="bi bi-person"></i>
-                    <span class="menu-text">Manajemen Dosen</span>
+                    <span class="menu-text">Manajemen Profil</span>
                 </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('lecturers*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('lecturers.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('lecturers.index') }}">Daftar Dosen</a>
-                    </li>
-                    <li class="{{ request()->routeIs('lecturers.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('lecturers.create') }}">Tambah Dosen</a>
-                    </li>
-                </ul>
             </li>
-            <li class="treeview {{ request()->is('general-information*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
-                    <i class="bi bi-info-circle"></i>
+            <li class="{{ request()->routeIs('courses.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('courses.index') }}">
+                    <i class="bi bi-book"></i>
+                    <span class="menu-text">Mata Kuliah</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('lecturers.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('lecturers.index') }}">
+                    <i class="bi bi-person-badge"></i>
+                    <span class="menu-text">Dosen</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('general_information.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('general_information.index') }}">
+                    <i class="bi bi-info-square"></i>
                     <span class="menu-text">Informasi Umum</span>
                 </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('general_information*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('general_information.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('general_information.index') }}">Daftar Informasi Umum</a>
-                    </li>
-                    <li class="{{ request()->routeIs('general-information.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('general_information.create') }}">Tambah Informasi Umum</a>
-                    </li>
-                </ul>
             </li>
-            <li class="treeview {{ request()->is('virtuals*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
+            <li class="{{ request()->routeIs('virtuals.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('virtuals.index') }}">
                     <i class="bi bi-camera-video"></i>
                     <span class="menu-text">Virtual Content</span>
                 </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('virtuals*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('virtuals.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('virtuals.index') }}">List Virtual Content</a>
-                    </li>
-                    <li class="{{ request()->routeIs('virtuals.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('virtuals.create') }}">Add Virtual Content</a>
-                    </li>
-                </ul>
             </li>
-            <li class="treeview {{ request()->is('categories*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
+            <li class="{{ request()->routeIs('categories.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('categories.index') }}">
                     <i class="bi bi-list-check"></i>
                     <span class="menu-text">Categories</span>
                 </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('categories*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('categories.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('categories.index') }}">List Categories</a>
-                    </li>
-                    <li class="{{ request()->routeIs('categories.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('categories.create') }}">Add Category</a>
-                    </li>
-                </ul>
             </li>
-            <li class="treeview {{ request()->is('articles*') ? 'active current-page open' : '' }}">
-                <a href="#" class="treeview-toggle">
+            <li class="{{ request()->routeIs('articles.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('articles.index') }}">
                     <i class="bi bi-file-earmark-text"></i>
                     <span class="menu-text">Articles</span>
                 </a>
-                <ul class="treeview-menu"
-                    style="{{ request()->is('articles*') ? 'display: block;' : 'display: none;' }}">
-                    <li class="{{ request()->routeIs('articles.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('articles.index') }}">List Articles</a>
-                    </li>
-                    <li class="{{ request()->routeIs('articles.create') ? 'active-sub' : '' }}">
-                        <a href="{{ route('articles.create') }}">Add Articles</a>
-                    </li>
-                </ul>
             </li>
         </ul>
-
     </div>
-    <!-- Sidebar menu ends -->
 </nav>
