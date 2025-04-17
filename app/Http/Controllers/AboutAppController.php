@@ -34,10 +34,14 @@ class AboutAppController extends Controller
         $request->validate([
             'title'           => 'required|string|max:255',
             'description'     => 'required|string',
+            'greeting'        => 'nullable|string',
+            'vision_mission'  => 'nullable|string',
+            'history'         => 'nullable|string',
             'contact_email'   => 'nullable|string|email|max:255',
             'contact_phone'   => 'nullable|string|max:20',
             'contact_address' => 'nullable|string|max:255',
         ]);
+
         $aboutApp = AboutApp::find($id);
 
         if ($request->has('struktur-organisasi')) {

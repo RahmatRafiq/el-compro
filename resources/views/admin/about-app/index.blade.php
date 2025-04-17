@@ -63,11 +63,11 @@
                         </div>
 
                         <div class="form-group row mb-3">
-                            <label for="mission" class="col-md-4 col-form-label text-md-right">Visi-Misi</label>
+                            <label for="vision_mission" class="col-md-4 col-form-label text-md-right">Visi-Misi</label>
                             <div class="col-md-8">
-                                <textarea id="mission" class="form-control @error('mission') is-invalid @enderror"
-                                    name="mission" rows="3">{{ old('mission', $aboutApp->vision_mission ?? '') }}</textarea>
-                                @error('mission')
+                                <textarea id="vision_mission" class="form-control @error('vision_mission') is-invalid @enderror"
+                                    name="vision_mission" rows="3">{{ old('vision_mission', $aboutApp->vision_mission ?? '') }}</textarea>
+                                @error('vision_mission')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
