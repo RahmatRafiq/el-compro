@@ -41,7 +41,7 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
                 className="w-full object-contain"
               />
               <figcaption className="bg-base-100 text-center text-sm text-gray-500 py-2">
-                Struktur Organisasi
+                STRUKTUR ORGANISASI
               </figcaption>
             </figure>
           </div>
@@ -49,14 +49,17 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
 
 
         {/* Konten Section */}
-        <div className="space-y-8">
-          <CollapseCard title="Sekapur Sirih" content={aboutApp.greeting} />
-          <CollapseCard title="Visi & Misi" content={aboutApp.vision_mission} />
-          <CollapseCard title="Sejarah Singkat" content={aboutApp.history} />
+        <div className="bg-base-200 px-4 py-8 rounded-xl shadow-md">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <CollapseCard title="SEKAPUR SIRIH" content={aboutApp.greeting} />
+            <CollapseCard title="VISI & MISI" content={aboutApp.vision_mission} />
+            <CollapseCard title="SEJARAH SINGKAT" content={aboutApp.history} />
+          </div>
         </div>
 
+
         {/* Kontak Section */}
-        <div className="card bg-neutral text-neutral-content shadow-xl">
+        <div className="card bg-base-300 shadow-xl">
           <div className="card-body space-y-4">
             <h2 className="card-title text-2xl">Kontak</h2>
             <div className="grid md:grid-cols-3 gap-6 text-base-content">
@@ -93,12 +96,15 @@ const CollapseCard: React.FC<{ title: string; content: string }> = ({
 }) => (
   <div className="collapse collapse-arrow bg-base-100 shadow border border-base-200">
     <input type="checkbox" />
-    <div className="collapse-title text-xl font-medium text-primary">{title}</div>
+    <div className="collapse-title text-xl font-medium text-primary text-center">
+      {title}
+    </div>
     <div className="collapse-content">
       <p className="whitespace-pre-line leading-relaxed text-gray-700">{content}</p>
     </div>
   </div>
 );
+
 
 // Contact item block
 const ContactItem: React.FC<{
