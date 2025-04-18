@@ -27,7 +27,7 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
         <div className="hero bg-base-200 rounded-xl shadow-md py-10">
           <div className="hero-content text-center flex-col">
             <h1 className="text-5xl font-bold text-primary">{aboutApp.title}</h1>
-            <p className="py-4 max-w-2xl text-gray-600">{aboutApp.description}</p>
+            <p className="py-4 max-w-2xl text-base-content">{aboutApp.description}</p>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ const AboutAppPage: React.FC<AboutAppPageProps> = ({ aboutApp }) => {
                 alt="Struktur Organisasi"
                 className="w-full object-contain"
               />
-              <figcaption className="bg-base-100 text-center text-sm text-gray-500 py-2">
+              <figcaption className="bg-base-100 text-center text-sm text-base-content py-2">
                 STRUKTUR ORGANISASI
               </figcaption>
             </figure>
@@ -100,7 +100,7 @@ const CollapseCard: React.FC<{ title: string; content: string }> = ({
       {title}
     </div>
     <div className="collapse-content">
-      <p className="whitespace-pre-line leading-relaxed text-gray-700">{content}</p>
+      <p className="whitespace-pre-line leading-relaxed text-base-content">{content}</p>
     </div>
   </div>
 );
