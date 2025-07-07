@@ -26,22 +26,37 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
     <div className="rounded-lg w-full py-8">
       <h2 className="text-3xl font-bold text-center mb-6">Mata Kuliah</h2>
 
-      <div role="tablist" className="tabs tabs-lifted flex justify-center mb-6">
+      {/* Mobile-first responsive tabs - horizontal di mobile */}
+      <div role="tablist" className="tabs tabs-lifted flex flex-row justify-center mb-6 w-full">
         <button
           role="tab"
-          className={`tab px-6 py-3 text-lg font-semibold ${activeTab === "teknik_tenaga_listrik" ? "tab-active text-primary border-b-2 border-primary" : ""
-            }`}
+          className={`tab px-2 sm:px-6 py-3 sm:py-5 text-xs sm:text-lg font-semibold min-h-[50px] sm:min-h-[60px] flex items-center justify-center gap-1 sm:gap-2 flex-1 ${
+            activeTab === "teknik_tenaga_listrik" ? "tab-active text-primary border-b-2 border-primary" : ""
+          }`}
           onClick={() => setActiveTab("teknik_tenaga_listrik")}
         >
-          TEKNIK TENAGA LISTRIK
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span className="text-center leading-tight whitespace-nowrap">
+            <span className="hidden sm:inline">TEKNIK TENAGA LISTRIK</span>
+            <span className="sm:hidden text-xs font-medium">TEKNIK<br/>TENAGA LISTRIK</span>
+          </span>
         </button>
         <button
           role="tab"
-          className={`tab px-6 py-3 text-lg font-semibold ${activeTab === "teknik_telekomunikasi" ? "tab-active text-primary border-b-2 border-primary" : ""
-            }`}
+          className={`tab px-2 sm:px-6 py-3 sm:py-5 text-xs sm:text-lg font-semibold min-h-[50px] sm:min-h-[60px] flex items-center justify-center gap-1 sm:gap-2 flex-1 ${
+            activeTab === "teknik_telekomunikasi" ? "tab-active text-primary border-b-2 border-primary" : ""
+          }`}
           onClick={() => setActiveTab("teknik_telekomunikasi")}
         >
-          TEKNIK TELEKOMUNIKASI
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+          </svg>
+          <span className="text-center leading-tight whitespace-nowrap">
+            <span className="hidden sm:inline">TEKNIK TELEKOMUNIKASI</span>
+            <span className="sm:hidden text-xs font-medium">TEKNIK<br/>TELEKOMUNIKASI</span>
+          </span>
         </button>
       </div>
 
