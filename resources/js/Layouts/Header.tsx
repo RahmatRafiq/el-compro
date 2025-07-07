@@ -121,7 +121,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
 
         <Link href="/" className="btn btn-ghost text-xl flex items-center p-0 bg-white">
           <img
-            src="assets/images/logo.png"
+            src="/assets/images/logo.png"
             alt="Logo"
             className="h-10 w-auto object-contain"
           />

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             CourseSeeder::class,
             GeneralInformationSeeder::class,
+            AboutAppSeeder::class,
             LecturerCourseSeeder::class,
             LecturerSeeder::class,
             VirtualSeeder::class,

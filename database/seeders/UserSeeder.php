@@ -4,11 +4,20 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        // Create roles first if they don't exist
+        $roles = ['admin', 'editor', 'viewer'];
+        foreach ($roles as $roleName) {
+            if (!Role::where('name', $roleName)->where('guard_name', 'web')->exists()) {
+                Role::create(['name' => $roleName, 'guard_name' => 'web']);
+            }
+        }
+
         // Create 1 admin user with a specific email and password
         $admin = User::create([
             'name' => 'Admin',

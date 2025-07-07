@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ aboutApp }) => {
       <aside>
         <a href="https://unifa.ac.id/" target="_blank" rel="noopener noreferrer">
           <img
-            src="assets/images/logo-sm.png"
+            src="/assets/images/logo-sm.png"
             alt="Logo"
             width="100"
             height="100"
