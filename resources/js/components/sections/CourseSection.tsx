@@ -98,7 +98,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
         </table>
       </div>
 
-      <div className="divider divider-vertical divider-end">
+   <div className="divider divider-vertical divider-end mt-8">
         <Link href="/courses" className="btn btn-secondary">
           Lihat Semua Mata Kuliah
         </Link>
