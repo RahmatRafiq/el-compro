@@ -23,7 +23,7 @@ const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ g
   const otherInfo = generalInformationData.filter(item => item.name !== "Informasi dan Alur Pendaftaran");
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full py-8">
       {flowInfo && (
         <section className="rounded-lg w-full py-8 card bg-base-200 shadow-lg">
           <h2 className="text-3xl font-bold text-center mb-6">{flowInfo.name}</h2>

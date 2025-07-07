@@ -8,7 +8,7 @@ interface LecturersSectionProps {
 
 const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
   return (
-    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section className="w-full py-12">
       <div className="text-center space-y-4 mb-8">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content">Dosen Kami</h2>
         <p className="text-base-content/70 text-sm sm:text-base max-w-2xl mx-auto">

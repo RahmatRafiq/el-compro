@@ -14,7 +14,7 @@ interface VirtualToursSectionProps {
 
 const VirtualToursSection: React.FC<VirtualToursSectionProps> = ({ virtualTours }) => {
   return (
-      <div className="space-y-8 px-6">
+      <div className="w-full py-8">
         <h2 className="text-3xl font-bold text-center mb-6">Virtual Tours</h2>
 
         <Swiper

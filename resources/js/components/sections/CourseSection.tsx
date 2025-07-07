@@ -23,7 +23,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
   }, [activeTab, courses]);
 
   return (
-    <div className="rounded-lg w-full py-8">
+    <div className="w-full py-8">
       <h2 className="text-3xl font-bold text-center mb-6">Mata Kuliah</h2>
 
       {/* Mobile-first responsive tabs - horizontal di mobile */}

@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = ({
   const registrationFlowData = generalInformationData.find(item => item.name === "Informasi dan Alur Pendaftaran");
   return (
     <Layout aboutApp={aboutApp}> 
-      <div className="space-y-8 px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <VirtualToursSection virtualTours={virtualTours} />
 
         <GeneralInformationSection generalInformationData={generalInformationData} />
