@@ -83,23 +83,23 @@ const VirtualTourDetail: React.FC<VirtualTourDetailProps> = ({ virtualTour, abou
         {/* Header section dengan container terbatas */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center space-y-4">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content leading-tight">
               {virtualTour.name}
             </h1>
-            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
+            <p className="text-base-content/70 text-sm sm:text-base max-w-2xl mx-auto">
               Jelajahi virtual tour interaktif ini dengan kualitas tinggi. Gunakan mouse atau sentuhan untuk navigasi.
             </p>
           </div>
         </div>
 
         {/* Virtual tour iframe - full width dengan kontrol */}
-        <div className="w-full bg-gradient-to-br from-gray-100 to-gray-200 relative">
+        <div className="w-full bg-base-200 relative">
           {/* Loading overlay */}
           {isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+            <div className="absolute inset-0 flex items-center justify-center bg-base-200 z-10">
               <div className="text-center space-y-4">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-                <p className="text-gray-600">Memuat virtual tour...</p>
+                <div className="loading loading-spinner loading-lg text-primary"></div>
+                <p className="text-base-content/70">Memuat virtual tour...</p>
               </div>
             </div>
           )}
@@ -108,7 +108,7 @@ const VirtualTourDetail: React.FC<VirtualTourDetailProps> = ({ virtualTour, abou
           <div className="absolute top-4 right-4 z-20 flex space-x-2">
             <button
               onClick={toggleFullscreen}
-              className="bg-black/70 hover:bg-black/90 text-white p-3 rounded-lg transition-all duration-200 backdrop-blur-sm shadow-lg group"
+              className="btn btn-ghost bg-base-content/70 hover:bg-base-content/90 text-base-100 p-3 rounded-lg transition-all duration-200 backdrop-blur-sm shadow-lg group border-0"
               title={isFullscreen ? "Keluar dari Fullscreen (ESC)" : "Masuk Fullscreen"}
             >
               {isFullscreen ? (
@@ -137,48 +137,48 @@ const VirtualTourDetail: React.FC<VirtualTourDetailProps> = ({ virtualTour, abou
         {/* Description section dengan container terbatas */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="card bg-base-100 shadow-xl border border-base-300">
+              <div className="card-header bg-base-200 px-6 py-4 border-b border-base-300">
+                <h2 className="card-title text-xl text-base-content flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Deskripsi Virtual Tour
                 </h2>
               </div>
-              <div className="p-6 md:p-8">
-                <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <div className="card-body p-6 md:p-8">
+                <div className="prose prose-lg max-w-none text-base-content leading-relaxed">
                   {parse(virtualTour.description)}
                 </div>
               </div>
             </div>
 
             {/* Tips penggunaan */}
-            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-                Tips Navigasi
-              </h3>
-              <ul className="text-blue-700 space-y-2 text-sm">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Gunakan mouse untuk melihat ke segala arah
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Klik tombol fullscreen untuk pengalaman immersive
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Tekan ESC atau klik tombol X untuk keluar dari fullscreen
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Cari hotspot interaktif untuk informasi lebih detail
-                </li>
-              </ul>
+            <div className="mt-8 alert alert-info">
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <div>
+                <h3 className="font-semibold text-lg mb-3">Tips Navigasi</h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-current rounded-full mt-2 mr-3 flex-shrink-0 opacity-60"></span>
+                    Gunakan mouse untuk melihat ke segala arah
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-current rounded-full mt-2 mr-3 flex-shrink-0 opacity-60"></span>
+                    Klik tombol fullscreen untuk pengalaman immersive
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-current rounded-full mt-2 mr-3 flex-shrink-0 opacity-60"></span>
+                    Tekan ESC atau klik tombol X untuk keluar dari fullscreen
+                  </li>
+                  <li className="flex items-start">
+                    <span className="w-2 h-2 bg-current rounded-full mt-2 mr-3 flex-shrink-0 opacity-60"></span>
+                    Cari hotspot interaktif untuk informasi lebih detail
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
