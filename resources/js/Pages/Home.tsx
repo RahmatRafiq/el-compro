@@ -1,33 +1,30 @@
 import React from 'react';
-import Layout from '../Layouts/Layout';
-import GeneralInformationSection from './Home/GeneralInformationSection';
-import VirtualToursSection from './Home/VirtualToursSection';
-import LecturersSection from './Home/LecturersSection';
-import ConcentrationTabs from './Home/ConcentrationTabs';
-import CoursesSection from './Home/CourseSection';
-import ArticlesSection from './Home/ArticleSections';
-
-interface Course {
-  id: number;
-  course_code: string;
-  name: string;
-  credits: number;
-  major_concentration: string;
-}
+import { Layout } from '@/Layouts';
+import {
+  GeneralInformationSection,
+  VirtualToursSection,
+  LecturersSection,
+  ConcentrationTabs,
+  CoursesSection,
+  ArticlesSection
+} from '@/components/sections';
+import type { 
+  Course as CourseType, 
+  VirtualTour, 
+  Lecturer, 
+  AboutApp, 
+  GeneralInformation, 
+  Article 
+} from '@/types';
 
 interface HomeProps {
-  generalInformationData: any[];
-  virtualTours: any[];
-  lecturers: any[];
+  generalInformationData: GeneralInformation[];
+  virtualTours: VirtualTour[];
+  lecturers: Lecturer[];
   concentrationData: any[];
-  courses: Course[]; 
-  aboutApp: {
-    title: string;
-    contact_email: string;
-    contact_phone: string;
-    contact_address: string;
-  };
-  articles: any[];
+  courses: CourseType[]; 
+  aboutApp: AboutApp;
+  articles: Article[];
 }
 
 const Home: React.FC<HomeProps> = ({

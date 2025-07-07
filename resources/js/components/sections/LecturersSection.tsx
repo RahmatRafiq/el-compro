@@ -1,13 +1,6 @@
 import React from 'react';
 import { router } from '@inertiajs/react';
-
-interface Lecturer {
-  id: number;
-  name: string;
-  image: string;
-  about: string;
-  courses: { id: number; name: string }[];
-}
+import type { Lecturer } from '@/types';
 
 interface LecturersSectionProps {
   lecturers: Lecturer[];

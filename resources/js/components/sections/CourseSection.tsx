@@ -1,13 +1,6 @@
 import { Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
-
-interface Course {
-  id: number;
-  course_code: string;
-  name: string;
-  credits: number;
-  major_concentration: string;
-}
+import type { Course } from '@/types';
 
 interface CoursesSectionProps {
   courses?: Course[];

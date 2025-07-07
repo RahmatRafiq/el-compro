@@ -6,13 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import parse from "html-react-parser";
-
-interface VirtualTour {
-  id: number;
-  name: string;
-  url_embed: string;
-  description: string;
-}
+import type { VirtualTour } from '@/types';
 
 interface VirtualToursSectionProps {
   virtualTours: VirtualTour[];

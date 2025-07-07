@@ -1,11 +1,6 @@
 import React from "react";
 import { FaInfoCircle } from "react-icons/fa";
-
-interface GeneralInformation {
-  id: number;
-  name: string;
-  description: string;
-}
+import type { GeneralInformation } from '@/types';
 
 interface GeneralInformationSectionProps {
   generalInformationData: GeneralInformation[];

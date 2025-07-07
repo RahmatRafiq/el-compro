@@ -1,22 +1,12 @@
 import React, { useState, useRef } from "react";
 import { usePage } from "@inertiajs/react";
-import Layout from "@/Layouts/Layout";
+import { Layout } from "@/Layouts";
 import parse from "html-react-parser";
-interface VirtualTour {
-  id: number;
-  name: string;
-  url_embed: string;
-  description: string;
-}
+import type { VirtualTour, AboutApp } from '@/types';
 
 interface VirtualTourDetailProps {
   virtualTour: VirtualTour;
-  aboutApp: {
-    title: string;
-    contact_email: string;
-    contact_phone: string;
-    contact_address: string;
-  };
+  aboutApp: AboutApp;
 }
 
 const VirtualTourDetail: React.FC<VirtualTourDetailProps> = ({ virtualTour, aboutApp }) => {

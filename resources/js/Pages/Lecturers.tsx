@@ -1,26 +1,13 @@
 import React from "react";
 import { Head, usePage } from "@inertiajs/react";
 import { PageProps as InertiaPageProps } from '@inertiajs/core';
-import Layout from "@/Layouts/Layout";
-
-interface Lecturer {
-    id: number;
-    name: string;
-    about: string;
-    email: string;
-    image: string;
-    courses: { id: number; name: string }[];
-}
+import { Layout } from "@/Layouts";
+import type { Lecturer, AboutApp } from '@/types';
 
 
 interface LecturersProps extends InertiaPageProps {
     lecturers: Lecturer[];
-    aboutApp: {
-        title: string;
-        contact_email: string;
-        contact_phone: string;
-        contact_address: string;
-      };
+    aboutApp: AboutApp;
 }
 
 const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {

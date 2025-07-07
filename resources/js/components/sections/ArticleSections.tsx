@@ -1,13 +1,6 @@
 import { Link } from "@inertiajs/react";
 import React from "react";
-
-interface Article {
-    id: number;
-    title: string;
-    image: string;
-    view_count: number;
-    slug: string;
-}
+import type { Article } from '@/types';
 
 interface ArticlesSectionProps {
     articles: Article[];
