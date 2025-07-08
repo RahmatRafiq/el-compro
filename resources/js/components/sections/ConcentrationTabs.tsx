@@ -18,8 +18,8 @@ const ConcentrationTabs: React.FC<Props> = ({ concentrationData }) => {
   }
 
   return (
-    <section className="rounded-lg w-full py-8 shadow-xl">
-      <h2 className="text-3xl font-bold text-center  mb-6">Konsentrasi</h2>
+    <section className="w-full py-8">
+      <h2 className="text-3xl font-bold text-center mb-6">Konsentrasi</h2>
 
       <div role="tablist" className="tabs tabs-lifted flex justify-center">
         {concentrationData.map((concentration, index) => (
