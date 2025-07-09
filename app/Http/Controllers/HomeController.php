@@ -252,7 +252,7 @@ class HomeController extends Controller
     public function virtualTourDetail($name)
     {
         $virtual = Virtual::with('category')
-            ->whereRaw("LOWER(REPLACE(name, ' ', '-')) = ?", [Str::slug($name)])
+            ->whereRaw("LOWER(REPLACE(REPLACE(name, ':', ''), ' ', '-')) = ?", [Str::slug($name)])
             ->firstOrFail();
 
         return inertia('VirtualTours/Detail', [

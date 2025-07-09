@@ -8,6 +8,7 @@ interface VirtualTour {
   name: string;
   url_embed: string;
   description: string;
+  slug: string;
 }
 
 interface VirtualTourPageProps {
@@ -41,7 +42,7 @@ const VirtualTourPage: React.FC<VirtualTourPageProps> = ({ virtualTours, aboutAp
                     <p>{parse(tour.description.length > 100 ? tour.description.substring(0, 100) + "..." : tour.description)}</p>
 
                   <Link
-                    href={`/virtual-tours/${encodeURIComponent(tour.name.replace(/\s+/g, "-").toLowerCase())}`}
+                    href={`/virtual-tours/${tour.slug}`}
                     className="mt-3 inline-block bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
                   >
                     Lihat Detail
