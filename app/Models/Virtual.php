@@ -13,9 +13,25 @@ class Virtual extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'slug',
         'url_embed',
         'description'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->slug = $model->slug ?? \Illuminate\Support\Str::slug($model->name);
+        });
+
+        static::updating(function ($model) {
+            if ($model->isDirty('name') && !$model->isDirty('slug')) {
+                $model->slug = \Illuminate\Support\Str::slug($model->name);
+            }
+        });
+    }
 
     public function category()
     {

@@ -227,20 +227,31 @@ class HomeController extends Controller
 
     public function virtualTours()
     {
+        // Clear the cache to ensure fresh data
+        Cache::forget("virtualTours_all");
+        
         $virtualTours = Cache::remember("virtualTours_all", now()->addMinutes(10), function () {
             return Virtual::with('category')
                 ->whereHas('category', function ($query) {
                     $query->where('type', 'virtual_tours');
                 })
                 ->get()
-                ->map(fn($virtual) => [
-                    'id'          => $virtual->id,
-                    'name'        => $virtual->name,
-                    'slug'        => Str::slug($virtual->name),
-                    'url_embed'   => $virtual->url_embed,
-                    'description' => $virtual->description,
-                    'category'    => $virtual->category ? $virtual->category->name : null,
-                ]);
+                ->map(function($virtual) {
+                    // Ensure each virtual tour has a slug
+                    if (empty($virtual->slug)) {
+                        $virtual->slug = Str::slug($virtual->name);
+                        $virtual->save();
+                    }
+                    
+                    return [
+                        'id'          => $virtual->id,
+                        'name'        => $virtual->name,
+                        'slug'        => $virtual->slug,
+                        'url_embed'   => $virtual->url_embed,
+                        'description' => $virtual->description,
+                        'category'    => $virtual->category ? $virtual->category->name : null,
+                    ];
+                });
         });
 
         return inertia('VirtualTours', [
@@ -249,12 +260,66 @@ class HomeController extends Controller
         ]);
     }
 
-    public function virtualTourDetail($name)
+    public function virtualTourDetail($slug)
     {
+        // Add detailed debugging
+        \Log::info('Virtual Tour Detail Request', [
+            'original_slug' => $slug,
+            'decoded_slug' => urldecode($slug)
+        ]);
+        
+        // For troubleshooting, let's find all virtual tours
+        $allVirtuals = Virtual::all();
+        \Log::info('All Virtual Tours', [
+            'count' => $allVirtuals->count(),
+            'data' => $allVirtuals->pluck('name', 'slug')->toArray()
+        ]);
+        
+        // Try to decode the URL in case it's URL-encoded
+        $decodedSlug = urldecode($slug);
+        
+        // First try with the exact slug
         $virtual = Virtual::with('category')
-            ->whereRaw("LOWER(REPLACE(REPLACE(name, ':', ''), ' ', '-')) = ?", [Str::slug($name)])
-            ->firstOrFail();
+            ->where('slug', $decodedSlug)
+            ->first();
+            
+        // If not found, try with regenerated slug (in case DB has different slug format)
+        if (!$virtual) {
+            $virtual = Virtual::with('category')
+                ->whereRaw('LOWER(slug) = ?', [strtolower($decodedSlug)])
+                ->first();
+        }
+        
+        // If still not found, try with the name directly
+        if (!$virtual) {
+            $virtual = Virtual::with('category')
+                ->whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [strtolower($decodedSlug)])
+                ->first();
+        }
+        
+        // If still not found, try a looser match
+        if (!$virtual) {
+            $virtual = Virtual::with('category')
+                ->whereRaw('slug LIKE ?', ['%' . str_replace('-', '%', $decodedSlug) . '%'])
+                ->first();
+        }
+        
+        // If still not found, throw 404 with details
+        if (!$virtual) {
+            \Log::warning('Virtual Tour Not Found', [
+                'attempted_slug' => $decodedSlug,
+                'available_slugs' => Virtual::pluck('slug')->toArray()
+            ]);
+            abort(404, 'Virtual tour not found');
+        }
 
+        // Log successful match
+        \Log::info('Virtual Tour Found', [
+            'id' => $virtual->id,
+            'name' => $virtual->name,
+            'slug' => $virtual->slug
+        ]);
+        
         return inertia('VirtualTours/Detail', [
             'virtualTour' => [
                 'id'          => $virtual->id,
@@ -262,6 +327,7 @@ class HomeController extends Controller
                 'url_embed'   => $virtual->url_embed,
                 'description' => $virtual->description,
                 'category'    => $virtual->category ? $virtual->category->name : null,
+                'slug'        => $virtual->slug,
             ],
             'aboutApp'    => $this->aboutApp,
         ]);
