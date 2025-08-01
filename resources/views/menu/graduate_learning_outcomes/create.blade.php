@@ -12,8 +12,7 @@
                     <option value="">-- Pilih Konsentrasi --</option>
                     <option value="teknik_tenaga_listrik" {{ old('concentration') == 'teknik_tenaga_listrik' ? 'selected' : '' }}>TEKNIK TENAGA LISTRIK</option>
                     <option value="teknik_telekomunikasi" {{ old('concentration') == 'teknik_telekomunikasi' ? 'selected' : '' }}>TEKNIK TELEKOMUNIKASI</option>
-                    <option value="semua_konsentrasi" {{ old('concentration') == 'semua_konsentrasi' ? 'selected' : '' }}>SEMUA KONSENTRASI</option>
-                    <option value="mata_kuliah_dasar" {{ old('concentration') == 'mata_kuliah_dasar' ? 'selected' : '' }}>MATA KULIAH DASAR</option>
+                  
                 </select>
                 @error('concentration')
                     <div class="text-danger">{{ $message }}</div>
