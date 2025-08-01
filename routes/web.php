@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin', [\App\Http\Controllers\DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
 
         Route::resource('about-app', \App\Http\Controllers\AboutAppController::class);
-        Route::delete('about-app/delete-file',[\App\Http\Controllers\AboutAppController::class, 'deleteFile'])->name('aboutApp.deleteFile');
+        Route::delete('about-app/delete-file', [\App\Http\Controllers\AboutAppController::class, 'deleteFile'])->name('aboutApp.deleteFile');
 
         Route::get('admin/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('admin/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -73,8 +73,13 @@ Route::middleware('auth')->group(function () {
         Route::post('articles/{id}/restore', [\App\Http\Controllers\ArticleController::class, 'restore'])->name('articles.restore');
         Route::delete('articles/{id}/force-delete', [\App\Http\Controllers\ArticleController::class, 'forceDelete'])->name('articles.forceDelete');
         Route::delete('articles/delete-file', [\App\Http\Controllers\ArticleController::class, 'deleteFile'])->name('articles.deleteFile');
-    });
 
+        Route::get('graduate_learning_outcomes/json', [\App\Http\Controllers\GraduateLearningOutcomeController::class, 'json'])->name('graduate_learning_outcomes.json');
+        Route::resource('graduate_learning_outcomes', \App\Http\Controllers\GraduateLearningOutcomeController::class);
+        Route::post('graduate_learning_outcomes/{id}/restore', [\App\Http\Controllers\GraduateLearningOutcomeController::class, 'restore'])->name('graduate_learning_outcomes.restore');
+        Route::delete('graduate_learning_outcomes/{id}/forceDelete', [\App\Http\Controllers\GraduateLearningOutcomeController::class, 'forceDelete'])->name('graduate_learning_outcomes.forceDelete');
+
+    });
 });
 
 require __DIR__ . '/auth.php';
