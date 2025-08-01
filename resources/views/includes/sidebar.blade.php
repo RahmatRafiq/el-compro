@@ -54,6 +54,12 @@
                     <span class="menu-text">Informasi Umum</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('graduate_learning_outcomes.index') ? 'active current-page' : '' }}">
+                <a href="{{ route('graduate_learning_outcomes.index') }}">
+                    <i class="bi bi-mortarboard"></i>
+                    <span class="menu-text">Capaian Pembelajaran Lulusan</span>
+                </a>
+            </li>
             <li class="{{ request()->routeIs('virtuals.index') ? 'active current-page' : '' }}">
                 <a href="{{ route('virtuals.index') }}">
                     <i class="bi bi-camera-video"></i>

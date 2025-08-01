@@ -3,16 +3,16 @@
 @section('content')
 <div class="card mb-3">
     <div class="alert alert-info" role="alert">
-        <h4 class="alert-heading">Customize Role Badges</h4>
-        <p>You can change the color of the role badges by editing the <code>assets/css/badges.css</code> file.</p>
+        <h4 class="alert-heading">Kustomisasi Lencana Role</h4>
+        <p>Anda dapat mengubah warna lencana role dengan mengedit file <code>assets/css/badges.css</code>.</p>
         <hr>
-        <p class="mb-0">Make sure to refresh the page after making changes to see the updated badge colors.</p>
+        <p class="mb-0">Pastikan untuk me-refresh halaman setelah melakukan perubahan untuk melihat warna lencana yang baru.</p>
     </div>
     <div class="card-body">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">User Data</h5>
+            <h5 class="card-title">Data Pengguna</h5>
             <div class="mb-3">
-                <a href="{{ route('user.create') }}" class="btn btn-success">Create New User</a>
+                <a href="{{ route('user.create') }}" class="btn btn-success">Tambah Pengguna Baru</a>
             </div>
         </div>
         <div class="table-responsive">
@@ -20,12 +20,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Nama</th>
                         <th>Role</th>
                         <th>Email</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                        <th>Action</th>
+                        <th>Tanggal Dibuat</th>
+                        <th>Tanggal Diubah</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,12 +98,12 @@
                                     ':id',
                                     row.id
                                 );
-                                editButton.textContent = 'Edit';
+                                editButton.textContent = 'Ubah';
 
                                 // delete use Swal as confirmation
                                 const deleteButton = document.createElement('button');
                                 deleteButton.classList.add('btn', 'btn-danger');
-                                deleteButton.textContent = 'Delete';
+                                deleteButton.textContent = 'Hapus';
                                 deleteButton.addEventListener('click', function() {
                                     deleteRow(row.id);
                                 });
@@ -132,12 +132,12 @@
                 url.replace(':id', id)
             );
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this user!',
+                title: 'Apakah Anda yakin?',
+                text: 'Pengguna yang dihapus tidak dapat dikembalikan!',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Tidak, batalkan',
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -149,10 +149,10 @@
                         },
                         success: function(response) {
                             $('#users').DataTable().ajax.reload();
-                            Swal.fire('Deleted!', 'User has been deleted.', 'success');
+                            Swal.fire('Berhasil!', 'Pengguna telah dihapus.', 'success');
                         },
                         error: function(xhr) {
-                            Swal.fire('Error!', 'Failed to delete user.', 'error');
+                            Swal.fire('Gagal!', 'Pengguna gagal dihapus.', 'error');
                         }
                     });
                 }

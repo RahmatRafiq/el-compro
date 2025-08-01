@@ -4,18 +4,18 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Course Data</h5>
+            <h5 class="card-title">Data Mata Kuliah</h5>
             <div>
-                <a href="{{ route('courses.create') }}" class="btn btn-success">Add Course</a>
+                <a href="{{ route('courses.create') }}" class="btn btn-success">Tambah Mata Kuliah</a>
             </div>
         </div>
 
         <div class="mb-3 mt-3 d-flex justify-content-end">
-            <label for="filter" class="form-label me-2">Filter Courses</label>
+            <label for="filter" class="form-label me-2">Filter Mata Kuliah</label>
             <select id="filter" class="form-select w-auto">
-                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Courses</option>
-                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Courses</option>
-                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Courses</option>
+                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Mata Kuliah Aktif</option>
+                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Mata Kuliah Terhapus</option>
+                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Mata Kuliah</option>
             </select>
         </div>
 
@@ -24,11 +24,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Credits</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th>SKS</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,24 +40,24 @@
                             <td>{{ $course->credits }}</td>
                             <td>
                                 @if ($course->deleted_at)
-                                    <span class="badge bg-danger">Deleted</span>
+                                    <span class="badge bg-danger">Terhapus</span>
                                 @else
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($course->deleted_at)
                                     <form action="{{ route('courses.restore', $course->id) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning btn-sm">Restore</button>
+                                        <button type="submit" class="btn btn-warning btn-sm">Pulihkan</button>
                                     </form>
                                     <form action="{{ route('courses.forceDelete', $course->id) }}" method="POST" style="display:inline;">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete permanently?')">Delete Permanently</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus permanen?')">Hapus Permanen</button>
                                     </form>
                                 @else
-                                    <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteCourse({{ $course->id }})">Delete</button>
+                                    <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-primary btn-sm">Ubah</a>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteCourse({{ $course->id }})">Hapus</button>
                                 @endif
                             </td>
                         </tr>
@@ -90,7 +90,7 @@
 
         // Initialize Select2 for the filter
         $('#filter').select2({
-            placeholder: "Select Filter",
+            placeholder: "Pilih Filter",
             allowClear: true
         });
 
@@ -104,12 +104,12 @@
     // Delete course function with confirmation
     function deleteCourse(id) {
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'This course will be moved to trash!',
+            title: 'Apakah Anda yakin?',
+            text: 'Mata kuliah ini akan dipindahkan ke tempat sampah!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Tidak, batalkan',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -121,10 +121,10 @@
                     },
                     success: function(response) {
                         window.location.reload();
-                        Swal.fire('Deleted!', 'Course has been moved to trash.', 'success');
+                        Swal.fire('Berhasil!', 'Mata kuliah telah dipindahkan ke tempat sampah.', 'success');
                     },
                     error: function(xhr) {
-                        Swal.fire('Error!', 'Failed to delete course.', 'error');
+                        Swal.fire('Gagal!', 'Gagal menghapus mata kuliah.', 'error');
                     }
                 });
             }

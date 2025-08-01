@@ -5,19 +5,19 @@
     <div class="col-xxl-12">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Edit Article</h5>
+                <h5 class="card-title">Ubah Artikel</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf @method('PUT')
 
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
+                        <label for="title" class="form-label">Judul</label>
                         <input type="text" class="form-control" name="title" value="{{ $article->title }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="category" class="form-label">Category</label>
+                        <label for="category" class="form-label">Kategori</label>
                         <select id="category-select" name="category_id" class="form-select">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" 
@@ -29,18 +29,18 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="content" class="form-label">Content</label>
+                        <label for="content" class="form-label">Konten</label>
                         <textarea class="form-control" name="content" rows="5" id="content"
                             required>{{ $article->content }}</textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label for="images" class="form-label">Article Image</label>
+                        <label for="images" class="form-label">Gambar Artikel</label>
                         <div class="dropzone" id="myDropzone"></div>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Update</button>
-                    <a href="{{ route('articles.index') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-success">Ubah</button>
+                    <a href="{{ route('articles.index') }}" class="btn btn-secondary">Batal</a>
                 </form>
             </div>
         </div>
@@ -72,7 +72,7 @@
     <script>
         $(document).ready(function () {
             $('#category-select').select2({
-                placeholder: "Select Category",
+                placeholder: "Pilih Kategori",
                 allowClear: true
             });
         });

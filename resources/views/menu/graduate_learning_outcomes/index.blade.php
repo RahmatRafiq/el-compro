@@ -4,16 +4,16 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Graduate Learning Outcomes</h5>
-            <a href="{{ route('graduate_learning_outcomes.create') }}" class="btn btn-success">Add Outcome</a>
+            <h5 class="card-title">Data Capaian Pembelajaran Lulusan</h5>
+            <a href="{{ route('graduate_learning_outcomes.create') }}" class="btn btn-success">Tambah Capaian</a>
         </div>
 
         <div class="mb-3 mt-3 d-flex justify-content-end">
             <label for="filter" class="form-label me-2">Filter</label>
             <select id="filter" class="form-select w-auto">
-                <option value="all">All</option>
-                <option value="Telecommunication">Telecommunication</option>
-                <option value="Electrical Power Engineering">Electrical Power Engineering</option>
+                <option value="all">Semua</option>
+                <option value="teknik_telekomunikasi">Teknik Telekomunikasi</option>
+                <option value="teknik_tenaga_listrik">Teknik Tenaga Listrik</option>
             </select>
         </div>
 
@@ -22,10 +22,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Concentration</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th>Konsentrasi</th>
+                        <th>Nama</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +40,10 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="{{ route('graduate_learning_outcomes.edit', $outcome->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ route('graduate_learning_outcomes.edit', $outcome->id) }}" class="btn btn-primary btn-sm">Ubah</a>
                                 <form action="{{ route('graduate_learning_outcomes.destroy', $outcome->id) }}" method="POST" style="display:inline;">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this outcome?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus capaian ini?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -75,7 +75,7 @@
 
         // Initialize Select2 for the filter
         $('#filter').select2({
-            placeholder: "Filter Concentration",
+            placeholder: "Filter Konsentrasi",
             allowClear: true
         });
 
@@ -90,18 +90,18 @@
             e.preventDefault();
             const form = $(this).closest('form');
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'This outcome will be deleted!',
+                title: 'Apakah Anda yakin?',
+                text: 'Capaian ini akan dihapus!',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, keep it'
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Tidak, batalkan'
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
                     Swal.fire(
-                        'Deleted!',
-                        'The outcome has been deleted.',
+                        'Berhasil!',
+                        'Capaian telah dihapus.',
                         'success'
                     );
                 }
