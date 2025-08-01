@@ -12,6 +12,7 @@ Route::middleware(['inertia'])->group(function () {
     Route::get('/virtual-tours', [\App\Http\Controllers\HomeController::class, 'virtualTours'])->name('virtualTours');
     Route::get('/virtual-tours/{slug}', [\App\Http\Controllers\HomeController::class, 'virtualTourDetail'])->name('virtualTourDetail');
     Route::get('/about-us', [\App\Http\Controllers\HomeController::class, 'aboutApp'])->name('aboutApp');
+    Route::get('/cpl', [\App\Http\Controllers\HomeController::class, 'cpl'])->name('cpl');
 
 });
 

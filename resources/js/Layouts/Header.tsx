@@ -115,6 +115,15 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   Tentang Kami
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/cpl"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="mb-1 btn btn-ghost text-primary"
+                >
+                  CPL
+                </Link>
+              </li>
             </ul>
           )}
         </div>
@@ -148,6 +157,9 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
           {/* Tambahkan Tentang Kami */}
           <li>
             <Link href="/about-us" className="btn btn-ghost text-primary">Tentang Kami</Link>
+          </li>
+          <li>
+            <Link href="/cpl" className="btn btn-ghost text-primary">CPL</Link>
           </li>
         </ul>
       </div>
