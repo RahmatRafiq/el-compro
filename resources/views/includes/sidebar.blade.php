@@ -4,7 +4,7 @@
             <li class="{{ request()->routeIs('dashboard') ? 'active current-page' : '' }}">
                 <a href="{{ route('dashboard') }}">
                     <i class="bi bi-speedometer2"></i>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">Beranda</span>
                 </a>
             </li>
 
@@ -17,13 +17,13 @@
                 <ul class="treeview-menu"
                     style="{{ request()->is('admin/role-permissions*') ? 'display: block;' : 'display: none;' }}">
                     <li class="{{ request()->routeIs('permission.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('permission.index') }}">Permissions</a>
+                        <a href="{{ route('permission.index') }}">Izin Akses</a>
                     </li>
                     <li class="{{ request()->routeIs('role.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('role.index') }}">Role</a>
+                        <a href="{{ route('role.index') }}">Peran</a>
                     </li>
                     <li class="{{ request()->routeIs('user.index') ? 'active-sub' : '' }}">
-                        <a href="{{ route('user.index') }}">Users</a>
+                        <a href="{{ route('user.index') }}">Pengguna</a>
                     </li>
                     <li class="{{ request()->routeIs('about-app.index') ? 'active-sub' : '' }}">
                         <a href="{{ route('about-app.index') }}">Tentang Aplikasi</a>
@@ -33,7 +33,7 @@
             <li class="{{ request()->routeIs('profile.edit') ? 'active current-page' : '' }}">
                 <a href="{{ route('profile.edit') }}">
                     <i class="bi bi-person"></i>
-                    <span class="menu-text">Manajemen Profil</span>
+                    <span class="menu-text">Profil Saya</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('courses.index') ? 'active current-page' : '' }}">
@@ -63,19 +63,19 @@
             <li class="{{ request()->routeIs('virtuals.index') ? 'active current-page' : '' }}">
                 <a href="{{ route('virtuals.index') }}">
                     <i class="bi bi-camera-video"></i>
-                    <span class="menu-text">Virtual Content</span>
+                    <span class="menu-text">Konten Virtual</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('categories.index') ? 'active current-page' : '' }}">
                 <a href="{{ route('categories.index') }}">
                     <i class="bi bi-list-check"></i>
-                    <span class="menu-text">Categories</span>
+                    <span class="menu-text">Kategori</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('articles.index') ? 'active current-page' : '' }}">
                 <a href="{{ route('articles.index') }}">
                     <i class="bi bi-file-earmark-text"></i>
-                    <span class="menu-text">Articles</span>
+                    <span class="menu-text">Artikel</span>
                 </a>
             </li>
         </ul>

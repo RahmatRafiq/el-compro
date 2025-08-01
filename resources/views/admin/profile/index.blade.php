@@ -2,20 +2,20 @@
 
 @section('content')
 <div class="row gx-3">
-    <!-- Profile Update Card -->
+    <!-- Kartu Update Profil -->
     <div class="col-xxl-12">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Update Profile</h5>
+                <h5 class="card-title">Perbarui Profil</h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
-                    <!-- Name Input -->
+                    <!-- Input Nama -->
                     <div class="form-group row mb-3">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
                         <div class="col-md-8">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
                                    name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
@@ -27,9 +27,9 @@
                         </div>
                     </div>
 
-                    <!-- Email Input -->
+                    <!-- Input Email -->
                     <div class="form-group row mb-3">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat Email') }}</label>
                         <div class="col-md-8">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
                                    name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
@@ -41,19 +41,19 @@
                         </div>
                     </div>
 
-                    <!-- Dropzone for Profile Images -->
+                    <!-- Dropzone untuk Gambar Profil -->
                     <div class="form-group row mb-3">
-                        <label for="images" class="col-md-4 col-form-label text-md-right">Profile Images</label>
+                        <label for="images" class="col-md-4 col-form-label text-md-right">Gambar Profil</label>
                         <div class="col-md-8">
                             <div class="dropzone" id="myDropzone"></div>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Tombol Submit -->
                     <div class="form-group row mb-3">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Update Profile') }}
+                                {{ __('Perbarui Profil') }}
                             </button>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
         </div>
     </div>
 
-    <!-- Update Password Card -->
+    <!-- Kartu Update Password -->
     <div class="col-xxl-12">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Update Password</h5>
+                <h5 class="card-title">Perbarui Kata Sandi</h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('password.update') }}">
@@ -74,7 +74,7 @@
                     @method('PUT')
 
                     <div class="form-group row mb-3">
-                        <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}</label>
+                        <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi Saat Ini') }}</label>
                         <div class="col-md-8">
                             <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" 
                                    name="current_password" required autocomplete="current-password">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="form-group row mb-3">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi Baru') }}</label>
                         <div class="col-md-8">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
                                    name="password" required autocomplete="new-password">
@@ -100,18 +100,18 @@
                     </div>
 
                     <div class="form-group row mb-3">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Kata Sandi') }}</label>
                         <div class="col-md-8">
                             <input id="password_confirmation" type="password" class="form-control" 
                                    name="password_confirmation" required autocomplete="new-password">
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Tombol Submit -->
                     <div class="form-group row mb-3">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Update Password') }}
+                                {{ __('Perbarui Kata Sandi') }}
                             </button>
                         </div>
                     </div>
@@ -120,11 +120,11 @@
         </div>
     </div>
 
-    <!-- Delete Account Card -->
+    <!-- Kartu Hapus Akun -->
     <div class="col-xxl-12">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Delete Account</h5>
+                <h5 class="card-title">Hapus Akun</h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('profile.destroy') }}">
@@ -132,7 +132,7 @@
                     @method('DELETE')
 
                     <div class="form-group row mb-3">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi') }}</label>
                         <div class="col-md-8">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
                                    name="password" required autocomplete="current-password">
@@ -144,11 +144,11 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Tombol Submit -->
                     <div class="form-group row mb-3">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-danger">
-                                {{ __('Delete Account') }}
+                                {{ __('Hapus Akun') }}
                             </button>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
 @push('javascript')
 <script type="module">
     const element = '#myDropzone';
-    const key = 'profile-images'; // Menggunakan 'profile-images' di sini
+    const key = 'profile-images';
     const files = [];
     const urlStore = "{!! route('storage.store') !!}";
     const urlDestroy = "{!! route('profile.deleteFile') !!}";
@@ -175,7 +175,7 @@
     const acceptedFiles = 'image/*';
     const maxFiles = 3;
 
-    // Add pre-existing files if any
+    // Tambahkan file yang sudah ada jika ada
     @if($profileImage)
         files.push({
             id: '{{ $profileImage->id }}',
