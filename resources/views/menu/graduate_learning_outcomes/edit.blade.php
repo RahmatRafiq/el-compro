@@ -20,9 +20,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="category" class="form-label">Kategori</label>
-                <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $graduateLearningOutcome->category) }}" required>
-                @error('category')
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $graduateLearningOutcome->name) }}" required>
+                @error('name')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
