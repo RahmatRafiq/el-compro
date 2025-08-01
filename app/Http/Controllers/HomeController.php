@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\GeneralInformation;
+use App\Models\GraduateLearningOutcome;
 use App\Models\Lecturers;
 use App\Models\Virtual;
 use Illuminate\Support\Facades\Cache;
@@ -51,18 +52,18 @@ class HomeController extends Controller
         });
 
         return inertia('Articles/ArticleDetail', [
-            'article'         => [
-                'slug'       => $article->slug,
-                'id'         => $article->id,
-                'title'      => $article->title,
-                'content'    => $article->content,
-                'image'      => $article->getFirstMediaUrl('article-image') ?: null,
+            'article' => [
+                'slug' => $article->slug,
+                'id' => $article->id,
+                'title' => $article->title,
+                'content' => $article->content,
+                'image' => $article->getFirstMediaUrl('article-image') ?: null,
                 'view_count' => $article->view_count + 1,
                 'created_at' => $article->created_at->format('d M Y'),
             ],
             'popularArticles' => $popularArticles,
-            'latestArticles'  => $latestArticles,
-            'aboutApp'        => $this->aboutApp,
+            'latestArticles' => $latestArticles,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 
@@ -78,11 +79,11 @@ class HomeController extends Controller
             ->latest()
             ->paginate(10)
             ->through(fn($article) => [
-                'id'         => $article->id,
-                'title'      => $article->title,
-                'image'      => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                'id' => $article->id,
+                'title' => $article->title,
+                'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
                 'view_count' => $article->view_count,
-                'slug'       => $article->slug,
+                'slug' => $article->slug,
             ]);
 
         return inertia('Articles/CategoryArticles', [
@@ -99,11 +100,11 @@ class HomeController extends Controller
         $articles = Cache::remember("home_articles", now()->addMinutes(10), function () {
             return Article::latest()->take(5)->get()->map(function ($article) {
                 return [
-                    'id'         => $article->id,
-                    'title'      => $article->title,
-                    'image'      => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                    'id' => $article->id,
+                    'title' => $article->title,
+                    'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
                     'view_count' => $article->view_count,
-                    'slug'       => $article->slug,
+                    'slug' => $article->slug,
                 ];
             });
         });
@@ -115,12 +116,12 @@ class HomeController extends Controller
         $lecturers = Cache::remember("home_lecturers", now()->addMinutes(10), function () {
             return Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
                 return [
-                    'id'      => $lecturer->id,
-                    'name'    => $lecturer->name,
-                    'about'   => $lecturer->about,
-                    'image'   => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
+                    'id' => $lecturer->id,
+                    'name' => $lecturer->name,
+                    'about' => $lecturer->about,
+                    'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
                     'courses' => $lecturer->courses->map(fn($course) => [
-                        'id'   => $course->id,
+                        'id' => $course->id,
                         'name' => $course->name,
                     ]),
                 ];
@@ -151,12 +152,12 @@ class HomeController extends Controller
         });
 
         return inertia('Home', [
-            'courses'                => $courses,
-            'articles'               => $articles,
-            'aboutApp'               => $this->aboutApp,
-            'lecturers'              => $lecturers,
-            'virtualTours'           => $virtualTours,
-            'concentrationData'      => $concentrationData,
+            'courses' => $courses,
+            'articles' => $articles,
+            'aboutApp' => $this->aboutApp,
+            'lecturers' => $lecturers,
+            'virtualTours' => $virtualTours,
+            'concentrationData' => $concentrationData,
             'generalInformationData' => $generalInformationData,
         ]);
     }
@@ -165,13 +166,13 @@ class HomeController extends Controller
     {
         $lecturers = Cache::remember("lecturers_all", now()->addMinutes(10), function () {
             return Lecturers::with('courses')->get()->map(fn($lecturer) => [
-                'id'      => $lecturer->id,
-                'name'    => $lecturer->name,
-                'about'   => $lecturer->about,
-                'email'   => $lecturer->email,
-                'image'   => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
+                'id' => $lecturer->id,
+                'name' => $lecturer->name,
+                'about' => $lecturer->about,
+                'email' => $lecturer->email,
+                'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
                 'courses' => $lecturer->courses->map(fn($course) => [
-                    'id'   => $course->id,
+                    'id' => $course->id,
                     'name' => $course->name,
                 ]),
             ]);
@@ -179,7 +180,7 @@ class HomeController extends Controller
 
         return inertia('Lecturers', [
             'lecturers' => $lecturers,
-            'aboutApp'  => $this->aboutApp,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 
@@ -190,7 +191,7 @@ class HomeController extends Controller
         });
 
         return inertia('Courses', [
-            'courses'  => $courses,
+            'courses' => $courses,
             'aboutApp' => $this->aboutApp,
         ]);
     }
@@ -207,21 +208,21 @@ class HomeController extends Controller
                 ->take(4)
                 ->get()
                 ->map(fn($article) => [
-                    'id'         => $article->id,
-                    'title'      => $article->title,
-                    'image'      => $article->hasMedia('article-image') ? $article->getFirstMediaUrl('article-image') : null,
+                    'id' => $article->id,
+                    'title' => $article->title,
+                    'image' => $article->hasMedia('article-image') ? $article->getFirstMediaUrl('article-image') : null,
                     'view_count' => $article->view_count,
-                    'slug'       => $article->slug,
+                    'slug' => $article->slug,
                 ]);
             return [
-                'name'     => $category->name,
+                'name' => $category->name,
                 'articles' => $articles,
             ];
         });
 
         return inertia('Articles', [
             'categories' => $categoriesWithArticles,
-            'aboutApp'   => $this->aboutApp,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 
@@ -229,34 +230,34 @@ class HomeController extends Controller
     {
         // Clear the cache to ensure fresh data
         Cache::forget("virtualTours_all");
-        
+
         $virtualTours = Cache::remember("virtualTours_all", now()->addMinutes(10), function () {
             return Virtual::with('category')
                 ->whereHas('category', function ($query) {
                     $query->where('type', 'virtual_tours');
                 })
                 ->get()
-                ->map(function($virtual) {
+                ->map(function ($virtual) {
                     // Ensure each virtual tour has a slug
                     if (empty($virtual->slug)) {
                         $virtual->slug = Str::slug($virtual->name);
                         $virtual->save();
                     }
-                    
+
                     return [
-                        'id'          => $virtual->id,
-                        'name'        => $virtual->name,
-                        'slug'        => $virtual->slug,
-                        'url_embed'   => $virtual->url_embed,
+                        'id' => $virtual->id,
+                        'name' => $virtual->name,
+                        'slug' => $virtual->slug,
+                        'url_embed' => $virtual->url_embed,
                         'description' => $virtual->description,
-                        'category'    => $virtual->category ? $virtual->category->name : null,
+                        'category' => $virtual->category ? $virtual->category->name : null,
                     ];
                 });
         });
 
         return inertia('VirtualTours', [
             'virtualTours' => $virtualTours,
-            'aboutApp'     => $this->aboutApp,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 
@@ -267,43 +268,43 @@ class HomeController extends Controller
             'original_slug' => $slug,
             'decoded_slug' => urldecode($slug)
         ]);
-        
+
         // For troubleshooting, let's find all virtual tours
         $allVirtuals = Virtual::all();
         \Log::info('All Virtual Tours', [
             'count' => $allVirtuals->count(),
             'data' => $allVirtuals->pluck('name', 'slug')->toArray()
         ]);
-        
+
         // Try to decode the URL in case it's URL-encoded
         $decodedSlug = urldecode($slug);
-        
+
         // First try with the exact slug
         $virtual = Virtual::with('category')
             ->where('slug', $decodedSlug)
             ->first();
-            
+
         // If not found, try with regenerated slug (in case DB has different slug format)
         if (!$virtual) {
             $virtual = Virtual::with('category')
                 ->whereRaw('LOWER(slug) = ?', [strtolower($decodedSlug)])
                 ->first();
         }
-        
+
         // If still not found, try with the name directly
         if (!$virtual) {
             $virtual = Virtual::with('category')
                 ->whereRaw('LOWER(REPLACE(name, " ", "-")) = ?', [strtolower($decodedSlug)])
                 ->first();
         }
-        
+
         // If still not found, try a looser match
         if (!$virtual) {
             $virtual = Virtual::with('category')
                 ->whereRaw('slug LIKE ?', ['%' . str_replace('-', '%', $decodedSlug) . '%'])
                 ->first();
         }
-        
+
         // If still not found, throw 404 with details
         if (!$virtual) {
             \Log::warning('Virtual Tour Not Found', [
@@ -319,17 +320,17 @@ class HomeController extends Controller
             'name' => $virtual->name,
             'slug' => $virtual->slug
         ]);
-        
+
         return inertia('VirtualTours/Detail', [
             'virtualTour' => [
-                'id'          => $virtual->id,
-                'name'        => $virtual->name,
-                'url_embed'   => $virtual->url_embed,
+                'id' => $virtual->id,
+                'name' => $virtual->name,
+                'url_embed' => $virtual->url_embed,
                 'description' => $virtual->description,
-                'category'    => $virtual->category ? $virtual->category->name : null,
-                'slug'        => $virtual->slug,
+                'category' => $virtual->category ? $virtual->category->name : null,
+                'slug' => $virtual->slug,
             ],
-            'aboutApp'    => $this->aboutApp,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 
@@ -341,12 +342,20 @@ class HomeController extends Controller
 
         if ($aboutApp) {
             $aboutApp->image = $aboutApp->hasMedia('struktur-organisasi')
-            ? $aboutApp->getFirstMediaUrl('struktur-organisasi')
-            : null;
+                ? $aboutApp->getFirstMediaUrl('struktur-organisasi')
+                : null;
         }
 
         return inertia('AboutApp', [
             'aboutApp' => $aboutApp,
+        ]);
+    }
+    public function cpl()
+    {
+        $graduateLearningOutcomes = GraduateLearningOutcome::select('id', 'concentration', 'name', 'description')->get();
+        return inertia('CPL', [
+            'graduateLearningOutcomes' => $graduateLearningOutcomes,
+            'aboutApp' => $this->aboutApp,
         ]);
     }
 

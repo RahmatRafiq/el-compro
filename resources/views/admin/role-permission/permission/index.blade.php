@@ -4,9 +4,9 @@
 <div class="card mb-3">
   <div class="card-body">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="card-title">Permissions Data</h5>
+      <h5 class="card-title">Data Permission</h5>
       <div class="mb-3">
-        <a href="{{ route('permission.create') }}" class="btn btn-success">tambah Data Permission</a>
+        <a href="{{ route('permission.create') }}" class="btn btn-success">Tambah Data Permission</a>
       </div>
     </div>
     <div class="table-responsive">
@@ -14,8 +14,8 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Permission</th>
-            <th>Guard Name</th>
+            <th>Nama Permission</th>
+            <th>Nama Guard</th>
             <th>Tanggal Dibuat</th>
             <th>Tanggal Diubah</th>
             <th>Aksi</th>
@@ -25,7 +25,7 @@
         </tbody>
       </table>
     </div>
-    <a href="#" class="show-all-link">Show All</a>
+    <a href="#" class="show-all-link">Tampilkan Semua</a>
   </div>
 </div>
 @endsection

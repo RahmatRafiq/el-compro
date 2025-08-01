@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Update Permission</button>
+        <button type="submit" class="btn btn-primary">Ubah Permission</button>
     </form>
 </div>
 @endsection

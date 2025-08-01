@@ -6,7 +6,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Role Data</h5>
+                <h5 class="card-title">Data Role</h5>
                 <div class="mb-3">
                     <a href="{{ route('role.create') }}" class="btn btn-success">Tambah Data Role</a>
                 </div>
@@ -16,8 +16,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Role</th>
-                            <th>Guard Name</th>
+                            <th>Nama Role</th>
+                            <th>Nama Guard</th>
                             <th>Tanggal Dibuat</th>
                             <th>Tanggal Diubah</th>
                             <th>Aksi</th>
@@ -28,7 +28,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="#" class="show-all-link">Show All</a>
+            <a href="#" class="show-all-link">Tampilkan Semua</a>
         </div>
     </div>
 </body>

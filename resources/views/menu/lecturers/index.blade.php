@@ -4,18 +4,18 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Lecturer Data</h5>
+            <h5 class="card-title">Data Dosen</h5>
             <div>
-                <a href="{{ route('lecturers.create') }}" class="btn btn-success">Add Lecturer</a>
+                <a href="{{ route('lecturers.create') }}" class="btn btn-success">Tambah Dosen</a>
             </div>
         </div>
 
         <div class="mb-3 mt-3 d-flex justify-content-end">
-            <label for="filter" class="form-label me-2">Filter Lecturers</label>
+            <label for="filter" class="form-label me-2">Filter Dosen</label>
             <select id="filter" class="form-select w-auto">
-                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active Lecturers</option>
-                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted Lecturers</option>
-                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All Lecturers</option>
+                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Dosen Aktif</option>
+                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Dosen Terhapus</option>
+                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Dosen</option>
             </select>
         </div>
 
@@ -24,11 +24,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>About</th>
-                        <th>Courses</th>
+                        <th>Nama</th>
+                        <th>Tentang</th>
+                        <th>Mata Kuliah</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,24 +40,24 @@
                             <td>{{ $lecturer->courses->pluck('name')->join(', ') }}</td>
                             <td>
                                 @if ($lecturer->deleted_at)
-                                    <span class="badge bg-danger">Deleted</span>
+                                    <span class="badge bg-danger">Terhapus</span>
                                 @else
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($lecturer->deleted_at)
                                     <form action="{{ route('lecturers.restore', $lecturer->id) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning btn-sm">Restore</button>
+                                        <button type="submit" class="btn btn-warning btn-sm">Pulihkan</button>
                                     </form>
                                     <form action="{{ route('lecturers.forceDelete', $lecturer->id) }}" method="POST" style="display:inline;">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete permanently?')">Delete Permanently</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus permanen?')">Hapus Permanen</button>
                                     </form>
                                 @else
-                                    <a href="{{ route('lecturers.edit', $lecturer->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteLecturer({{ $lecturer->id }})">Delete</button>
+                                    <a href="{{ route('lecturers.edit', $lecturer->id) }}" class="btn btn-primary btn-sm">Ubah</a>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteLecturer({{ $lecturer->id }})">Hapus</button>
                                 @endif
                             </td>
                         </tr>
@@ -86,7 +86,7 @@
 
         // Initialize Select2 for the filter
         $('#filter').select2({
-            placeholder: "Filter Lecturers",
+            placeholder: "Filter Dosen",
             allowClear: true
         });
 
@@ -99,12 +99,12 @@
 
     function deleteLecturer(id) {
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'This lecturer will be moved to trash!',
+            title: 'Apakah Anda yakin?',
+            text: 'Dosen ini akan dipindahkan ke tempat sampah!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Tidak, batalkan',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -116,10 +116,10 @@
                     },
                     success: function(response) {
                         window.location.reload();
-                        Swal.fire('Deleted!', 'Lecturer has been moved to trash.', 'success');
+                        Swal.fire('Berhasil!', 'Dosen telah dipindahkan ke tempat sampah.', 'success');
                     },
                     error: function(xhr) {
-                        Swal.fire('Error!', 'Failed to delete lecturer.', 'error');
+                        Swal.fire('Gagal!', 'Gagal menghapus dosen.', 'error');
                     }
                 });
             }

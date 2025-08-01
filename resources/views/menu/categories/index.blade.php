@@ -4,18 +4,18 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Category Data</h5>
+            <h5 class="card-title">Data Kategori</h5>
             <div>
-                <a href="{{ route('categories.create') }}" class="btn btn-success">Add Category</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-success">Tambah Kategori</a>
             </div>
         </div>
 
         <div class="mb-3 mt-3 d-flex justify-content-end">
-            <label for="filter" class="form-label me-2">Filter Categories</label>
+            <label for="filter" class="form-label me-2">Filter Kategori</label>
             <select id="filter" class="form-select w-auto">
-                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Deleted</option>
-                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All</option>
+                <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Aktif</option>
+                <option value="trashed" {{ $filter == 'trashed' ? 'selected' : '' }}>Terhapus</option>
+                <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua</option>
             </select>
         </div>
 
@@ -24,11 +24,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Type</th>
-                        <th>Name</th>
+                        <th>Tipe</th>
+                        <th>Nama</th>
                         <th>Slug</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,9 +37,11 @@
                             <td>{{ $category->id }}</td>
                             <td>
                                 @if ($category->type == 'virtual_tours')
-                                    Virtual Tours
+                                    Virtual Tour
                                 @elseif ($category->type == 'general_information')
-                                    General Information
+                                    Informasi Umum
+                                @elseif ($category->type == 'article')
+                                    Artikel
                                 @else
                                     {{ $category->type ?? '-' }}
                                 @endif
@@ -48,24 +50,24 @@
                             <td>{{ $category->slug }}</td>
                             <td>
                                 @if ($category->deleted_at)
-                                    <span class="badge bg-danger">Deleted</span>
+                                    <span class="badge bg-danger">Terhapus</span>
                                 @else
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-success">Aktif</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($category->deleted_at)
                                     <form action="{{ route('categories.restore', $category->id) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning btn-sm">Restore</button>
+                                        <button type="submit" class="btn btn-warning btn-sm">Pulihkan</button>
                                     </form>
                                     <form action="{{ route('categories.forceDelete', $category->id) }}" method="POST" style="display:inline;">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete permanently?')">Delete Permanently</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus permanen?')">Hapus Permanen</button>
                                     </form>
                                 @else
-                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteCategory({{ $category->id }})">Delete</button>
+                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Ubah</a>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteCategory({{ $category->id }})">Hapus</button>
                                 @endif
                             </td>
                         </tr>
@@ -92,7 +94,7 @@
         $('#categories').DataTable();
 
         $('#filter').select2({
-            placeholder: "Filter Categories",
+            placeholder: "Filter Kategori",
             allowClear: true
         });
 
@@ -104,12 +106,12 @@
 
     function deleteCategory(id) {
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'This category will be moved to trash!',
+            title: 'Apakah Anda yakin?',
+            text: 'Kategori ini akan dipindahkan ke tempat sampah!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, keep it',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Tidak, batalkan',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -120,11 +122,11 @@
                         _method: 'DELETE',
                     },
                     success: function(response) {
-                        Swal.fire('Deleted!', 'Category has been moved to trash.', 'success')
+                        Swal.fire('Berhasil!', 'Kategori telah dipindahkan ke tempat sampah.', 'success')
                         .then(() => window.location.reload());
                     },
                     error: function(xhr) {
-                        Swal.fire('Error!', 'Failed to delete category.', 'error');
+                        Swal.fire('Gagal!', 'Gagal menghapus kategori.', 'error');
                     }
                 });
             }

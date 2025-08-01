@@ -5,19 +5,19 @@
         <div class="col-xxl-12">
             <div class="card mb-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Add Article</h5>
+                    <h5 class="card-title">Tambah Artikel</h5>
                 </div>
                 <div class="card-body">
                     <form id="article-form" action="{{ route('articles.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
+                            <label for="title" class="form-label">Judul</label>
                             <input type="text" class="form-control" name="title" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
+                            <label for="category" class="form-label">Kategori</label>
                             <select id="category-select" name="category_id" class="form-select">
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -26,17 +26,17 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="content" class="form-label">Content</label>
+                            <label for="content" class="form-label">Konten</label>
                             <textarea class="form-control" name="content" rows="5" id="content"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="images" class="form-label">Article Image</label>
+                            <label for="images" class="form-label">Gambar Artikel</label>
                             <div class="dropzone" id="myDropzone"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a href="{{ route('articles.index') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="{{ route('articles.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
         $(document).ready(function () {
             $('#category-select').select2({
-                placeholder: "Select Category",
+                placeholder: "Pilih Kategori",
                 allowClear: true
             });
         });
@@ -79,7 +79,7 @@
         document.querySelector("#article-form").addEventListener("submit", function (e) {
             const editorData = editorInstance.getData().trim();
             if (!editorData) {
-                alert("Content is required!");
+                alert("Konten wajib diisi!");
                 e.preventDefault();
             }
         });

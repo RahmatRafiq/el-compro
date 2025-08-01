@@ -5,19 +5,19 @@
     <div class="col-xxl-12">
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Edit Lecturer</h5>
+                <h5 class="card-title">Ubah Dosen</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('lecturers.update', $lecturer->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf @method('PUT')
 
                     <div class="mb-3">
-                        <label for="name" class="form-label">Lecturer Name</label>
+                        <label for="name" class="form-label">Nama Dosen</label>
                         <input type="text" class="form-control" name="name" value="{{ $lecturer->name }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="about" class="form-label">About</label>
+                        <label for="about" class="form-label">Tentang</label>
                         <textarea class="form-control" name="about" id="about">{{ $lecturer->about }}</textarea>
                     </div>
 
@@ -27,12 +27,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="images" class="form-label">Lecturer Image</label>
+                        <label for="images" class="form-label">Foto Dosen</label>
                         <div class="dropzone" id="myDropzone"></div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="courses" class="form-label">Assign Courses</label>
+                        <label for="courses" class="form-label">Pilih Mata Kuliah</label>
                         <select id="courses-select" name="courses[]" class="form-select" multiple="multiple">
                             @foreach ($courses as $course)
                                 <option value="{{ $course->id }}" 
@@ -43,8 +43,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Update</button>
-                    <a href="{{ route('lecturers.index') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-success">Ubah</button>
+                    <a href="{{ route('lecturers.index') }}" class="btn btn-secondary">Batal</a>
                 </form>
             </div>
         </div>
@@ -66,7 +66,7 @@
 <script>
     $(document).ready(function() {
         $('#courses-select').select2({
-            placeholder: "Select Courses",
+            placeholder: "Pilih Mata Kuliah",
             allowClear: true
         });
     });

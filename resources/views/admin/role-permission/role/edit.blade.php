@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card mb-3">
         <div class="card-body">
-            <h1>Edit Role</h1>
+            <h1>Ubah Role</h1>
 
             <form action="{{ route('role.update', $role->id) }}" method="POST">
                 @csrf
@@ -13,11 +13,11 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Role Name</label>
+                                <label for="name" class="form-label">Nama Role</label>
                                 <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}">
                             </div>
                             <div class="mb-3">
-                                <label for="guard_name" class="form-label">Guard Name</label>
+                                <label for="guard_name" class="form-label">Nama Guard</label>
                                 <input type="text" class="form-control" id="guard_name" name="guard_name" value="{{ $role->guard_name }}">
                             </div>
                             <select id="js-example-basic-multiple" name="permissions[]" multiple="multiple">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Update Role</button>
+                <button type="submit" class="btn btn-primary">Ubah Role</button>
             </form>
         </div>
     </div>
