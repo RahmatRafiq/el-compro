@@ -79,7 +79,7 @@ const AnnouncementSection: React.FC<AnnouncementSectionProps> = ({ announcements
                 </div>
               </div>
               
-              <h3 className="card-title text-base font-semibold line-clamp-2 leading-tight">
+              <h3 className="card-title text-base font-semibold line-clamp-2 leading-tight text-base-content">
                 {announcement.title}
               </h3>
               

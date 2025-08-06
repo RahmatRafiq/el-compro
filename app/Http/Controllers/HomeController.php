@@ -66,18 +66,32 @@ class HomeController extends Controller
             ->where('type', 'article')
             ->firstOrFail();
 
-        $articles = Article::where('category_id', $category->id)
+        $articlesPaginated = Article::where('category_id', $category->id)
             ->latest()
-            ->get()
-            ->map(function($article) {
-                return [
-                    'id' => $article->id,
-                    'title' => $article->title,
-                    'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
-                    'view_count' => $article->view_count,
-                    'slug' => $article->slug,
-                ];
-            });
+            ->paginate(10);
+
+        // Transform items manually
+        $transformedItems = $articlesPaginated->items();
+        $transformedData = [];
+        
+        foreach ($transformedItems as $article) {
+            $transformedData[] = [
+                'id' => $article->id,
+                'title' => $article->title,
+                'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                'view_count' => $article->view_count,
+                'slug' => $article->slug,
+            ];
+        }
+
+        // Create pagination response manually
+        $articles = [
+            'data' => $transformedData,
+            'current_page' => $articlesPaginated->currentPage(),
+            'last_page' => $articlesPaginated->lastPage(),
+            'per_page' => $articlesPaginated->perPage(),
+            'total' => $articlesPaginated->total(),
+        ];
 
         return inertia('Articles/CategoryArticles', [
             'category' => [

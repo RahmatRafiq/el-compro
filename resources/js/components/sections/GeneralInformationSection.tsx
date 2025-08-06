@@ -49,19 +49,19 @@ const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ g
           {otherInfo.map((item) => (
             <div key={item.id} className="collapse collapse-arrow w-full">
               <input type="radio" name="general-information-accordion" />
-              <div className="collapse-title text-xl font-medium flex items-center">
-                <FaInfoCircle className="text-blue-500 mr-2" />
+              <div className="collapse-title text-xl font-medium flex items-center text-base-content">
+                <FaInfoCircle className="text-primary mr-2" />
                 {item.name}
               </div>
-              <div className="collapse-content space-y-4 p-4 bg-secondary rounded-lg">
+              <div className="collapse-content space-y-4 p-4 bg-base-200 rounded-lg">
                 {(() => {
                   const parser = new DOMParser();
                   const parsedHtml = parser.parseFromString(item.description, "text/html");
                   const paragraphs = Array.from(parsedHtml.querySelectorAll("p"));
 
                   return paragraphs.map((p, index) => (
-                    <div key={index} className="card shadow-md p-4 rounded-lg">
-                      <p className="text-white">{p.textContent}</p>
+                    <div key={index} className="card shadow-md p-4 rounded-lg bg-base-100">
+                      <p className="text-base-content">{p.textContent}</p>
                     </div>
                   ));
                 })()}
