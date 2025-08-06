@@ -1,4 +1,5 @@
 // Home Page Sections
+export { default as HeroSection } from './HeroSection';
 export { default as GeneralInformationSection } from './GeneralInformationSection';
 export { default as VirtualToursSection } from './VirtualToursSection';
 export { default as LecturersSection } from './LecturersSection';
