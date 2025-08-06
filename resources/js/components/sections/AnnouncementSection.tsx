@@ -8,7 +8,7 @@ interface AnnouncementSectionProps {
 }
 
 const AnnouncementSection: React.FC<AnnouncementSectionProps> = ({ announcements = [] }) => {
-  // Filter announcements yang memiliki kategori "pengumuman"
+  // Filter announcements yang memiliki kategori "Pengumuman"
   const filteredAnnouncements = announcements.filter(
     article => article.category?.name?.toLowerCase() === 'pengumuman'
   ).slice(0, 3); // Ambil maksimal 3 pengumuman terbaru
