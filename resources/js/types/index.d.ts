@@ -29,7 +29,6 @@ export interface Course {
     credits: number;
     semester?: string;
     major_concentration: string;
-    lecturers?: { id: number; name: string }[];
 }
 
 export interface Article {

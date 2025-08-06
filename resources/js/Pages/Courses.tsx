@@ -12,7 +12,6 @@ interface CoursesProps {
 const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, aboutApp }) => {
   const [activeTab, setActiveTab] = useState<string>("teknik_tenaga_listrik");
 
-  const [baseCoursesToShow, setBaseCoursesToShow] = useState(10); // 10 mata kuliah pertama
   const [tenagaListrikCoursesToShow, setTenagaListrikCoursesToShow] = useState(10);
   const [telekomunikasiCoursesToShow, setTelekomunikasiCoursesToShow] = useState(10);
 
@@ -22,9 +21,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
     console.log("CPL received:", graduateLearningOutcomes);
   }, [courses, graduateLearningOutcomes]);
 
-  const baseCourses = courses.filter(
-    (course) => course.major_concentration === "mata_kuliah_dasar"
-  );
   const tenagaListrikCourses = courses.filter(
     (course) =>
       course.major_concentration === "teknik_tenaga_listrik" ||
@@ -134,14 +130,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
                     <span className="font-medium text-base-content">{course.semester}</span>
                   </div>
                 )}
-                {course.lecturers && course.lecturers.length > 0 && (
-                  <div className="pt-2 border-t border-base-300">
-                    <span className="text-base-content/70 text-xs">Dosen:</span>
-                    <p className="text-base-content text-sm mt-1">
-                      {course.lecturers.map((lecturer: any) => lecturer.name).join(", ")}
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -158,7 +146,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
               <th className="text-base-content">Nama Mata Kuliah</th>
               <th className="text-base-content">SKS</th>
               {courseList.some(c => c.semester) && <th className="text-base-content">Semester</th>}
-              <th className="text-base-content">Dosen Pengajar</th>
             </tr>
           </thead>
           <tbody>
@@ -178,11 +165,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
                 {courseList.some(c => c.semester) && (
                   <td className="text-base-content">{course.semester || "-"}</td>
                 )}
-                <td className="text-base-content">
-                  {course.lecturers && course.lecturers.length > 0
-                    ? course.lecturers.map((lecturer: any) => lecturer.name).join(", ")
-                    : "Belum ada dosen"}
-                </td>
               </tr>
             ))}
           </tbody>
@@ -225,27 +207,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
 
         {/* Content Section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-          {/* Mata Kuliah Dasar Section */}
-          <div className="card bg-base-100 shadow-xl border border-base-300 mb-8">
-            <div className="card-header bg-base-200 px-6 py-4 border-b border-base-300">
-              <h2 className="card-title text-xl text-base-content flex items-center">
-                <svg className="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                MATA KULIAH DASAR
-              </h2>
-            </div>
-            <div className="card-body p-6">
-              {baseCourses.length > 0 ? (
-                renderCoursesTable(baseCourses, baseCoursesToShow, setBaseCoursesToShow)
-              ) : (
-                <div className="text-center py-8 text-base-content/70">
-                  <p>Belum ada mata kuliah dasar tersedia.</p>
-                </div>
-              )}
-            </div>
-          </div>
-
           {/* Tabs Section for Concentrations */}
           <div className="card bg-base-100 shadow-xl border border-base-300">
             <div className="card-header bg-base-200 px-6 py-4 border-b border-base-300">
