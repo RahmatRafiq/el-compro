@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary"
                 >
-                  Dosen Kami
+                  Pengajar Kami
                 </Link>
               </li>
               <li>

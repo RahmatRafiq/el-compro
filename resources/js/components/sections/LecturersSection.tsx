@@ -103,7 +103,7 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
               </div>
             </figure>
             <div className="card-body flex-1 p-4 flex flex-col justify-center">
-              <h3 className="card-title text-lg lg:text-xl text-base-content mb-2">Lihat Semua Dosen</h3>
+              <h3 className="card-title text-lg lg:text-xl text-base-content mb-2">Lihat Semua Pengajar</h3>
               <p className="text-xs lg:text-sm text-base-content/70 mb-3">Temukan seluruh tim pengajar kami</p>
               <button className="btn btn-primary self-start text-sm">
                 Selengkapnya →

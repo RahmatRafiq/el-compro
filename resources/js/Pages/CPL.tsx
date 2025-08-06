@@ -89,7 +89,7 @@ const CPL: React.FC<CPLProps> = ({ graduateLearningOutcomes, aboutApp }) => {
                       className={`tab flex-1 text-sm sm:text-base font-semibold rounded-lg transition-all duration-200 min-h-[60px] sm:min-h-[70px] border border-base-300 ${
                         activeTab === conc
                           ? "tab-active bg-primary text-primary-content shadow-lg"
-                          : "bg-base-100 text-primary-content hover:bg-base-300 " 
+                          : "bg-base-100  text-primary-content hover:bg-base-300 " 
                       }`}
                       onClick={() => setActiveTab(conc)}
                     >
