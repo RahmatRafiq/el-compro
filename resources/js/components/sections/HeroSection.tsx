@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import React, { useState, useEffect, useRef } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -194,9 +195,9 @@ const HeroSection: React.FC = () => {
                                 {/* Content - Only for first slide */}
                                 {index === 0 && slide.title && (
                                     <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
-                                        {/* Background blur tipis untuk seluruh area */}
-                                        <div className="absolute inset-0 bg-base-100/5 backdrop-blur-sm"></div>
-                                        {/* Text content langsung tanpa background blur tambahan */}
+                                        {/* Background blur gelap untuk meningkatkan keterbacaan text */}
+                                        <div className="absolute inset-0 bg-black/20 backdrop-blur-md"></div>
+                                        {/* Text content dengan background gelap semi-transparan */}
                                         <div className="relative z-10 p-6 sm:p-8 md:p-12 m-4 sm:m-6 md:m-8 max-w-4xl mx-auto">
                                             <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight animate-fadeInUp drop-shadow-lg">
                                                 {slide.title}
@@ -205,15 +206,14 @@ const HeroSection: React.FC = () => {
                                                 {slide.description}
                                             </p>
 
-                                            {/* CTA Button */}
                                             <div className="animate-fadeInUp animation-delay-400">
-                                                <a
+                                                <Link
                                                     href="/courses"
                                                     className="btn btn-primary btn-sm sm:btn-md lg:btn-lg gap-2 sm:gap-3 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                                                 >
                                                     <span className="text-sm sm:text-base">Jelajahi Program Kami</span>
                                                     <FaChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary"
                 >
-                  Mata Kuliah & CPL
+                  Peta Kurikulum
                 </Link>
               </li>
               <li>
@@ -159,7 +159,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
             <Link href="/lecturers" className="btn btn-ghost text-primary">Dosen Kami</Link>
           </li>
           <li>
-            <Link href="/courses" className="btn btn-ghost text-primary">Mata Kuliah & CPL</Link>
+            <Link href="/courses" className="btn btn-ghost text-primary">Peta Kurikulum</Link>
           </li>
           <li>
             <Link href="/virtual-tours" className="btn btn-ghost text-primary">Virtual Tours</Link>
