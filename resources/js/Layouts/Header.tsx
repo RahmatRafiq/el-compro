@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary font-bold"
                 >
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li>
@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary"
                 >
-                  Dosen Kami
+                  Pengajar Kami
                 </Link>
               </li>
               <li>
@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary"
                 >
-                  Mata Kuliah
+                  Peta Kurikulum
                 </Link>
               </li>
               <li>
@@ -105,6 +105,17 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                   Artikel
                 </Link>
               </li>
+              <li>
+                <a
+                  href="https://journal.unifa.ac.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="mb-1 btn btn-ghost text-primary"
+                >
+                  E-Journal
+                </a>
+              </li>
               {/* Tambahkan Tentang Kami */}
               <li>
                 <Link
@@ -116,13 +127,15 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/cpl"
+                <a
+                  href="https://simba.unifa.ac.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsDropdownOpen(false)}
                   className="mb-1 btn btn-ghost text-primary"
                 >
-                  CPL
-                </Link>
+                  Pendaftaran Maba
+                </a>
               </li>
             </ul>
           )}
@@ -140,13 +153,13 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href="/" className="btn btn-ghost text-primary">Home</Link>
+            <Link href="/" className="btn btn-ghost text-primary">Beranda</Link>
           </li>
           <li>
             <Link href="/lecturers" className="btn btn-ghost text-primary">Dosen Kami</Link>
           </li>
           <li>
-            <Link href="/courses" className="btn btn-ghost text-primary">Mata Kuliah</Link>
+            <Link href="/courses" className="btn btn-ghost text-primary">Peta Kurikulum</Link>
           </li>
           <li>
             <Link href="/virtual-tours" className="btn btn-ghost text-primary">Virtual Tours</Link>
@@ -154,12 +167,15 @@ const Header: React.FC<HeaderProps> = ({ isDropdownOpen, setIsDropdownOpen }) =>
           <li>
             <Link href="/articles" className="btn btn-ghost text-primary">Artikel</Link>
           </li>
+          <li>
+            <a href="https://journal.unifa.ac.id/" target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-primary">E-Journal</a>
+          </li>
           {/* Tambahkan Tentang Kami */}
           <li>
             <Link href="/about-us" className="btn btn-ghost text-primary">Tentang Kami</Link>
           </li>
           <li>
-            <Link href="/cpl" className="btn btn-ghost text-primary">CPL</Link>
+            <a href="https://simba.unifa.ac.id/" target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-primary">Pendaftaran Maba</a>
           </li>
         </ul>
       </div>

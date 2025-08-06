@@ -29,7 +29,6 @@ export interface Course {
     credits: number;
     semester?: string;
     major_concentration: string;
-    lecturers?: { id: number; name: string }[];
 }
 
 export interface Article {
@@ -54,6 +53,13 @@ export interface AboutApp {
     contact_email: string;
     contact_phone: string;
     contact_address: string;
+}
+
+export interface GraduateLearningOutcome {
+    id: number;
+    concentration: string;
+    name: string;
+    description: string;
 }
 
 export interface GeneralInformation {

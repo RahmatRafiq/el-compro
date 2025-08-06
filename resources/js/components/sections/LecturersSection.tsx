@@ -10,16 +10,12 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
   return (
     <section className="w-full py-12">
       <div className="text-center space-y-4 mb-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content">Dosen Kami</h2>
-        <p className="text-base-content/70 text-sm sm:text-base max-w-2xl mx-auto">
-          Tim dosen berpengalaman yang siap membimbing mahasiswa dalam perjalanan akademik mereka.
-        </p>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content">Pengajar Kami</h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {lecturers.slice(0, 5).map((lecturer) => (
           <div key={lecturer.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-            {/* Mobile: Vertical Layout */}
             <div className="block sm:hidden">
               <figure className="h-48 overflow-hidden">
                 <img
@@ -43,7 +39,6 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
               </div>
             </div>
 
-            {/* Desktop/Tablet: Horizontal Layout */}
             <div className="hidden sm:flex">
               <figure className="w-32 h-32 lg:w-36 lg:h-36 flex-shrink-0 overflow-hidden">
                 <img
@@ -69,12 +64,10 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
           </div>
         ))}
 
-        {/* Card "Lihat Semua" */}
         <div
           className="card bg-base-200 border-2 border-dashed border-primary/30 hover:shadow-xl cursor-pointer transition-all duration-300 transform hover:-translate-y-1 group"
           onClick={() => router.visit('/lecturers')}
         >
-          {/* Mobile: Vertical Layout */}
           <div className="block sm:hidden h-full">
             <figure className="h-48 flex items-center justify-center bg-base-300">
               <div className="text-center">
@@ -93,7 +86,6 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
             </div>
           </div>
 
-          {/* Desktop/Tablet: Horizontal Layout */}
           <div className="hidden sm:flex h-full items-center">
             <figure className="w-32 h-32 lg:w-36 lg:h-36 flex-shrink-0 flex items-center justify-center bg-base-300">
               <div className="w-12 h-12 lg:w-16 lg:h-16 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -103,7 +95,7 @@ const LecturersSection: React.FC<LecturersSectionProps> = ({ lecturers }) => {
               </div>
             </figure>
             <div className="card-body flex-1 p-4 flex flex-col justify-center">
-              <h3 className="card-title text-lg lg:text-xl text-base-content mb-2">Lihat Semua Dosen</h3>
+              <h3 className="card-title text-lg lg:text-xl text-base-content mb-2">Lihat Semua Pengajar</h3>
               <p className="text-xs lg:text-sm text-base-content/70 mb-3">Temukan seluruh tim pengajar kami</p>
               <button className="btn btn-primary self-start text-sm">
                 Selengkapnya →

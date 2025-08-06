@@ -1,12 +1,14 @@
 import React from 'react';
 import { Layout } from '@/Layouts';
 import {
+  HeroSection,
   GeneralInformationSection,
   VirtualToursSection,
   LecturersSection,
   ConcentrationTabs,
   CoursesSection,
-  ArticlesSection
+  ArticlesSection,
+  AnnouncementSection
 } from '@/components/sections';
 import type { 
   Course as CourseType, 
@@ -39,8 +41,14 @@ const Home: React.FC<HomeProps> = ({
   const registrationFlowData = generalInformationData.find(item => item.name === "Informasi dan Alur Pendaftaran");
   return (
     <Layout aboutApp={aboutApp}> 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* Hero Section */}
+      <HeroSection />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-8 pt-8">
         <VirtualToursSection virtualTours={virtualTours} />
+
+        <AnnouncementSection announcements={articles} />
+        <div className="divider"></div>
 
         <GeneralInformationSection generalInformationData={generalInformationData} />
         <div className="divider"></div>

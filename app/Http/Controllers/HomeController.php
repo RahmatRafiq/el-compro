@@ -9,7 +9,6 @@ use App\Models\GeneralInformation;
 use App\Models\GraduateLearningOutcome;
 use App\Models\Lecturers;
 use App\Models\Virtual;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -18,9 +17,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->aboutApp = Cache::remember('aboutApp', now()->addMinutes(60), function () {
-            return AboutApp::first();
-        });
+        $this->aboutApp = AboutApp::first();
     }
 
     public function show($slug)
@@ -28,28 +25,24 @@ class HomeController extends Controller
         $article = Article::with('media')->where('slug', $slug)->firstOrFail();
         $article->increment('view_count');
 
-        $popularArticles = Cache::remember("popular_articles", now()->addMinutes(10), function () {
-            return Article::with('media')
-                ->where('created_at', '>=', now()->subMonth())
-                ->orderByDesc('view_count')
-                ->take(5)
-                ->get(['id', 'slug', 'title', 'view_count', 'created_at'])
-                ->map(function ($article) {
-                    $article->image = $article->getFirstMediaUrl('article-image') ?: null;
-                    return $article;
-                });
-        });
+        $popularArticles = Article::with('media')
+            ->where('created_at', '>=', now()->subMonth())
+            ->orderByDesc('view_count')
+            ->take(5)
+            ->get(['id', 'slug', 'title', 'view_count', 'created_at'])
+            ->map(function ($article) {
+                $article->image = $article->getFirstMediaUrl('article-image') ?: null;
+                return $article;
+            });
 
-        $latestArticles = Cache::remember("latest_articles", now()->addMinutes(10), function () {
-            return Article::with('media')
-                ->orderByDesc('created_at')
-                ->take(5)
-                ->get(['id', 'slug', 'title', 'created_at'])
-                ->map(function ($article) {
-                    $article->image = $article->getFirstMediaUrl('article-image') ?: null;
-                    return $article;
-                });
-        });
+        $latestArticles = Article::with('media')
+            ->orderByDesc('created_at')
+            ->take(5)
+            ->get(['id', 'slug', 'title', 'created_at'])
+            ->map(function ($article) {
+                $article->image = $article->getFirstMediaUrl('article-image') ?: null;
+                return $article;
+            });
 
         return inertia('Articles/ArticleDetail', [
             'article' => [
@@ -69,22 +62,36 @@ class HomeController extends Controller
 
     public function articlesByCategory($name)
     {
-        $category = Cache::remember("category_article_{$name}", now()->addMinutes(60), function () use ($name) {
-            return Category::where('name', $name)
-                ->where('type', 'article')
-                ->firstOrFail();
-        });
+        $category = Category::where('name', $name)
+            ->where('type', 'article')
+            ->firstOrFail();
 
-        $articles = Article::where('category_id', $category->id)
+        $articlesPaginated = Article::where('category_id', $category->id)
             ->latest()
-            ->paginate(10)
-            ->through(fn($article) => [
+            ->paginate(10);
+
+        // Transform items manually
+        $transformedItems = $articlesPaginated->items();
+        $transformedData = [];
+        
+        foreach ($transformedItems as $article) {
+            $transformedData[] = [
                 'id' => $article->id,
                 'title' => $article->title,
                 'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
                 'view_count' => $article->view_count,
                 'slug' => $article->slug,
-            ]);
+            ];
+        }
+
+        // Create pagination response manually
+        $articles = [
+            'data' => $transformedData,
+            'current_page' => $articlesPaginated->currentPage(),
+            'last_page' => $articlesPaginated->lastPage(),
+            'per_page' => $articlesPaginated->perPage(),
+            'total' => $articlesPaginated->total(),
+        ];
 
         return inertia('Articles/CategoryArticles', [
             'category' => [
@@ -97,59 +104,53 @@ class HomeController extends Controller
 
     public function index()
     {
-        $articles = Cache::remember("home_articles", now()->addMinutes(10), function () {
-            return Article::latest()->take(5)->get()->map(function ($article) {
-                return [
-                    'id' => $article->id,
-                    'title' => $article->title,
-                    'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
-                    'view_count' => $article->view_count,
-                    'slug' => $article->slug,
-                ];
-            });
+        $articles = Article::with('category')->latest()->take(10)->get()->map(function ($article) {
+            return [
+                'id' => $article->id,
+                'title' => $article->title,
+                'image' => $article->getFirstMediaUrl('article-image') ?: asset('images/default-article.png'),
+                'view_count' => $article->view_count,
+                'slug' => $article->slug,
+                'created_at' => $article->created_at,
+                'category' => $article->category ? [
+                    'id' => $article->category->id,
+                    'name' => $article->category->name,
+                    'slug' => $article->category->slug,
+                ] : null,
+            ];
         });
 
-        $courses = Cache::remember("home_courses", now()->addMinutes(10), function () {
-            return Course::get();
+        $courses = Course::get();
+
+        $lecturers = Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
+            return [
+                'id' => $lecturer->id,
+                'name' => $lecturer->name,
+                'about' => $lecturer->about,
+                'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
+                'courses' => $lecturer->courses->map(fn($course) => [
+                    'id' => $course->id,
+                    'name' => $course->name,
+                ]),
+            ];
         });
 
-        $lecturers = Cache::remember("home_lecturers", now()->addMinutes(10), function () {
-            return Lecturers::with('courses')->take(2)->get()->map(function ($lecturer) {
-                return [
-                    'id' => $lecturer->id,
-                    'name' => $lecturer->name,
-                    'about' => $lecturer->about,
-                    'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
-                    'courses' => $lecturer->courses->map(fn($course) => [
-                        'id' => $course->id,
-                        'name' => $course->name,
-                    ]),
-                ];
-            });
-        });
+        $virtualTours = Virtual::with('category')
+            ->whereHas('category', function ($query) {
+                $query->where('type', 'virtual_tours');
+            })
+            ->get();
 
-        $virtualTours = Cache::remember("home_virtualTours", now()->addMinutes(10), function () {
-            return Virtual::with('category')
-                ->whereHas('category', function ($query) {
-                    $query->where('type', 'virtual_tours');
-                })
-                ->get();
-        });
+        $concentrationData = GeneralInformation::where('type', 'Konsentrasi')
+            ->select('id', 'name', 'description')
+            ->get();
 
-        $concentrationData = Cache::remember("home_concentrationData", now()->addMinutes(10), function () {
-            return GeneralInformation::where('type', 'Konsentrasi')
-                ->select('id', 'name', 'description')
-                ->get();
-        });
-
-        $generalInformationData = Cache::remember("home_generalInformationData", now()->addMinutes(10), function () {
-            return GeneralInformation::whereIn('name', [
-                'Keunggulan',
-                'Capaian Prestasi',
-                'Prospek Karier',
-                'Informasi dan Alur Pendaftaran',
-            ])->get();
-        });
+        $generalInformationData = GeneralInformation::whereIn('name', [
+            'Keunggulan',
+            'Capaian Prestasi',
+            'Prospek Karier',
+            'Informasi dan Alur Pendaftaran',
+        ])->get();
 
         return inertia('Home', [
             'courses' => $courses,
@@ -164,19 +165,17 @@ class HomeController extends Controller
 
     public function lecturers()
     {
-        $lecturers = Cache::remember("lecturers_all", now()->addMinutes(10), function () {
-            return Lecturers::with('courses')->get()->map(fn($lecturer) => [
-                'id' => $lecturer->id,
-                'name' => $lecturer->name,
-                'about' => $lecturer->about,
-                'email' => $lecturer->email,
-                'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
-                'courses' => $lecturer->courses->map(fn($course) => [
-                    'id' => $course->id,
-                    'name' => $course->name,
-                ]),
-            ]);
-        });
+        $lecturers = Lecturers::with('courses')->get()->map(fn($lecturer) => [
+            'id' => $lecturer->id,
+            'name' => $lecturer->name,
+            'about' => $lecturer->about,
+            'email' => $lecturer->email,
+            'image' => $lecturer->getFirstMediaUrl('lecturer-image') ?: asset('images/default-avatar.png'),
+            'courses' => $lecturer->courses->map(fn($course) => [
+                'id' => $course->id,
+                'name' => $course->name,
+            ]),
+        ]);
 
         return inertia('Lecturers', [
             'lecturers' => $lecturers,
@@ -186,21 +185,20 @@ class HomeController extends Controller
 
     public function courses()
     {
-        $courses = Cache::remember("courses_all", now()->addMinutes(10), function () {
-            return Course::with('lecturers')->get();
-        });
+        $courses = Course::with('lecturers')->get();
+
+        $graduateLearningOutcomes = GraduateLearningOutcome::select('id', 'concentration', 'name', 'description')->get();
 
         return inertia('Courses', [
             'courses' => $courses,
+            'graduateLearningOutcomes' => $graduateLearningOutcomes,
             'aboutApp' => $this->aboutApp,
         ]);
     }
 
     public function articles()
     {
-        $categories = Cache::remember("article_categories", now()->addMinutes(10), function () {
-            return Category::where('type', 'article')->get();
-        });
+        $categories = Category::where('type', 'article')->get();
 
         $categoriesWithArticles = $categories->map(function ($category) {
             $articles = Article::where('category_id', $category->id)
@@ -228,32 +226,27 @@ class HomeController extends Controller
 
     public function virtualTours()
     {
-        // Clear the cache to ensure fresh data
-        Cache::forget("virtualTours_all");
+        $virtualTours = Virtual::with('category')
+            ->whereHas('category', function ($query) {
+                $query->where('type', 'virtual_tours');
+            })
+            ->get()
+            ->map(function ($virtual) {
+                // Ensure each virtual tour has a slug
+                if (empty($virtual->slug)) {
+                    $virtual->slug = Str::slug($virtual->name);
+                    $virtual->save();
+                }
 
-        $virtualTours = Cache::remember("virtualTours_all", now()->addMinutes(10), function () {
-            return Virtual::with('category')
-                ->whereHas('category', function ($query) {
-                    $query->where('type', 'virtual_tours');
-                })
-                ->get()
-                ->map(function ($virtual) {
-                    // Ensure each virtual tour has a slug
-                    if (empty($virtual->slug)) {
-                        $virtual->slug = Str::slug($virtual->name);
-                        $virtual->save();
-                    }
-
-                    return [
-                        'id' => $virtual->id,
-                        'name' => $virtual->name,
-                        'slug' => $virtual->slug,
-                        'url_embed' => $virtual->url_embed,
-                        'description' => $virtual->description,
-                        'category' => $virtual->category ? $virtual->category->name : null,
-                    ];
-                });
-        });
+                return [
+                    'id' => $virtual->id,
+                    'name' => $virtual->name,
+                    'slug' => $virtual->slug,
+                    'url_embed' => $virtual->url_embed,
+                    'description' => $virtual->description,
+                    'category' => $virtual->category ? $virtual->category->name : null,
+                ];
+            });
 
         return inertia('VirtualTours', [
             'virtualTours' => $virtualTours,
@@ -336,9 +329,7 @@ class HomeController extends Controller
 
     public function aboutApp()
     {
-        $aboutApp = Cache::remember('aboutApp', now()->addMinutes(10), function () {
-            return AboutApp::with('media')->first();
-        });
+        $aboutApp = AboutApp::with('media')->first();
 
         if ($aboutApp) {
             $aboutApp->image = $aboutApp->hasMedia('struktur-organisasi')

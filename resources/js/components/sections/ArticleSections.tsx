@@ -7,12 +7,31 @@ interface ArticlesSectionProps {
 }
 
 const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
+    // Filter artikel yang bukan kategori "Pengumuman" karena pengumuman ditampilkan di section terpisah
+    const filteredArticles = articles.filter(
+        article => {
+            const categoryName = article.category?.name?.toLowerCase();
+            return categoryName !== 'pengumuman';
+        }
+    );
+
+    if (filteredArticles.length === 0) {
+        return (
+            <section className="w-full py-8">
+                <h2 className="text-3xl font-bold text-center mb-6">Artikel Terbaru</h2>
+                <div className="text-center py-8">
+                    <p className="text-base-content/60">Belum ada artikel tersedia.</p>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="w-full py-8">
             <h2 className="text-3xl font-bold text-center mb-6">Artikel Terbaru</h2>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[1fr]">
-                {articles.map((article, index) => (
+                {filteredArticles.map((article, index) => (
                     <div
                         key={article.id}
                         className="card bg-base-100 image-full shadow-xl break-inside-avoid"

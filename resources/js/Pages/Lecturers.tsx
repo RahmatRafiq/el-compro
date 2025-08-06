@@ -20,10 +20,10 @@ const Lecturers: React.FC<LecturersProps> = ({ lecturers, aboutApp }) => {
                     {/* Header Section */}
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <div className="text-center space-y-4">
-                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content">Dosen Kami</h1>
-                            <p className="text-base-content/70 text-sm sm:text-base max-w-2xl mx-auto">
-                                Tim dosen berpengalaman dan berkualitas tinggi yang siap membimbing mahasiswa dalam perjalanan akademik mereka.
-                            </p>
+                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-base-content">Pengajar Kami</h1>
+                            {/* <p className="text-base-content/70 text-sm sm:text-base max-w-2xl mx-auto">
+                                Tim pengajar berpengalaman dan berkualitas tinggi yang siap membimbing mahasiswa dalam perjalanan akademik mereka.
+                            </p> */}
                         </div>
                     </div>
 

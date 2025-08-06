@@ -78,11 +78,6 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ courses = [] }) => {
                   <td>{course.course_code}</td>
                   <td>
                     {course.name}
-                    {course.major_concentration === "semua_konsentrasi" && (
-                      <span className="ml-2 text-xs text-white bg-blue-500 px-2 py-1 rounded-full">
-                        Umum
-                      </span>
-                    )}
                   </td>
                   <td>{course.credits}</td>
                 </tr>
