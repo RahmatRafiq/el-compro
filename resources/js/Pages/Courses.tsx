@@ -111,9 +111,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
             <div className="card-body p-4">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="card-title text-base text-base-content">{course.name}</h3>
-                {course.major_concentration === "semua_konsentrasi" && (
-                  <span className="badge badge-primary badge-sm">Umum</span>
-                )}
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
@@ -156,9 +153,6 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
                 <td className="text-base-content">
                   <div className="flex items-center gap-2">
                     <span>{course.name}</span>
-                    {course.major_concentration === "semua_konsentrasi" && (
-                      <span className="badge badge-primary badge-sm">Umum</span>
-                    )}
                   </div>
                 </td>
                 <td className="text-base-content">{course.credits}</td>
@@ -175,9 +169,9 @@ const Courses: React.FC<CoursesProps> = ({ courses, graduateLearningOutcomes, ab
         <div className="text-center mt-6">
           <button
             className="btn btn-primary"
-            onClick={() => setCoursesToShow(coursesToShow + 5)}
+            onClick={() => setCoursesToShow(courseList.length)}
           >
-            Lihat Lebih Banyak ({courseList.length - coursesToShow} tersisa)
+            Lihat Semua Mata Kuliah ({courseList.length - coursesToShow} tersisa)
           </button>
         </div>
       )}
