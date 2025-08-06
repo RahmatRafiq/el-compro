@@ -190,8 +190,13 @@ class HomeController extends Controller
             return Course::with('lecturers')->get();
         });
 
+        $graduateLearningOutcomes = Cache::remember("cpl_all", now()->addMinutes(10), function () {
+            return GraduateLearningOutcome::select('id', 'concentration', 'name', 'description')->get();
+        });
+
         return inertia('Courses', [
             'courses' => $courses,
+            'graduateLearningOutcomes' => $graduateLearningOutcomes,
             'aboutApp' => $this->aboutApp,
         ]);
     }

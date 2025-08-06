@@ -56,6 +56,13 @@ export interface AboutApp {
     contact_address: string;
 }
 
+export interface GraduateLearningOutcome {
+    id: number;
+    concentration: string;
+    name: string;
+    description: string;
+}
+
 export interface GeneralInformation {
     id: number;
     name: string;
