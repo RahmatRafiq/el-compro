@@ -1,5 +1,5 @@
 import React from "react";
-import { FaMedal, FaTrophy, FaCertificate, FaStar } from "react-icons/fa";
+import { FaMedal, FaTrophy, FaCertificate, FaStar, FaUserGraduate, FaArrowRight } from "react-icons/fa";
 import type { GeneralInformation } from '@/types';
 
 interface GeneralInformationSectionProps {
@@ -84,6 +84,20 @@ const GeneralInformationSection: React.FC<GeneralInformationSectionProps> = ({ g
                 allowFullScreen
               ></iframe>
             </div>
+          </div>
+          
+          {/* Tombol Pendaftaran */}
+          <div className="flex justify-center mt-8">
+            <a
+              href="https://simba.unifa.ac.id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-lg gap-3 group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <FaUserGraduate className="text-xl group-hover:animate-bounce" />
+              <span className="font-bold">Ingin Mendaftar?</span>
+              <FaArrowRight className="text-lg group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
           </div>
         </section>
       )}
